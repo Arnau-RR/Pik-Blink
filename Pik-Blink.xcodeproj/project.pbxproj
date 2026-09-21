@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 110;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		578F8E913061309B0088FC22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 578F8E793061309A0088FC22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 578F8E803061309A0088FC22;
+			remoteInfo = "Pik-Blink";
+		};
+		578F8E9B3061309B0088FC22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 578F8E793061309A0088FC22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 578F8E803061309A0088FC22;
+			remoteInfo = "Pik-Blink";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		578F8E813061309A0088FC22 /* Pik-Blink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pik-Blink.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		578F8E903061309B0088FC22 /* Pik-BlinkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pik-BlinkTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		578F8E9A3061309B0088FC22 /* Pik-BlinkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pik-BlinkUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		578F8E833061309A0088FC22 /* Pik-Blink */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Pik-Blink";
+			sourceTree = "<group>";
+		};
+		578F8E933061309B0088FC22 /* Pik-BlinkTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Pik-BlinkTests";
+			sourceTree = "<group>";
+		};
+		578F8E9D3061309B0088FC22 /* Pik-BlinkUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Pik-BlinkUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		578F8E7E3061309A0088FC22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		578F8E8D3061309B0088FC22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		578F8E973061309B0088FC22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		578F8E783061309A0088FC22 = {
+			isa = PBXGroup;
+			children = (
+				578F8E833061309A0088FC22 /* Pik-Blink */,
+				578F8E933061309B0088FC22 /* Pik-BlinkTests */,
+				578F8E9D3061309B0088FC22 /* Pik-BlinkUITests */,
+				578F8E823061309A0088FC22 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		578F8E823061309A0088FC22 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				578F8E813061309A0088FC22 /* Pik-Blink.app */,
+				578F8E903061309B0088FC22 /* Pik-BlinkTests.xctest */,
+				578F8E9A3061309B0088FC22 /* Pik-BlinkUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		578F8E803061309A0088FC22 /* Pik-Blink */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 578F8EA23061309B0088FC22 /* Build configuration list for PBXNativeTarget "Pik-Blink" */;
+			buildPhases = (
+				578F8E7D3061309A0088FC22 /* Sources */,
+				578F8E7E3061309A0088FC22 /* Frameworks */,
+				578F8E7F3061309A0088FC22 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				578F8E833061309A0088FC22 /* Pik-Blink */,
+			);
+			name = "Pik-Blink";
+			productName = "Pik-Blink";
+			productReference = 578F8E813061309A0088FC22 /* Pik-Blink.app */;
+			productType = "com.apple.product-type.application";
+		};
+		578F8E8F3061309B0088FC22 /* Pik-BlinkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 578F8EA53061309B0088FC22 /* Build configuration list for PBXNativeTarget "Pik-BlinkTests" */;
+			buildPhases = (
+				578F8E8C3061309B0088FC22 /* Sources */,
+				578F8E8D3061309B0088FC22 /* Frameworks */,
+				578F8E8E3061309B0088FC22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				578F8E923061309B0088FC22 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				578F8E933061309B0088FC22 /* Pik-BlinkTests */,
+			);
+			name = "Pik-BlinkTests";
+			productName = "Pik-BlinkTests";
+			productReference = 578F8E903061309B0088FC22 /* Pik-BlinkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		578F8E993061309B0088FC22 /* Pik-BlinkUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 578F8EA83061309B0088FC22 /* Build configuration list for PBXNativeTarget "Pik-BlinkUITests" */;
+			buildPhases = (
+				578F8E963061309B0088FC22 /* Sources */,
+				578F8E973061309B0088FC22 /* Frameworks */,
+				578F8E983061309B0088FC22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				578F8E9C3061309B0088FC22 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				578F8E9D3061309B0088FC22 /* Pik-BlinkUITests */,
+			);
+			name = "Pik-BlinkUITests";
+			productName = "Pik-BlinkUITests";
+			productReference = 578F8E9A3061309B0088FC22 /* Pik-BlinkUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		578F8E793061309A0088FC22 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					578F8E803061309A0088FC22 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					578F8E8F3061309B0088FC22 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 578F8E803061309A0088FC22;
+					};
+					578F8E993061309B0088FC22 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 578F8E803061309A0088FC22;
+					};
+				};
+			};
+			buildConfigurationList = 578F8E7C3061309A0088FC22 /* Build configuration list for PBXProject "Pik-Blink" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 578F8E783061309A0088FC22;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 578F8E823061309A0088FC22 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				578F8E803061309A0088FC22 /* Pik-Blink */,
+				578F8E8F3061309B0088FC22 /* Pik-BlinkTests */,
+				578F8E993061309B0088FC22 /* Pik-BlinkUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		578F8E7F3061309A0088FC22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		578F8E8E3061309B0088FC22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		578F8E983061309B0088FC22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		578F8E7D3061309A0088FC22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		578F8E8C3061309B0088FC22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		578F8E963061309B0088FC22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		578F8E923061309B0088FC22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 578F8E803061309A0088FC22 /* Pik-Blink */;
+			targetProxy = 578F8E913061309B0088FC22 /* PBXContainerItemProxy */;
+		};
+		578F8E9C3061309B0088FC22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 578F8E803061309A0088FC22 /* Pik-Blink */;
+			targetProxy = 578F8E9B3061309B0088FC22 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		578F8EA03061309B0088FC22 /* Debug configuration for PBXProject "Pik-Blink" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BD25VMM275;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		578F8EA13061309B0088FC22 /* Release configuration for PBXProject "Pik-Blink" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BD25VMM275;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		578F8EA33061309B0088FC22 /* Debug configuration for PBXNativeTarget "Pik-Blink" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BD25VMM275;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arnaurivas.Pik-Blink";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		578F8EA43061309B0088FC22 /* Release configuration for PBXNativeTarget "Pik-Blink" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BD25VMM275;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arnaurivas.Pik-Blink";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		578F8EA63061309B0088FC22 /* Debug configuration for PBXNativeTarget "Pik-BlinkTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BD25VMM275;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arnaurivas.Pik-BlinkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pik-Blink.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pik-Blink";
+			};
+			name = Debug;
+		};
+		578F8EA73061309B0088FC22 /* Release configuration for PBXNativeTarget "Pik-BlinkTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BD25VMM275;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arnaurivas.Pik-BlinkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pik-Blink.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pik-Blink";
+			};
+			name = Release;
+		};
+		578F8EA93061309B0088FC22 /* Debug configuration for PBXNativeTarget "Pik-BlinkUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BD25VMM275;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arnaurivas.Pik-BlinkUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Pik-Blink";
+			};
+			name = Debug;
+		};
+		578F8EAA3061309B0088FC22 /* Release configuration for PBXNativeTarget "Pik-BlinkUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BD25VMM275;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arnaurivas.Pik-BlinkUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Pik-Blink";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		578F8E7C3061309A0088FC22 /* Build configuration list for PBXProject "Pik-Blink" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				578F8EA03061309B0088FC22 /* Debug configuration for PBXProject "Pik-Blink" */,
+				578F8EA13061309B0088FC22 /* Release configuration for PBXProject "Pik-Blink" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		578F8EA23061309B0088FC22 /* Build configuration list for PBXNativeTarget "Pik-Blink" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				578F8EA33061309B0088FC22 /* Debug configuration for PBXNativeTarget "Pik-Blink" */,
+				578F8EA43061309B0088FC22 /* Release configuration for PBXNativeTarget "Pik-Blink" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		578F8EA53061309B0088FC22 /* Build configuration list for PBXNativeTarget "Pik-BlinkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				578F8EA63061309B0088FC22 /* Debug configuration for PBXNativeTarget "Pik-BlinkTests" */,
+				578F8EA73061309B0088FC22 /* Release configuration for PBXNativeTarget "Pik-BlinkTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		578F8EA83061309B0088FC22 /* Build configuration list for PBXNativeTarget "Pik-BlinkUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				578F8EA93061309B0088FC22 /* Debug configuration for PBXNativeTarget "Pik-BlinkUITests" */,
+				578F8EAA3061309B0088FC22 /* Release configuration for PBXNativeTarget "Pik-BlinkUITests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 578F8E793061309A0088FC22 /* Project object */;
+	validationLevel = 1;
+}
