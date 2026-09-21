@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PikTextField: View {
     @Binding var text: String
+    let isRecording: Bool
+
     var onMicTap: () -> Void = {}
 
     var body: some View {
@@ -27,9 +29,9 @@ struct PikTextField: View {
             }
 
             Button(action: onMicTap) {
-                Image(systemName: "mic.fill")
+                Image(systemName: isRecording ? "stop.circle.fill" : "mic.fill")
                     .font(.title2)
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(isRecording ? .red : .blue)
             }
             .padding(.top, 8)
         }
