@@ -13,6 +13,7 @@ import SwiftData
 final class MainViewModel: ObservableObject {
     
     @Published var pickList: [PikItem] = []
+    @Published var createNewItemPressed: Bool = false
     
     private var modelContext: ModelContext?
 

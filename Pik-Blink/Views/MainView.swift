@@ -14,6 +14,19 @@ struct MainView: View {
     
     var body: some View {
         VStack() {
+            HeaderView(
+                title: "Pik Blink",
+                subtitle: "Capture ideas in a blink."
+            ) {
+                GlassIconButton(icon: "magnifyingglass") {
+                    viewModel.createNewItemPressed.toggle()
+                }
+                
+                GlassIconButton(icon: "plus") {
+                    viewModel.createNewItemPressed.toggle()
+                }
+            }
+            
             ListItems(listElements: viewModel.pickList) { item in
                 viewModel.toggle(item)
             } onArchive: { item in
@@ -21,18 +34,13 @@ struct MainView: View {
             } onDelete: { item in
                 viewModel.archive(item)
             }
-
-//            Button {
-//                } label: {
-//                    Image(systemName: "plus")
-//                        .font(.title.weight(.semibold))
-//                        .padding()
-//                        .background(Color.purple)
-//                        .foregroundColor(.white)
-//                        .clipShape(Circle())
-//                }
-//            .padding()
         }
+        .sheet(isPresented: $viewModel.createNewItemPressed) {
+            CreateItemView()
+                .presentationDetents([.large]) // Alturas
+                .presentationDragIndicator(.visible)
+        }
+        
         .task {
             viewModel.configure(modelContext: context)
             try? viewModel.loadMockIfNeeded(context: context)

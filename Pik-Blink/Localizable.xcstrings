@@ -2,10 +2,92 @@
   "sourceLanguage" : "en",
   "strings" : {
     "list.swap.delete" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eliminar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eliminar"
+          }
+        }
+      }
     },
     "list.swipe.archive" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Arxivar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Archivar"
+          }
+        }
+      }
+    },
+    "new.item.textfield.placeholder" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Que tens en ment?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What's on your mind?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Que tienes en mente?"
+          }
+        }
+      }
+    },
+    "new.item.title" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nou Pik"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Pik"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo Pik"
+          }
+        }
+      }
     },
     "section.today" : {
       "localizations" : {
