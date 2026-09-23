@@ -28,6 +28,8 @@ final class CreateItemViewModel: ObservableObject {
     @Published var showCalendar: Bool = false
     @Published var showTime: Bool = false
     @Published var showPopup = false
+    
+    @Published var showDatePicker = false
 
     private let audio = AudioRecorder()
     private let speech = SpeechRecognizer()

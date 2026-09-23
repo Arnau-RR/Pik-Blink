@@ -18,82 +18,84 @@ struct CreateItemView: View {
         ZStack {
             // MARK: - Main content
             VStack(spacing: 0) {
-                
-                // Header
-                HStack {
-                    GlassIconButton(icon: "x.circle.fill") {
-                        if !viewModel.checkPikTextEmpty() {
-                            viewModel.showPopup = true
-                        } else {
-                            dismiss()
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    GlassIconButton(
-                        icon: "square.and.arrow.down",
-                        isEnabled: !viewModel.checkPikTextEmpty()
-                    ) {
-                        if !viewModel.checkPikTextEmpty() {
-                            do {
-                                try viewModel.savePik()
-                                dismiss()
-                            } catch {
-                                print("Error guardando:", error)
-                            }
-                        }
-                    }
+                VStack(alignment: .leading, spacing: 20) {
+                    HeaderView(
+                        title: String(localized: "new.item.title"),
+                        subtitle: "Capture ideas in a blink."
+                    ) {}
                 }
-                .padding(.horizontal, 10)
-                .padding(.bottom, 12)
+                .padding(.horizontal)
+                .padding(.bottom, 20)
                 
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
-                        
-                        HeaderView(
-                            title: String(localized: "new.item.title"),
-                            subtitle: "Capture ideas in a blink."
-                        ) {}
-                        
                         PikTextField(
                             text: $viewModel.pikItemText,
                             isRecording: viewModel.isRecording
                         ) {
                             viewModel.micTap()
                         }
+                        
                         .frame(height: 150)
                         
                         SectionHeader(
-                            title: String(localized: "new.item.select.reminder.when.title"),
-                            subtitle: String(localized: "new.item.select.reminder.when.description")
+                            title: String(localized: "new.item.select.reminder.title"),
+                            subtitle: String(localized: "new.item.select.reminder.description")
                         )
                         
-                        HStack(spacing: 17) {
-                            ForEach(QuickReminder.allCases, id: \.self) { option in
-                                GlassTileButton(
-                                    title: option.title,
-                                    icon: option.icon,
-                                    isSelected: viewModel.selected == option
-                                ) {
-                                    viewModel.selectReminder(option)
+                        Picker("", selection: $viewModel.selectedTab) {
+                            Label(String(localized: "new.item.picker.when"), systemImage: "clock")
+                                .tag(0)
+                            
+                            Label(String(localized: "new.item.picker.where"), systemImage: "checkmark.circle")
+                                .tag(1)
+                            
+                        }
+                        .pickerStyle(.segmented)
+                        .labelStyle(.titleAndIcon)
+                        
+                        ReminderBox {
+                            VStack (spacing: 15){
+                                HStack (spacing: 10){
+                                    
+                                    Image(systemName: "clock")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 20)
+                                    
+                                    SectionHeader(
+                                        title: String(localized: "new.item.select.reminder.when.title"),
+                                        subtitle: String(localized: "new.item.select.reminder.when.description"),
+                                        titleFont: .system(size: 15),
+                                        subtitleFont: .footnote
+                                    )
+                                }
+                                
+                                HStack(spacing: 5) {
+                                    ForEach(QuickReminder.allCases, id: \.self) { option in
+                                        GlassTileButton(
+                                            title: option.title,
+                                            icon: option.icon,
+                                            isSelected: viewModel.selected == option,
+                                            backgroundColor: Color(.systemBackground)
+                                        ) {
+                                            viewModel.selectReminder(option)
+                                        }
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
+                                
+                                if viewModel.selected == .custom {
+                                    DateTimeCard(
+                                        date: viewModel.reminderDate
+                                    ) {
+                                        viewModel.showDatePicker = true
+                                    }
                                 }
                             }
                         }
                         
-                        if viewModel.selected == .custom {
-                            DatePicker(
-                                String(localized: "new.item.select.date.time.reminder"),
-                                selection: Binding(
-                                    get: { viewModel.reminderDate ?? Date() },
-                                    set: { viewModel.reminderDate = $0 }
-                                ),
-                                in: viewModel.dateRange,
-                                displayedComponents: [.date, .hourAndMinute]
-                            )
-                        }
-                        
-                        if viewModel.reminderDate != nil {
+                        if viewModel.selected != .custom && viewModel.reminderDate != nil {
                             ReminderSummary(date: viewModel.reminderDate)
                         }
                         
@@ -103,7 +105,6 @@ struct CreateItemView: View {
                     .padding(.bottom, 20)
                 }
             }
-            .padding(.top)
             
             // MARK: - Glass popup
             if viewModel.showPopup {
@@ -137,8 +138,76 @@ struct CreateItemView: View {
                 viewModel.reminderDate = Date()
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(String(localized: "new.item.popup.close.cancel")) {
+                    if !viewModel.checkPikTextEmpty() {
+                        viewModel.showPopup = true
+                    } else {
+                        dismiss()
+                    }
+                }
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(String(localized: "new.item.popup.close.accept")) {
+                    do {
+                        try viewModel.savePik()
+                        dismiss()
+                    } catch {
+                        print("Error guardando:", error)
+                    }
+                }
+                .fontWeight(.semibold)
+                .disabled(viewModel.checkPikTextEmpty())
+                .opacity(viewModel.checkPikTextEmpty() ? 0.4 : 1.0)
+            }
+        }
         .task {
             viewModel.configure(modelContext: modelContext)
+        }
+        .sheet(isPresented: $viewModel.showDatePicker) {
+            customDateAndHourSheetView
+                .presentationDetents([.height(470)])
+                .presentationDragIndicator(.visible)
+        }
+    }
+}
+
+extension CreateItemView {
+    
+    private var customDateAndHourSheetView: some View {
+        NavigationStack {
+            VStack {
+                DatePicker(
+                    "",
+                    selection: Binding(
+                        get: { viewModel.reminderDate ?? Date() },
+                        set: { viewModel.reminderDate = $0 }
+                    ),
+                    in: viewModel.dateRange,
+                    displayedComponents: [.date, .hourAndMinute]
+                )
+                .datePickerStyle(.graphical)
+                .labelsHidden()
+            }
+            .padding()
+            .navigationTitle("new.item.popup.date.time.title")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(String(localized: "new.item.popup.close.cancel")) {
+                        viewModel.showDatePicker = false
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(String(localized: "new.item.popup.close.accept")) {
+                        viewModel.showDatePicker = false
+                    }
+                    .fontWeight(.semibold)
+                }
+            }
         }
     }
 }

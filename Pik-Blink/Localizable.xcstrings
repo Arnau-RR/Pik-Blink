@@ -124,6 +124,50 @@
         }
       }
     },
+    "new.item.picker.when" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quan"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando"
+          }
+        }
+      }
+    },
+    "new.item.picker.where" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donde"
+          }
+        }
+      }
+    },
     "new.item.popup.close.accept" : {
       "localizations" : {
         "ca" : {
@@ -212,7 +256,30 @@
         }
       }
     },
+    "new.item.popup.date.time.title" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data i Hora"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date & Time"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha y Hora"
+          }
+        }
+      }
+    },
     "new.item.select.date.time.reminder" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -230,6 +297,50 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Selecciona fecha y hora"
+          }
+        }
+      }
+    },
+    "new.item.select.reminder.description" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tria quan o on vols que robre l’avís (opcional)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose when or where to receive the notification (optional)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elige cuando o donde quieres que aparezca el aviso (opcional)"
+          }
+        }
+      }
+    },
+    "new.item.select.reminder.title" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Recordatori"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Recordatorio"
           }
         }
       }
@@ -260,20 +371,20 @@
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quan?"
+            "state" : "needs_review",
+            "value" : "Avisa’m per hora"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When?"
+            "value" : "Hourly reminder"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cuando?"
+            "state" : "needs_review",
+            "value" : "Avísame en una hora"
           }
         }
       }

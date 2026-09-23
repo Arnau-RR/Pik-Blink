@@ -12,12 +12,19 @@ struct SectionHeader: View {
     let title: String?
     let subtitle: String?
 
+    let titleFont: Font
+    let subtitleFont: Font
+
     init(
         title: String? = nil,
-        subtitle: String? = nil
+        subtitle: String? = nil,
+        titleFont: Font = .title3,
+        subtitleFont: Font = .subheadline
     ) {
         self.title = title
         self.subtitle = subtitle
+        self.titleFont = titleFont
+        self.subtitleFont = subtitleFont
     }
 
     var body: some View {
@@ -25,13 +32,13 @@ struct SectionHeader: View {
 
             if let title, !title.isEmpty {
                 Text(title)
-                    .font(.title3)
+                    .font(titleFont)
                     .fontWeight(.semibold)
             }
 
             if let subtitle, !subtitle.isEmpty {
                 Text(subtitle)
-                    .font(.subheadline)
+                    .font(subtitleFont)
                     .foregroundStyle(.secondary)
             }
         }

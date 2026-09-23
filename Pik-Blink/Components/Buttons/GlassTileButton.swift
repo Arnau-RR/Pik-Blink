@@ -12,7 +12,22 @@ struct GlassTileButton: View {
     let title: String
     let icon: String
     let isSelected: Bool
+    let backgroundColor: Color
     var action: () -> Void
+
+    init(
+        title: String,
+        icon: String,
+        isSelected: Bool,
+        backgroundColor: Color = .clear,
+        action: @escaping () -> Void
+    ) {
+        self.title = title
+        self.icon = icon
+        self.isSelected = isSelected
+        self.backgroundColor = backgroundColor
+        self.action = action
+    }
 
     var body: some View {
         Button(action: action) {
@@ -23,21 +38,21 @@ struct GlassTileButton: View {
                 Text(title)
                     .font(.caption2)
                     .fontWeight(.medium)
+                    .multilineTextAlignment(.center)
             }
-            .frame(width: 74, height: 74)
+            .frame(maxWidth: .infinity)
+            .frame(height: 74)
             .foregroundStyle(isSelected ? .primary : .secondary)
             .background(
-                isSelected
-                ? AnyShapeStyle(.thinMaterial)
-                : AnyShapeStyle(.ultraThinMaterial)
+                RoundedRectangle(cornerRadius: 18)
+                    .fill(backgroundColor)
+                    .background(isSelected ? .thinMaterial : .ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
             )
-            .clipShape(RoundedRectangle(cornerRadius: 18))
             .overlay {
                 RoundedRectangle(cornerRadius: 18)
                     .stroke(
-                        isSelected
-                        ? .white.opacity(0.22)
-                        : .white.opacity(0.10),
+                        isSelected ? .white.opacity(0.22) : .white.opacity(0.10),
                         lineWidth: 1
                     )
             }

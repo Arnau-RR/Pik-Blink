@@ -54,9 +54,11 @@ struct MainView: View {
                 viewModel.reload()
             }
         ) {
-            CreateItemView()
-                .presentationDetents([.large])
-                .presentationDragIndicator(.visible)
+            NavigationStack {
+                CreateItemView()
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.visible)
+            }
         }
         
         .task {
