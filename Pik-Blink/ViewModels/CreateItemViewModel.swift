@@ -140,7 +140,8 @@ final class CreateItemViewModel: ObservableObject {
             transcription: isRecording ? pikItemText : nil,
             audioPath: audioPath,
             remindAt: reminderDate,
-            source: audioPath == nil ? .text : .voice
+            source: audioPath == nil ? .text : .voice,
+            status: .pending
         )
 
         modelContext.insert(item)

@@ -15,8 +15,22 @@ final class MainViewModel: ObservableObject {
     //@Published var pickList: [PikItem] = []
     @Published var createNewItemPressed: Bool = false
     @Published var piksSavedInDB: [PikItem] = []
+    @Published var selectedTab = 0
     
     private var modelContext: ModelContext?
+    
+    var filteredPiks: [PikItem] {
+        switch selectedTab {
+            case 0:
+                return pendingPiks
+            case 1:
+                return completedPiks
+            case 2:
+                return archivedPiks
+            default:
+                return []
+        }
+    }
     
     var pendingPiks: [PikItem] {
         piksSavedInDB.filter { $0.status == .pending }

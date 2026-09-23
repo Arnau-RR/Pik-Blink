@@ -10,44 +10,39 @@ import SwiftUI
 struct ListItems: View {
     
     let listElements: [PikItem]
-    
     let onToggle: (PikItem) -> Void
     let onArchive: (PikItem) -> Void
     let onDelete: (PikItem) -> Void
     
     private var sections: [(date: Date, items: [PikItem])] {
         let calendar = Calendar.current
-        
         let grouped = Dictionary(grouping: listElements) {
             calendar.startOfDay(for: $0.createdAt)
         }
-        
         return grouped
             .map { (date: $0.key, items: $0.value) }
             .sorted { $0.date > $1.date }
     }
     
     var body: some View {
-        List {
-            ForEach(sections, id: \.date) { section in
-                Section(section.date.sectionTitle) {
-                    ForEach(section.items) { item in
-                        PikItemRow(item: item) {
-                            onToggle(item)
+        ForEach(sections, id: \.date) { section in
+            Section(section.date.sectionTitle) {
+                ForEach(section.items) { item in
+                    PikItemRow(item: item) {
+                        onToggle(item)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button {
+                            onArchive(item)
+                        } label: {
+                            Label("list.swipe.archive", systemImage: "archivebox")
                         }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button {
-                                onArchive(item)
-                            } label: {
-                                Label("list.swipe.archive", systemImage: "archivebox")
-                            }
-                            .tint(.indigo)
+                        .tint(.indigo)
 
-                            Button(role: .destructive) {
-                                onDelete(item)
-                            } label: {
-                                Label("list.swap.delete", systemImage: "trash")
-                            }
+                        Button(role: .destructive) {
+                            onDelete(item)
+                        } label: {
+                            Label("list.swap.delete", systemImage: "trash")
                         }
                     }
                 }

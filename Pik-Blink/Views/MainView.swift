@@ -28,14 +28,26 @@ struct MainView: View {
             }
             .padding(.horizontal, 20)
             
-            ListItems(listElements: viewModel.piksSavedInDB) { item in
-                viewModel.toggle(item)
-            } onArchive: { item in
-                viewModel.archive(item)
-            } onDelete: { item in
-                viewModel.delete(item)
+            Picker("", selection: $viewModel.selectedTab) {
+                Text(String(localized: "main.view.picker.pending")).tag(0)
+                Text(String(localized: "main.view.picker.completed")).tag(1)
+                Text(String(localized: "main.view.picker.archived")).tag(2)
             }
+            .pickerStyle(.segmented)
+            .padding()
+
+            List {
+                ListItems(listElements: viewModel.filteredPiks) { item in
+                    viewModel.toggle(item)
+                } onArchive: { item in
+                    viewModel.archive(item)
+                } onDelete: { item in
+                    viewModel.delete(item)
+                }
+            }
+            .layoutPriority(1)
         }
+
         .sheet(
             isPresented: $viewModel.createNewItemPressed,
             onDismiss: {

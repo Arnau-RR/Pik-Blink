@@ -55,7 +55,8 @@ final class PikItem {
         imagePath: String? = nil,
         audioPath: String? = nil,
         remindAt: Date? = nil,
-        source: PikSource = .text
+        source: PikSource = .text,
+        status: PikStatus = .pending
     ) {
         self.id = UUID()
         self.text = text
@@ -66,6 +67,7 @@ final class PikItem {
         self.remindAt = remindAt
         self.status = .pending
         self.source = source
+        self.status = status
     }
 }
 
