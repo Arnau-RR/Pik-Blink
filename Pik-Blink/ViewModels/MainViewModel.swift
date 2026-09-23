@@ -12,32 +12,40 @@ import SwiftData
 @MainActor
 final class MainViewModel: ObservableObject {
     
-    @Published var pickList: [PikItem] = []
+    //@Published var pickList: [PikItem] = []
     @Published var createNewItemPressed: Bool = false
+    @Published var piksSavedInDB: [PikItem] = []
     
     private var modelContext: ModelContext?
+    
+    var pendingPiks: [PikItem] {
+        piksSavedInDB.filter { $0.status == .pending }
+    }
+
+    var archivedPiks: [PikItem] {
+        piksSavedInDB.filter { $0.status == .archived }
+    }
+
+    var completedPiks: [PikItem] {
+        piksSavedInDB.filter { $0.status == .completed }
+    }
 
     func configure(modelContext: ModelContext) {
         self.modelContext = modelContext
     }
 
-    func loadMockIfNeeded(context: ModelContext) throws {
-        let descriptor = FetchDescriptor<PikItem>()
-        
-        let items = try context.fetch(descriptor)
-        
-        guard items.isEmpty else {
-            pickList = items
-            return
+    func loadPiksStored() async {
+        guard let modelContext else { return }
+
+        do {
+            let descriptor = FetchDescriptor<PikItem>(
+                sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+            )
+
+            piksSavedInDB = try modelContext.fetch(descriptor)
+        } catch {
+            print("Error cargando PikItems:", error)
         }
-        
-        for item in PikItem.mockList {
-            context.insert(item)
-        }
-        
-        try context.save()
-        pickList = try context.fetch(descriptor)
-        
     }
     
     func toggle(_ item: PikItem) {
@@ -59,5 +67,17 @@ final class MainViewModel: ObservableObject {
 
         modelContext.delete(item)
         try? modelContext.save()
+
+        piksSavedInDB.removeAll { $0.id == item.id }
+    }
+    
+    func reload() {
+        guard let modelContext else { return }
+
+        let descriptor = FetchDescriptor<PikItem>(
+            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+        )
+
+        piksSavedInDB = (try? modelContext.fetch(descriptor)) ?? []
     }
 }

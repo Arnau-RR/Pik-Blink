@@ -44,7 +44,6 @@ struct HeaderView<Actions: View>: View {
                 actions
             }
         }
-        .padding(.horizontal, 20)
         .padding(.top, 12)
     }
 }

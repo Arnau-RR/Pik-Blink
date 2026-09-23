@@ -10,6 +10,7 @@ import SwiftUI
 struct GlassIconButton: View {
 
     let icon: String
+    var isEnabled: Bool = true
     var action: () -> Void
 
     var body: some View {
@@ -26,6 +27,7 @@ struct GlassIconButton: View {
                 .stroke(.white.opacity(0.18), lineWidth: 1)
         }
         .shadow(color: .black.opacity(0.12), radius: 10, y: 4)
+        .opacity(isEnabled ? 1.0 : 0.4)
     }
 }
 

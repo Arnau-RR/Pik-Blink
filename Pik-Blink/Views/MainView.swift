@@ -26,24 +26,30 @@ struct MainView: View {
                     viewModel.createNewItemPressed.toggle()
                 }
             }
+            .padding(.horizontal, 20)
             
-            ListItems(listElements: viewModel.pickList) { item in
+            ListItems(listElements: viewModel.piksSavedInDB) { item in
                 viewModel.toggle(item)
             } onArchive: { item in
                 viewModel.archive(item)
             } onDelete: { item in
-                viewModel.archive(item)
+                viewModel.delete(item)
             }
         }
-        .sheet(isPresented: $viewModel.createNewItemPressed) {
+        .sheet(
+            isPresented: $viewModel.createNewItemPressed,
+            onDismiss: {
+                viewModel.reload()
+            }
+        ) {
             CreateItemView()
-                .presentationDetents([.large]) // Alturas
+                .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         }
         
         .task {
             viewModel.configure(modelContext: context)
-            try? viewModel.loadMockIfNeeded(context: context)
+            await viewModel.loadPiksStored()
         }
         
     }
