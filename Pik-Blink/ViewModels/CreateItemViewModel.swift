@@ -14,6 +14,10 @@ enum SavePikError: Error {
     case missingModelContext
 }
 
+enum Field {
+    case title
+}
+
 @MainActor
 final class CreateItemViewModel: ObservableObject {
 
@@ -40,8 +44,9 @@ final class CreateItemViewModel: ObservableObject {
 
     private let audio = AudioRecorder()
     private let speech = SpeechRecognizer()
+    private let notifications = NotificationManager.shared
     private var cancellables = Set<AnyCancellable>()
-    
+        
     let dateRange: PartialRangeFrom<Date> = Calendar.current.startOfDay(for: .now)...
 
     /// Texto que ya existía antes de empezar una nueva grabación
@@ -150,12 +155,13 @@ final class CreateItemViewModel: ObservableObject {
         }
     }
 
+    
     @MainActor
     func savePik() throws {
         guard let modelContext else {
             throw SavePikError.missingModelContext
         }
-        
+
         let type: ReminderType
 
         if selectedPlace != nil {
@@ -168,7 +174,7 @@ final class CreateItemViewModel: ObservableObject {
 
         let item = PikItem(
             text: pikItemText.trimmingCharacters(in: .whitespacesAndNewlines),
-            transcription: isRecording ? pikItemText : nil,
+            transcription: audioPath != nil ? pikItemText : nil,
             audioPath: audioPath,
 
             reminderType: type,
@@ -182,10 +188,56 @@ final class CreateItemViewModel: ObservableObject {
             source: audioPath == nil ? .text : .voice,
             status: .pending
         )
-        
+
+        // Guardar en SwiftData
         modelContext.insert(item)
         try modelContext.save()
+
+        // Pedir permiso de ubicación si hace falta
+        if type == .location {
+            notifications.requestLocationPermission()
+        }
+
+        // Programar la notificación
+        notifications.schedule(for: item)
     }
+    
+//    @MainActor
+//    func savePik() throws {
+//        guard let modelContext else {
+//            throw SavePikError.missingModelContext
+//        }
+//        
+//        let type: ReminderType
+//
+//        if selectedPlace != nil {
+//            type = .location
+//        } else if reminderDate != nil {
+//            type = .date
+//        } else {
+//            type = .none
+//        }
+//
+//        let item = PikItem(
+//            text: pikItemText.trimmingCharacters(in: .whitespacesAndNewlines),
+//            transcription: isRecording ? pikItemText : nil,
+//            audioPath: audioPath,
+//
+//            reminderType: type,
+//            remindAt: type == .date ? reminderDate : nil,
+//
+//            placeName: type == .location ? selectedPlace?.name : nil,
+//            placeAddress: type == .location ? selectedPlace?.address : nil,
+//            latitude: type == .location ? selectedPlace?.coordinate.latitude : nil,
+//            longitude: type == .location ? selectedPlace?.coordinate.longitude : nil,
+//
+//            source: audioPath == nil ? .text : .voice,
+//            status: .pending
+//        )
+//        
+//        modelContext.insert(item)
+//        try modelContext.save()
+//    }
     
 
     @MainActor

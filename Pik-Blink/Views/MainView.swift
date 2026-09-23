@@ -35,19 +35,24 @@ struct MainView: View {
             }
             .pickerStyle(.segmented)
             .padding()
-
+            
             List {
-                ListItems(listElements: viewModel.filteredPiks) { item in
+                ListItems(
+                    listElements: viewModel.filteredPiks,
+                    showArchivedActions: viewModel.selectedTab == 2
+                ) { item in
                     viewModel.toggle(item)
                 } onArchive: { item in
                     viewModel.archive(item)
+                } onUnarchive: { item in
+                    viewModel.unarchive(item)
                 } onDelete: { item in
                     viewModel.delete(item)
                 }
             }
             .layoutPriority(1)
         }
-
+        
         .sheet(
             isPresented: $viewModel.createNewItemPressed,
             onDismiss: {
@@ -62,8 +67,14 @@ struct MainView: View {
         }
         
         .task {
+            NotificationManager.shared.registerCategories()
+
             viewModel.configure(modelContext: context)
             await viewModel.loadPiksStored()
+            viewModel.checkNotificationAuthorization()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .pikCompleted)) { _ in
+            viewModel.reload()
         }
         
     }

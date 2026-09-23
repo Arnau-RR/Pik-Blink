@@ -10,6 +10,7 @@ import SwiftUI
 struct PikTextField: View {
     @Binding var text: String
     let isRecording: Bool
+    let focusedField: FocusState<Field?>.Binding
     var onMicTap: () -> Void = {}
 
     private let placeholder = String(localized: "new.item.textfield.placeholder")
@@ -41,6 +42,7 @@ struct PikTextField: View {
                         TextEditor(text: $text)
                             .scrollContentBackground(.hidden)
                             .background(.clear)
+                            .focused(focusedField, equals: .title)
                             .frame(minHeight: 60)
                             .onChange(of: text) { _, newValue in
                                 if newValue.count > characterLimit {

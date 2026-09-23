@@ -33,7 +33,7 @@ final class PikItem {
 
     // MARK: Reminder
 
-    var reminderType: ReminderType
+    var reminderType: ReminderType?
     var remindAt: Date?
 
     // MARK: Location
@@ -55,7 +55,7 @@ final class PikItem {
         transcription: String? = nil,
         imagePath: String? = nil,
         audioPath: String? = nil,
-        reminderType: ReminderType = .none,
+        reminderType: ReminderType? = .none,
         remindAt: Date? = nil,
         placeName: String? = nil,
         placeAddress: String? = nil,
@@ -113,7 +113,7 @@ enum PikSource: Int, Codable {
 extension PikItem {
 
     var hasReminder: Bool {
-        reminderType != .none
+        (reminderType ?? .none) != .none
     }
 
     var hasLocation: Bool {

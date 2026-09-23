@@ -29,9 +29,22 @@
 		578F8E9A3061309B0088FC22 /* Pik-BlinkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pik-BlinkUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		57BBA658306420C100BF0B10 /* Exceptions for "Pik-Blink" folder in "Pik-Blink" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 578F8E803061309A0088FC22 /* Pik-Blink */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		578F8E833061309A0088FC22 /* Pik-Blink */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				57BBA658306420C100BF0B10 /* Exceptions for "Pik-Blink" folder in "Pik-Blink" target */,
+			);
 			path = "Pik-Blink";
 			sourceTree = "<group>";
 		};
@@ -378,6 +391,9 @@
 				DEVELOPMENT_TEAM = BD25VMM275;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Pik-Blink/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "\"Necesitamos acceso permanente para avisarte incluso con la app cerrada.\"";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"Pik Blink utiliza tu ubicación para recordarte tareas al llegar a un lugar.\"";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = NSMicrophoneUsageDescription;
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = NSSpeechRecognitionUsageDescription;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -413,6 +429,9 @@
 				DEVELOPMENT_TEAM = BD25VMM275;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Pik-Blink/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "\"Necesitamos acceso permanente para avisarte incluso con la app cerrada.\"";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"Pik Blink utiliza tu ubicación para recordarte tareas al llegar a un lugar.\"";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = NSMicrophoneUsageDescription;
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = NSSpeechRecognitionUsageDescription;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

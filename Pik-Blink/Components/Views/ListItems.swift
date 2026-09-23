@@ -10,8 +10,11 @@ import SwiftUI
 struct ListItems: View {
     
     let listElements: [PikItem]
+    let showArchivedActions: Bool
+    
     let onToggle: (PikItem) -> Void
     let onArchive: (PikItem) -> Void
+    let onUnarchive: (PikItem) -> Void
     let onDelete: (PikItem) -> Void
     
     private var sections: [(date: Date, items: [PikItem])] {
@@ -32,13 +35,31 @@ struct ListItems: View {
                         onToggle(item)
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        Button {
-                            onArchive(item)
-                        } label: {
-                            Label("list.swipe.archive", systemImage: "archivebox")
+                        if showArchivedActions {
+                            
+                            Button {
+                                onUnarchive(item)
+                            } label: {
+                                Label("Unarchive", systemImage: "arrow.uturn.backward.circle")
+                            }
+                            .tint(.green)
+                            
+                        } else {
+                            
+                            Button {
+                                onArchive(item)
+                            } label: {
+                                Label("Archive", systemImage: "archivebox")
+                            }
+                            .tint(.indigo)
                         }
-                        .tint(.indigo)
-
+                        //                        Button {
+                        //                            onArchive(item)
+                        //                        } label: {
+                        //                            Label("list.swipe.archive", systemImage: "archivebox")
+                        //                        }
+                        //                        .tint(.indigo)
+                        
                         Button(role: .destructive) {
                             onDelete(item)
                         } label: {
@@ -52,10 +73,12 @@ struct ListItems: View {
 }
 
 #Preview {
-    ListItems(listElements: PikItem.mockList) { item in
+    ListItems(listElements: PikItem.mockList, showArchivedActions: true) { item in
         print("Toggle \(item)")
     } onArchive: { item in
         print("Archive \(item)")
+    } onUnarchive: { item in
+        print("UnArchive \(item)")
     } onDelete: { item in
         print("Delete \(item)")
     }

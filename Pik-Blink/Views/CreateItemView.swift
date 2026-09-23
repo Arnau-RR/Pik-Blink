@@ -13,6 +13,8 @@ struct CreateItemView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     
+    @FocusState private var focusedField: Field?
+    
     @StateObject private var viewModel = CreateItemViewModel()
     
     var body: some View {
@@ -32,7 +34,8 @@ struct CreateItemView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         PikTextField(
                             text: $viewModel.pikItemText,
-                            isRecording: viewModel.isRecording
+                            isRecording: viewModel.isRecording,
+                            focusedField: $focusedField
                         ) {
                             viewModel.micTap()
                         }
@@ -44,24 +47,10 @@ struct CreateItemView: View {
                             subtitle: String(localized: "new.item.select.reminder.description")
                         )
                         
-//                        Picker("", selection: $viewModel.selectedTab) {
-//                            Label(String(localized: "new.item.picker.when"), systemImage: "clock")
-//                                .tag(0)
-//                            
-//                            Label(String(localized: "new.item.picker.where"), systemImage: "checkmark.circle")
-//                                .tag(1)
-//                            
-//                        }
-//                        .pickerStyle(.segmented)
-//                        .labelStyle(.titleAndIcon)
-//                        .onChange(of: viewModel.selectedTab) { newValue in
-//                            viewModel.didChangeTab(to: newValue)
-//                        }
-                        
                         Picker("", selection: $viewModel.selectedTab) {
                             Label(String(localized: "new.item.picker.when"), systemImage: "clock")
                                 .tag(0)
-
+                            
                             Label(String(localized: "new.item.picker.where"), systemImage: "checkmark.circle")
                                 .tag(1)
                         }
@@ -85,6 +74,7 @@ struct CreateItemView: View {
                     }
                     .padding(.horizontal)
                     .padding(.bottom, 20)
+                    .scrollDismissesKeyboard(.interactively)
                 }
             }
             
@@ -115,6 +105,9 @@ struct CreateItemView: View {
             }
         }
         .animation(.spring(response: 0.35, dampingFraction: 0.85), value: viewModel.showPopup)
+        .onTapGesture {
+            focusedField = nil
+        }
         .onChange(of: viewModel.selected) { _, newValue in
             if newValue == .custom && viewModel.reminderDate == nil {
                 viewModel.reminderDate = Date()
@@ -149,13 +142,15 @@ struct CreateItemView: View {
             viewModel.configure(modelContext: modelContext)
         }
         .sheet(isPresented: $viewModel.showDatePicker) {
-            customDateAndHourSheetView
-                .presentationDetents([.height(470)])
-                .presentationDragIndicator(.visible)
+            NavigationStack {
+                customDateAndHourSheetView
+            }
+            .presentationDetents([.height(520)])
+            .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $viewModel.showPlacePicker) {
             customSelectLocationView
-                .presentationDetents([.height(470)])
+                .presentationDetents([.height(520)])
                 .presentationDragIndicator(.visible)
         }
     }
@@ -167,7 +162,6 @@ extension CreateItemView {
         ReminderBox {
             VStack (spacing: 15){
                 HStack (spacing: 10){
-                    
                     Image(systemName: "clock")
                         .resizable()
                         .scaledToFit()
@@ -231,13 +225,13 @@ extension CreateItemView {
                         Image(systemName: "magnifyingglass")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(.white.opacity(0.55))
-
+                        
                         Text("Buscar un lloc")
                             .font(.subheadline.weight(.medium))
                             .foregroundStyle(.white.opacity(0.85))
-
+                        
                         Spacer()
-
+                        
                         Image(systemName: "chevron.right")
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(.white.opacity(0.35))
@@ -281,6 +275,8 @@ extension CreateItemView {
             )
             .datePickerStyle(.graphical)
             .labelsHidden()
+            
+            Spacer()
         }
     }
     
@@ -302,7 +298,7 @@ extension CreateItemView {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(item.title)
                                 .font(.headline)
-
+                            
                             if !item.subtitle.isEmpty {
                                 Text(item.subtitle)
                                     .font(.subheadline)
