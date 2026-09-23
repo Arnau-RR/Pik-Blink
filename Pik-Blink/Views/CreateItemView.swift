@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+internal import MapKit
 
 struct CreateItemView: View {
     @Environment(\.dismiss) private var dismiss
@@ -43,57 +44,38 @@ struct CreateItemView: View {
                             subtitle: String(localized: "new.item.select.reminder.description")
                         )
                         
+//                        Picker("", selection: $viewModel.selectedTab) {
+//                            Label(String(localized: "new.item.picker.when"), systemImage: "clock")
+//                                .tag(0)
+//                            
+//                            Label(String(localized: "new.item.picker.where"), systemImage: "checkmark.circle")
+//                                .tag(1)
+//                            
+//                        }
+//                        .pickerStyle(.segmented)
+//                        .labelStyle(.titleAndIcon)
+//                        .onChange(of: viewModel.selectedTab) { newValue in
+//                            viewModel.didChangeTab(to: newValue)
+//                        }
+                        
                         Picker("", selection: $viewModel.selectedTab) {
                             Label(String(localized: "new.item.picker.when"), systemImage: "clock")
                                 .tag(0)
-                            
+
                             Label(String(localized: "new.item.picker.where"), systemImage: "checkmark.circle")
                                 .tag(1)
-                            
                         }
                         .pickerStyle(.segmented)
-                        .labelStyle(.titleAndIcon)
-                        
-                        ReminderBox {
-                            VStack (spacing: 15){
-                                HStack (spacing: 10){
-                                    
-                                    Image(systemName: "clock")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 20)
-                                    
-                                    SectionHeader(
-                                        title: String(localized: "new.item.select.reminder.when.title"),
-                                        subtitle: String(localized: "new.item.select.reminder.when.description"),
-                                        titleFont: .system(size: 15),
-                                        subtitleFont: .footnote
-                                    )
-                                }
-                                
-                                HStack(spacing: 5) {
-                                    ForEach(QuickReminder.allCases, id: \.self) { option in
-                                        GlassTileButton(
-                                            title: option.title,
-                                            icon: option.icon,
-                                            isSelected: viewModel.selected == option,
-                                            backgroundColor: Color(.systemBackground)
-                                        ) {
-                                            viewModel.selectReminder(option)
-                                        }
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                }
-                                
-                                if viewModel.selected == .custom {
-                                    DateTimeCard(
-                                        date: viewModel.reminderDate
-                                    ) {
-                                        viewModel.showDatePicker = true
-                                    }
-                                }
-                            }
+                        .onChange(of: viewModel.selectedTab) { _, newValue in
+                            viewModel.didChangeTab(to: newValue)
                         }
+                        
+                        if viewModel.selectedTab == 0 {
+                            selectWhenPickerView
+                        } else {
+                            selectWherePickerView
+                        }
+                        
                         
                         if viewModel.selected != .custom && viewModel.reminderDate != nil {
                             ReminderSummary(date: viewModel.reminderDate)
@@ -171,43 +153,172 @@ struct CreateItemView: View {
                 .presentationDetents([.height(470)])
                 .presentationDragIndicator(.visible)
         }
+        .sheet(isPresented: $viewModel.showPlacePicker) {
+            customSelectLocationView
+                .presentationDetents([.height(470)])
+                .presentationDragIndicator(.visible)
+        }
     }
 }
 
 extension CreateItemView {
     
-    private var customDateAndHourSheetView: some View {
-        NavigationStack {
-            VStack {
-                DatePicker(
-                    "",
-                    selection: Binding(
-                        get: { viewModel.reminderDate ?? Date() },
-                        set: { viewModel.reminderDate = $0 }
-                    ),
-                    in: viewModel.dateRange,
-                    displayedComponents: [.date, .hourAndMinute]
-                )
-                .datePickerStyle(.graphical)
-                .labelsHidden()
-            }
-            .padding()
-            .navigationTitle("new.item.popup.date.time.title")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(String(localized: "new.item.popup.close.cancel")) {
-                        viewModel.showDatePicker = false
-                    }
+    private var selectWhenPickerView: some View {
+        ReminderBox {
+            VStack (spacing: 15){
+                HStack (spacing: 10){
+                    
+                    Image(systemName: "clock")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 20)
+                    
+                    SectionHeader(
+                        title: String(localized: "new.item.select.reminder.when.title"),
+                        subtitle: String(localized: "new.item.select.reminder.when.description"),
+                        titleFont: .system(size: 15),
+                        subtitleFont: .footnote
+                    )
                 }
                 
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(String(localized: "new.item.popup.close.accept")) {
-                        viewModel.showDatePicker = false
+                HStack(spacing: 5) {
+                    ForEach(QuickReminder.allCases, id: \.self) { option in
+                        GlassTileButton(
+                            title: option.title,
+                            icon: option.icon,
+                            isSelected: viewModel.selected == option,
+                            backgroundColor: Color(.systemBackground)
+                        ) {
+                            viewModel.selectReminder(option)
+                        }
                     }
-                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                }
+                
+                if viewModel.selected == .custom {
+                    DateTimeCard(
+                        date: viewModel.reminderDate
+                    ) {
+                        viewModel.showDatePicker = true
+                    }
                 }
             }
+        }
+    }
+    
+    private var selectWherePickerView: some View {
+        ReminderBox {
+            VStack (spacing: 15){
+                HStack (spacing: 10){
+                    
+                    Image(systemName: "location.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 20)
+                    
+                    SectionHeader(
+                        title: String(localized: "new.item.select.reminder.where.title"),
+                        subtitle: String(localized: "new.item.select.reminder.where.description"),
+                        titleFont: .system(size: 15),
+                        subtitleFont: .footnote
+                    )
+                }
+                
+                Button {
+                    viewModel.showPlacePicker = true
+                } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(.white.opacity(0.55))
+
+                        Text("Buscar un lloc")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.white.opacity(0.85))
+
+                        Spacer()
+
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.white.opacity(0.35))
+                    }
+                    .padding(.horizontal, 16)
+                    .frame(height: 52)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .fill(Color(red: 0.22, green: 0.22, blue: 0.24))
+                    )
+                }
+                .buttonStyle(.plain)
+                
+                if let place = viewModel.selectedPlace {
+                    PlaceCard(place: place)
+                        .id(place.id)
+                }
+                
+            }
+        }
+    }
+    
+    private var customDateAndHourSheetView: some View {
+        ReusableSheet(
+            title: "new.item.popup.date.time.title",
+            onCancel: {
+                viewModel.showDatePicker = false
+            },
+            onAccept: {
+                viewModel.showDatePicker = false
+            }
+        ) {
+            DatePicker(
+                "",
+                selection: Binding(
+                    get: { viewModel.reminderDate ?? Date() },
+                    set: { viewModel.reminderDate = $0 }
+                ),
+                in: viewModel.dateRange,
+                displayedComponents: [.date, .hourAndMinute]
+            )
+            .datePickerStyle(.graphical)
+            .labelsHidden()
+        }
+    }
+    
+    private var customSelectLocationView: some View {
+        ReusableSheet(
+            title: "new.item.popup.location.title",
+            onCancel: {
+                viewModel.showPlacePicker = false
+            },
+            onAccept: {
+                viewModel.showPlacePicker = false
+            }
+        ) {
+            List {
+                ForEach(viewModel.search.results, id: \.self) { item in
+                    Button {
+                        viewModel.selectCompletion(item)
+                    } label: {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(item.title)
+                                .font(.headline)
+
+                            if !item.subtitle.isEmpty {
+                                Text(item.subtitle)
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .listStyle(.plain)
+            .searchable(
+                text: $viewModel.search.query,
+                prompt: "Buscar un lugar"
+            )
         }
     }
 }

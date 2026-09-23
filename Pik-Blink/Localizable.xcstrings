@@ -14,6 +14,12 @@
         }
       }
     },
+    "Buscar un lloc" : {
+
+    },
+    "Buscar un lugar" : {
+
+    },
     "list.swap.delete" : {
       "localizations" : {
         "ca" : {
@@ -278,6 +284,9 @@
         }
       }
     },
+    "new.item.popup.location.title" : {
+
+    },
     "new.item.select.date.time.reminder" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -305,8 +314,8 @@
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tria quan o on vols que robre l’avís (opcional)"
+            "state" : "translated",
+            "value" : "Tria quan o on vols que rebre l’avís (opcional)"
           }
         },
         "en" : {
@@ -371,8 +380,8 @@
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Avisa’m per hora"
+            "state" : "translated",
+            "value" : "Recorda’m per hora"
           }
         },
         "en" : {
@@ -385,6 +394,50 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Avísame en una hora"
+          }
+        }
+      }
+    },
+    "new.item.select.reminder.where.description" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rep un avis quan arrivais al bloc"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose the place to be reminded"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selecciona el lugar para el aviso (opcional)"
+          }
+        }
+      }
+    },
+    "new.item.select.reminder.where.title" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Recorda’m per ubicació"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place reminder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Avísame en un lugar "
           }
         }
       }

@@ -48,6 +48,20 @@ final class MainViewModel: ObservableObject {
         self.modelContext = modelContext
     }
 
+//    func loadPiksStored() async {
+//        guard let modelContext else { return }
+//
+//        do {
+//            let descriptor = FetchDescriptor<PikItem>(
+//                sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+//            )
+//
+//            piksSavedInDB = try modelContext.fetch(descriptor)
+//        } catch {
+//            print("Error cargando PikItems:", error)
+//        }
+//    }
+    
     func loadPiksStored() async {
         guard let modelContext else { return }
 
@@ -57,6 +71,23 @@ final class MainViewModel: ObservableObject {
             )
 
             piksSavedInDB = try modelContext.fetch(descriptor)
+
+            // Debug
+            piksSavedInDB.forEach { item in
+                print("""
+                ───────────────
+                ID: \(item.id)
+                Texto: \(item.text)
+                Fecha: \(item.createdAt)
+                Recordatorio: \(item.remindAt?.description ?? "No")
+                Ubicación: \(item.placeName ?? "No")
+                Dirección: \(item.placeAddress ?? "-")
+                Coordenadas: \(item.latitude ?? 0), \(item.longitude ?? 0)
+                Estado: \(item.status)
+                ───────────────
+                """)
+            }
+
         } catch {
             print("Error cargando PikItems:", error)
         }

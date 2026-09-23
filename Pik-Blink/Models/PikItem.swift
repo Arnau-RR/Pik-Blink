@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import CoreLocation
 
 // MARK: - Pik Item
 
@@ -18,33 +19,33 @@ final class PikItem {
 
     // MARK: Content
 
-    /// Main text shown in the UI.
     var text: String
-
-    /// Original speech transcription (optional).
     var transcription: String?
 
     // MARK: Media
 
-    /// Local path to the attached image.
     var imagePath: String?
-
-    /// Local path to the recorded audio.
     var audioPath: String?
 
     // MARK: Dates
 
-    /// Creation date.
     var createdAt: Date
 
-    /// Optional reminder date.
+    // MARK: Reminder
+
+    var reminderType: ReminderType
     var remindAt: Date?
+
+    // MARK: Location
+
+    var placeName: String?
+    var placeAddress: String?
+    var latitude: Double?
+    var longitude: Double?
 
     // MARK: State
 
     var status: PikStatus
-
-    /// Whether the item was created by text or voice.
     var source: PikSource
 
     // MARK: Init
@@ -54,7 +55,12 @@ final class PikItem {
         transcription: String? = nil,
         imagePath: String? = nil,
         audioPath: String? = nil,
+        reminderType: ReminderType = .none,
         remindAt: Date? = nil,
+        placeName: String? = nil,
+        placeAddress: String? = nil,
+        latitude: Double? = nil,
+        longitude: Double? = nil,
         source: PikSource = .text,
         status: PikStatus = .pending
     ) {
@@ -64,11 +70,26 @@ final class PikItem {
         self.imagePath = imagePath
         self.audioPath = audioPath
         self.createdAt = .now
+
+        self.reminderType = reminderType
         self.remindAt = remindAt
-        self.status = .pending
+
+        self.placeName = placeName
+        self.placeAddress = placeAddress
+        self.latitude = latitude
+        self.longitude = longitude
+
         self.source = source
         self.status = status
     }
+}
+
+// MARK: - Reminder Type
+
+enum ReminderType: Int, Codable {
+    case none
+    case date
+    case location
 }
 
 // MARK: - Status
@@ -87,12 +108,20 @@ enum PikSource: Int, Codable {
     case voice
 }
 
-// MARK: - Computed Properties
+// MARK: - Computed
 
 extension PikItem {
 
     var hasReminder: Bool {
-        remindAt != nil
+        reminderType != .none
+    }
+
+    var hasLocation: Bool {
+        reminderType == .location
+    }
+
+    var hasDateReminder: Bool {
+        reminderType == .date
     }
 
     var hasImage: Bool {
@@ -112,12 +141,32 @@ extension PikItem {
     }
 
     var isOverdue: Bool {
-        guard let remindAt else { return false }
+        guard reminderType == .date,
+              let remindAt else { return false }
+
         return remindAt < .now && status == .pending
     }
 
     var displayText: String {
         transcription ?? text
+    }
+
+    var location: SelectedPlace? {
+        guard reminderType == .location,
+              let name = placeName,
+              let address = placeAddress,
+              let lat = latitude,
+              let lon = longitude
+        else { return nil }
+
+        return SelectedPlace(
+            name: name,
+            address: address,
+            coordinate: CLLocationCoordinate2D(
+                latitude: lat,
+                longitude: lon
+            )
+        )
     }
 }
 
@@ -129,22 +178,25 @@ extension PikItem {
 
         let calendar = Calendar.current
 
-        // MARK: Hoy
-
-        let today1 = PikItem(
-            text: "Comprar café"
-        )
+        let today1 = PikItem(text: "Comprar café")
 
         let today2 = PikItem(
             text: "Llamar a Marta",
             transcription: "Llamar a Marta al salir del trabajo",
             audioPath: "/mock/audio/marta.m4a",
+            reminderType: .date,
+            remindAt: calendar.date(byAdding: .hour, value: 2, to: .now),
             source: .voice
         )
 
         let today3 = PikItem(
             text: "Guardar inspiración del salón",
-            imagePath: "/mock/images/salon.jpg"
+            imagePath: "/mock/images/salon.jpg",
+            reminderType: .location,
+            placeName: "Sant Andreu de Llavaneres",
+            placeAddress: "Barcelona, España",
+            latitude: 41.57,
+            longitude: 2.48
         )
 
         let today4 = PikItem(
@@ -155,42 +207,17 @@ extension PikItem {
             source: .voice
         )
 
-        // MARK: Ayer
+        let yesterday1 = PikItem(text: "Enviar presupuesto")
+        let yesterday2 = PikItem(text: "Reservar restaurante")
+        let yesterday3 = PikItem(text: "Hacer la compra")
+        let yesterday4 = PikItem(text: "Entrevista con Apple", source: .voice)
 
-        let yesterday1 = PikItem(
-            text: "Enviar presupuesto"
-        )
-
-        let yesterday2 = PikItem(
-            text: "Reservar restaurante",
-            imagePath: "/mock/images/restaurant.jpg"
-        )
-
-        let yesterday3 = PikItem(
-            text: "Hacer la compra"
-        )
-
-        let yesterday4 = PikItem(
-            text: "Entrevista con Apple",
-            audioPath: "/mock/audio/interview.m4a",
-            source: .voice
-        )
-
-        // Cambiar fecha a ayer
         [yesterday1, yesterday2, yesterday3, yesterday4].forEach {
             $0.createdAt = calendar.date(byAdding: .day, value: -1, to: .now)!
         }
 
-        // MARK: Antes de ayer
-
-        let older1 = PikItem(
-            text: "Renovar DNI"
-        )
-
-        let older2 = PikItem(
-            text: "Pagar factura de la luz",
-            imagePath: "/mock/images/factura.jpg"
-        )
+        let older1 = PikItem(text: "Renovar DNI")
+        let older2 = PikItem(text: "Pagar factura de la luz")
 
         [older1, older2].forEach {
             $0.createdAt = calendar.date(byAdding: .day, value: -2, to: .now)!
