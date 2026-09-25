@@ -9,24 +9,19 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
-//    @Environment(\.modelContext) private var context
-//    //@StateObject private var viewModel = MainViewModel()
     
     var body: some View {
         
         TabView {
-            Tab("Pik", systemImage: "house") {
-                // 2.
+            Tab("Pik", systemImage: "list.bullet") {
                 PikViewList()
             }
            
-            Tab("Search", systemImage: "magnifyingglass") {
+            Tab("Search", systemImage: "gear") {
                 SettingsView()
             }
         }
-        // 3.
         .tabBarMinimizeBehavior(.onScrollDown)
-        
     }
 }
     

@@ -30,9 +30,9 @@ struct PikViewList: View {
             .padding(.horizontal, 20)
             
             Picker("", selection: $viewModel.selectedTab) {
-                Text(String(localized: "main.view.picker.pending")).tag(0)
-                Text(String(localized: "main.view.picker.completed")).tag(1)
-                Text(String(localized: "main.view.picker.archived")).tag(2)
+                Text(localized( "main.view.picker.pending" )).tag(0)
+                Text(localized( "main.view.picker.completed")).tag(1)
+                Text(localized( "main.view.picker.archived")).tag(2)
             }
             .pickerStyle(.segmented)
             .padding()

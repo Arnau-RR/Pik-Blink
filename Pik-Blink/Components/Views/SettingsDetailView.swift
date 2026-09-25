@@ -1,8 +1,15 @@
+//
+//  SettingsDetailView.swift
+//  Pik-Blink
+//
+//  Created by Arnau on 25/09/2026.
+//
+
 import SwiftUI
 
 struct SettingsDetailView<Content: View>: View {
     let title: String
-    @ViewBuilder let content: Content
+    let content: Content
 
     init(
         title: String,

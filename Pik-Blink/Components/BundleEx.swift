@@ -10,6 +10,12 @@ import ObjectiveC
 
 private var bundleKey: UInt8 = 0
 
+func localized(_ key: String.LocalizationValue) -> String {
+    let stored = UserDefaults.standard.string(forKey: "appLanguage") ?? AppLanguage.system.rawValue
+    let locale = AppLanguage(rawValue: stored)?.locale ?? .autoupdatingCurrent
+    return String(localized: key, locale: locale)
+}
+
 final class BundleEx: Bundle, @unchecked Sendable {
     override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
         print("🔍 localizedString called for key:", key)

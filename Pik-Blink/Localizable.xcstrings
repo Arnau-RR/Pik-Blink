@@ -27,6 +27,21 @@
         }
       }
     },
+    "1.0.0" : {
+
+    },
+    "About" : {
+
+    },
+    "Add Favorite Place" : {
+
+    },
+    "Add Place" : {
+
+    },
+    "App" : {
+
+    },
     "Archive" : {
 
     },
@@ -36,10 +51,28 @@
     "Buscar un lugar" : {
 
     },
+    "Cancel" : {
+
+    },
     "Change" : {
 
     },
     "Choice" : {
+
+    },
+    "Choose a location" : {
+
+    },
+    "Choose how Pik Blink appears. System follows your device settings." : {
+
+    },
+    "Choose Location" : {
+
+    },
+    "Choose your default reminder" : {
+
+    },
+    "Configure Siri shortcuts" : {
 
     },
     "create.pik.intent.title" : {
@@ -126,7 +159,22 @@
     "Edit text" : {
 
     },
+    "Export your Pik Blink data" : {
+
+    },
+    "Favorite name" : {
+
+    },
+    "General" : {
+
+    },
+    "Home" : {
+
+    },
     "How should I remind you?" : {
+
+    },
+    "iCloud Sync" : {
 
     },
     "list.swap.delete" : {
@@ -761,7 +809,13 @@
         }
       }
     },
+    "No favorite places yet" : {
+
+    },
     "None" : {
+
+    },
+    "Notification settings" : {
 
     },
     "Option" : {
@@ -829,6 +883,9 @@
       }
     },
     "Place" : {
+
+    },
+    "Privacy" : {
 
     },
     "Quick Reminder" : {
@@ -981,6 +1038,9 @@
         }
       }
     },
+    "Save" : {
+
+    },
     "Save custom date" : {
 
     },
@@ -988,6 +1048,9 @@
 
     },
     "Search" : {
+
+    },
+    "Search a place" : {
 
     },
     "section.today" : {
@@ -1037,6 +1100,9 @@
     "Set reminder" : {
 
     },
+    "System follows your device language." : {
+
+    },
     "Tap to write…" : {
 
     },
@@ -1050,6 +1116,12 @@
 
     },
     "Unarchive" : {
+
+    },
+    "Version" : {
+
+    },
+    "We'd love to hear your feedback." : {
 
     },
     "What do you want to remember?" : {

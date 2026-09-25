@@ -1,3 +1,12 @@
+//
+//  SettingsRow.swift
+//  Pik-Blink
+//
+//  Created by Arnau on 25/09/2026.
+//
+
+import SwiftUI
+
 struct SettingsRow: View {
     let title: String
     let icon: String
@@ -7,7 +16,6 @@ struct SettingsRow: View {
         HStack(spacing: 14) {
             Image(systemName: icon)
                 .frame(width: 22)
-                .foregroundStyle(.primary)
 
             Text(title)
 
@@ -16,13 +24,6 @@ struct SettingsRow: View {
             if let value {
                 Text(value)
                     .foregroundStyle(.secondary)
-                    .font(.subheadline)
-            }
-
-            if value == nil {
-                Image(systemName: "chevron.right")
-                    .font(.footnote)
-                    .foregroundStyle(.tertiary)
             }
         }
         .padding(.vertical, 4)

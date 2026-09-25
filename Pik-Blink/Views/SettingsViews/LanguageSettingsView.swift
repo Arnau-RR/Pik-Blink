@@ -1,3 +1,12 @@
+//
+//  LanguageSettingsView.swift
+//  Pik-Blink
+//
+//  Created by Arnau on 25/09/2026.
+//
+
+import SwiftUI
+
 struct LanguageSettingsView: View {
 
     @AppStorage("appLanguage")
@@ -10,6 +19,7 @@ struct LanguageSettingsView: View {
                 ForEach(AppLanguage.allCases) { option in
                     Button {
                         language = option.rawValue
+                        Bundle.setLanguage(option == .system ? nil : option.rawValue)
                     } label: {
                         HStack {
                             Text(option.title)

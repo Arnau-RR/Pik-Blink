@@ -1,3 +1,10 @@
+//
+//  AppearanceSettingsView.swift
+//  Pik-Blink
+//
+//  Created by Arnau on 25/09/2026.
+//
+
 import SwiftUI
 
 struct AppearanceSettingsView: View {
