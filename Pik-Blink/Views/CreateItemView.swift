@@ -127,7 +127,7 @@ struct CreateItemView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(String(localized: "new.item.popup.close.accept")) {
                     do {
-                        try viewModel.savePik()
+                        try viewModel.savePikLocal()
                         dismiss()
                     } catch {
                         print("Error guardando:", error)

@@ -4,12 +4,25 @@
     "" : {
 
     },
+    "%@" : {
+
+    },
     "%lld/%lld %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld/%2$lld %3$@"
+          }
+        }
+      }
+    },
+    "%lld/%lld characters" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld characters"
           }
         }
       }
@@ -21,6 +34,99 @@
 
     },
     "Buscar un lugar" : {
+
+    },
+    "Change" : {
+
+    },
+    "Choice" : {
+
+    },
+    "create.pik.intent.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear Pik"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Pik"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear Pik"
+          }
+        }
+      }
+    },
+    "Custom" : {
+
+    },
+    "Date" : {
+
+    },
+    "date.parameter.question" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A quina hora?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What time?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿A qué hora?"
+          }
+        }
+      }
+    },
+    "date.parameter.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora"
+          }
+        }
+      }
+    },
+    "Draft" : {
+
+    },
+    "Draft not found" : {
+
+    },
+    "Edit text" : {
+
+    },
+    "How should I remind you?" : {
 
     },
     "list.swap.delete" : {
@@ -64,6 +170,55 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Archivar"
+          }
+        }
+      }
+    },
+    "Location" : {
+
+    },
+    "location.parameter.question" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En quin lloc?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At which location?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿En qué lugar?"
+          }
+        }
+      }
+    },
+    "location.parameter.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lloc"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lugar"
           }
         }
       }
@@ -133,6 +288,9 @@
           }
         }
       }
+    },
+    "New Pik" : {
+
     },
     "new.item.picker.when" : {
       "localizations" : {
@@ -603,6 +761,235 @@
         }
       }
     },
+    "None" : {
+
+    },
+    "Option" : {
+
+    },
+    "Pick a date" : {
+
+    },
+    "Pick custom date" : {
+
+    },
+    "Pick location" : {
+
+    },
+    "Pik" : {
+
+    },
+    "Pik Draft" : {
+
+    },
+    "pik.parameter.question" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quin Pik vols guardar?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What Pik do you want to save?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué Pik quieres guardar?"
+          }
+        }
+      }
+    },
+    "pik.parameter.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pik"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pik"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pik"
+          }
+        }
+      }
+    },
+    "Place" : {
+
+    },
+    "Quick Reminder" : {
+
+    },
+    "Reminder" : {
+
+    },
+    "Reminder choice" : {
+
+    },
+    "Reminder date" : {
+
+    },
+    "reminder.parameter.question" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Com t'ho recordo?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How should I remind you?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo quieres que te lo recuerde?"
+          }
+        }
+      }
+    },
+    "reminder.parameter.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recordatori"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recordatorio"
+          }
+        }
+      }
+    },
+    "reminder.type.date" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora"
+          }
+        }
+      }
+    },
+    "reminder.type.location" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lloc"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lugar"
+          }
+        }
+      }
+    },
+    "reminder.type.name" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipus de recordatori"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder type"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de recordatorio"
+          }
+        }
+      }
+    },
+    "reminder.type.none" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No"
+          }
+        }
+      }
+    },
+    "Save custom date" : {
+
+    },
+    "Save date" : {
+
+    },
+    "Search" : {
+
+    },
     "section.today" : {
       "localizations" : {
         "ca" : {
@@ -647,7 +1034,40 @@
         }
       }
     },
+    "Set reminder" : {
+
+    },
+    "Tap to write…" : {
+
+    },
+    "Today" : {
+
+    },
+    "Tomorrow" : {
+
+    },
+    "Tonight" : {
+
+    },
     "Unarchive" : {
+
+    },
+    "What do you want to remember?" : {
+
+    },
+    "When" : {
+
+    },
+    "When should I remind you?" : {
+
+    },
+    "Where" : {
+
+    },
+    "Where should I remind you?" : {
+
+    },
+    "Your idea" : {
 
     }
   },

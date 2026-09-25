@@ -11,7 +11,7 @@ import Foundation
 import SwiftData
 
 @MainActor
-final class MainViewModel: ObservableObject {
+final class PikViewModel: ObservableObject {
 
     @Published var createNewItemPressed = false
     @Published var piksSavedInDB: [PikItem] = []

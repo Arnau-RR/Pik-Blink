@@ -7,12 +7,14 @@
 
 import SwiftUI
 import SwiftData
+import AppIntents
 
 @main
 struct Pik_BlinkApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             PikItem.self,
+            PikDraft.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -22,6 +24,14 @@ struct Pik_BlinkApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+    init() {
+        let container = sharedModelContainer   // ← copia, no self
+
+        AppDependencyManager.shared.add(
+            dependency: container
+        )
+    }
 
     var body: some Scene {
         WindowGroup {
