@@ -46,6 +46,15 @@
         }
       }
     },
+    "+1 hour" : {
+
+    },
+    "+2 hours" : {
+
+    },
+    "+30 min" : {
+
+    },
     "1.0.0" : {
       "localizations" : {
         "ca" : {
@@ -85,6 +94,9 @@
           }
         }
       }
+    },
+    "Address" : {
+
     },
     "App" : {
       "localizations" : {
@@ -139,6 +151,9 @@
         }
       }
     },
+    "Canvia" : {
+
+    },
     "Capture ideas in a blink." : {
 
     },
@@ -166,6 +181,9 @@
       }
     },
     "Choose a location" : {
+
+    },
+    "Choose another place" : {
 
     },
     "Choose how Pik Blink appears. System follows your device settings." : {
@@ -426,7 +444,13 @@
     "la ubicación" : {
 
     },
+    "Label" : {
+
+    },
     "Language" : {
+
+    },
+    "Latitude" : {
 
     },
     "Light" : {
@@ -533,6 +557,9 @@
         }
       }
     },
+    "Longitude" : {
+
+    },
     "main.view.picker.archived" : {
       "localizations" : {
         "ca" : {
@@ -598,6 +625,9 @@
           }
         }
       }
+    },
+    "Name" : {
+
     },
     "New Pik" : {
       "localizations" : {
@@ -1025,6 +1055,12 @@
         }
       }
     },
+    "No favourite places yet." : {
+
+    },
+    "No se encontró el borrador" : {
+
+    },
     "None" : {
       "localizations" : {
         "ca" : {
@@ -1110,6 +1146,9 @@
           }
         }
       }
+    },
+    "Pik guardado" : {
+
     },
     "Place" : {
       "localizations" : {
@@ -1303,6 +1342,9 @@
     "Save date" : {
 
     },
+    "Save Pik" : {
+
+    },
     "Search" : {
 
     },
@@ -1356,6 +1398,9 @@
     "Seleccionar" : {
 
     },
+    "Select favourite place" : {
+
+    },
     "Send Feedback" : {
 
     },
@@ -1378,9 +1423,6 @@
 
     },
     "Tomorrow" : {
-
-    },
-    "Tonight" : {
 
     },
     "Unarchive" : {

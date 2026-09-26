@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import AppIntents
 
 struct LocationSummaryView: View {
 
-    let location: String
+    let draft: PikDraftEntity
+    let label: String
+    let address: String
 
     var body: some View {
         HStack(spacing: 10) {
@@ -24,8 +27,16 @@ struct LocationSummaryView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
-                Text(location)
+                Text(label)
                     .font(.subheadline.weight(.medium))
+
+                Button(intent: SetReminderChoiceIntent(
+                    draft: draft,
+                    choice: .none
+                )) {
+                    Text("Canvia")
+                }
+                .buttonStyle(.borderless)
             }
 
             Spacer()

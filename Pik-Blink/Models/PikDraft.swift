@@ -21,6 +21,7 @@ final class PikDraft {
     var reminderType: ReminderType
     var remindAt: Date?
 
+    var placeLabel: String?
     var placeName: String?
     var placeAddress: String?
 
@@ -30,7 +31,9 @@ final class PikDraft {
     var audioPath: String?
     
     var isPickingCustomDate: Bool = false
+    var isPickingLocation: Bool = false
     var locationName: String?
+    
 
     init() {
         self.id = UUID()

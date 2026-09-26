@@ -74,6 +74,9 @@ struct PikViewList: View {
             await viewModel.loadPiksStored()
             viewModel.checkNotificationAuthorization()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .pikCreated)) { _ in
+            viewModel.reload()
+        }
         .onReceive(NotificationCenter.default.publisher(for: .pikCompleted)) { _ in
             viewModel.reload()
         }

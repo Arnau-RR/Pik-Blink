@@ -5,7 +5,6 @@
 //  Created by Arnau on 25/09/2026.
 //
 
-
 import AppIntents
 import SwiftData
 import SwiftUI
@@ -40,6 +39,17 @@ struct PickCustomDateIntent: AppIntent {
         let descriptor = FetchDescriptor<PikDraft>(
             predicate: #Predicate<PikDraft> { $0.id == draftID }
         )
+        
+        let favorites = try context.fetch(FetchDescriptor<FavoritePlace>())
+            .map {
+                FavoritePlaceSnippet(
+                    label: $0.label,
+                    name: $0.name,
+                    address: $0.address,
+                    latitude: $0.latitude,
+                    longitude: $0.longitude
+                )
+            }
 
         guard let model = try context.fetch(descriptor).first else {
             return .result { Text("Draft not found") }
@@ -53,7 +63,7 @@ struct PickCustomDateIntent: AppIntent {
         let entity = PikDraftEntity(id: model.id, text: model.text)
 
         return .result {
-            EditSnippetContent(draft: entity, model: model)
+            EditSnippetContent(draft: entity, model: model, favorites: favorites)
         }
     }
 }

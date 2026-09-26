@@ -13,11 +13,26 @@ struct PikShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: NewPikIntent(),
             phrases: [
-                "New Pik in \(.applicationName)",
-                "Create Pik in \(.applicationName)"
+                "Nuevo Pik en \\(.applicationName)",
+                "Crear Pik en \\(.applicationName)",
+                "Nou Pik a \\(.applicationName)",
+                "Crea un Pik a \\(.applicationName)",
+                "New Pik in \\(.applicationName)",
+                "Create Pik in \\(.applicationName)"
             ],
             shortTitle: "New Pik",
             systemImageName: "plus.circle"
         )
     }
+//    static var appShortcuts: [AppShortcut] {
+//        AppShortcut(
+//            intent: NewPikIntent(),
+//            phrases: [
+//                "New Pik in \(.applicationName)",
+//                "Create Pik in \(.applicationName)"
+//            ],
+//            shortTitle: "New Pik",
+//            systemImageName: "plus.circle"
+//        )
+//    }
 }

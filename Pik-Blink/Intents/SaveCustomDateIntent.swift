@@ -42,6 +42,17 @@ struct SaveCustomDateIntent: AppIntent {
                 $0.id == draftID
             }
         )
+        
+        let favorites = try context.fetch(FetchDescriptor<FavoritePlace>())
+            .map {
+                FavoritePlaceSnippet(
+                    label: $0.label,
+                    name: $0.name,
+                    address: $0.address,
+                    latitude: $0.latitude,
+                    longitude: $0.longitude
+                )
+            }
 
         guard let model = try context.fetch(descriptor).first else {
             return .result {
@@ -62,7 +73,9 @@ struct SaveCustomDateIntent: AppIntent {
         return .result {
             EditSnippetContent(
                 draft: entity,
-                model: model
+                model: model,
+                favorites: favorites
+                
             )
         }
     }

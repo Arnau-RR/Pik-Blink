@@ -5,7 +5,6 @@
 //  Created by Arnau on 25/09/2026.
 //
 
-
 import AppIntents
 import SwiftData
 import SwiftUI
@@ -42,6 +41,17 @@ struct SetQuickReminderIntent: AppIntent {
                 $0.id == draftID
             }
         )
+        
+        let favorites = try context.fetch(FetchDescriptor<FavoritePlace>())
+            .map {
+                FavoritePlaceSnippet(
+                    label: $0.label,
+                    name: $0.name,
+                    address: $0.address,
+                    latitude: $0.latitude,
+                    longitude: $0.longitude
+                )
+            }
 
         guard let model = try context.fetch(descriptor).first else {
             return .result {
@@ -49,48 +59,70 @@ struct SetQuickReminderIntent: AppIntent {
             }
         }
 
-        let calendar = Calendar.current
-        let now = Date()
+//
 
-        switch option {
+            let calendar = Calendar.current
+            let now = Date()
 
-        case .today:
-            model.isPickingCustomDate = false
-            model.remindAt = calendar.date(
-                bySettingHour: 17,
-                minute: 0,
-                second: 0,
-                of: now
-            )
+            switch option {
 
-        case .tonight:
-            model.isPickingCustomDate = false
-            model.remindAt = calendar.date(
-                bySettingHour: 20,
-                minute: 0,
-                second: 0,
-                of: now
-            )
+            case .thirtyMinutes:
+                model.isPickingCustomDate = false
+                model.remindAt = calendar.date(byAdding: .minute, value: 30, to: now)
 
-        case .tomorrow:
-            model.isPickingCustomDate = false
-            let tomorrow = calendar.date(
-                byAdding: .day,
-                value: 1,
-                to: now
-            )!
+            case .oneHour:
+                model.isPickingCustomDate = false
+                model.remindAt = calendar.date(byAdding: .hour, value: 1, to: now)
 
-            model.remindAt = calendar.date(
-                bySettingHour: 9,
-                minute: 0,
-                second: 0,
-                of: tomorrow
-            )
+            case .twoHours:
+                model.isPickingCustomDate = false
+                model.remindAt = calendar.date(byAdding: .hour, value: 2, to: now)
 
-        case .custom:
-            model.isPickingCustomDate = true
-            break
-        }
+            case .custom:
+                model.isPickingCustomDate = true
+            }
+        
+        //let calendar = Calendar.current
+//        let now = Date()
+//
+//        switch option {
+//        case .today:
+//            model.isPickingCustomDate = false
+//            model.remindAt = calendar.date(
+//                bySettingHour: 17,
+//                minute: 0,
+//                second: 0,
+//                of: now
+//            )
+//
+//        case .tonight:
+//            model.isPickingCustomDate = false
+//            model.remindAt = calendar.date(
+//                bySettingHour: 20,
+//                minute: 0,
+//                second: 0,
+//                of: now
+//            )
+//
+//        case .tomorrow:
+//            model.isPickingCustomDate = false
+//            let tomorrow = calendar.date(
+//                byAdding: .day,
+//                value: 1,
+//                to: now
+//            )!
+//
+//            model.remindAt = calendar.date(
+//                bySettingHour: 9,
+//                minute: 0,
+//                second: 0,
+//                of: tomorrow
+//            )
+
+//        case .custom:
+//            model.isPickingCustomDate = true
+//            break
+//        }
 
         try context.save()
 
@@ -102,7 +134,8 @@ struct SetQuickReminderIntent: AppIntent {
         return .result {
             EditSnippetContent(
                 draft: entity,
-                model: model
+                model: model,
+                favorites: favorites
             )
         }
     }

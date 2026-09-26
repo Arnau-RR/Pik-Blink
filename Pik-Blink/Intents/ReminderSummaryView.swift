@@ -38,9 +38,9 @@ struct ReminderSummaryView: View {
                 
                 Button(intent: SetReminderChoiceIntent(
                     draft: draft,
-                    choice: .time
+                    choice: .none
                 )) {
-                    Text("Change")
+                    Text("Canvia")
                 }
                 .buttonStyle(.borderless)
             }

@@ -39,20 +39,3 @@ struct PikDraftQuery: EntityQuery {
         []
     }
 }
-
-//import SwiftData
-//import AppIntents
-//
-//struct PikDraftQuery: EntityQuery {
-//
-//    func entities(
-//        for identifiers: [UUID]
-//    ) async throws -> [PikDraftEntity] {
-//
-//        []
-//    }
-//
-//    func suggestedEntities() async throws -> [PikDraftEntity] {
-//        []
-//    }
-//}

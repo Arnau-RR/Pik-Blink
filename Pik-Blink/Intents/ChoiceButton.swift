@@ -25,7 +25,7 @@ struct ChoiceButton<I: AppIntent>: View {
                     .font(.caption)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
+            .padding(.vertical, 5)
             .background(.gray.opacity(0.12))
             .clipShape(RoundedRectangle(cornerRadius: 16))
         }
