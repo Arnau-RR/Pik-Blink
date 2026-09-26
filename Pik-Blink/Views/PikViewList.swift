@@ -80,6 +80,12 @@ struct PikViewList: View {
         .onReceive(NotificationCenter.default.publisher(for: .pikCompleted)) { _ in
             viewModel.reload()
         }
+        .onOpenURL { url in
+            guard url.scheme == "pikblink",
+                  url.host == "new" else { return }
+
+            viewModel.createNewItemPressed = true
+        }
         
     }
     
