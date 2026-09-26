@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsRow: View {
-    let title: String
+    let title: LocalizedStringKey
     let icon: String
     var value: String? = nil
 

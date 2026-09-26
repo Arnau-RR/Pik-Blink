@@ -12,7 +12,7 @@ struct DateTimeCard: View {
     let onTap: () -> Void
 
     private var formattedDate: String {
-        guard let date else { return "Seleccionar" }
+        guard let date else { return String(localized: "Seleccionar") }
 
         let formatter = DateFormatter()
         formatter.locale = .current

@@ -1,0 +1,36 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "New Pik in ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "ca" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Nou Pik a ${applicationName}"
+            ]
+          }
+        },
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "New Pik in ${applicationName}",
+              "Create Pik in ${applicationName}"
+            ]
+          }
+        },
+        "es" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Nuevo Pik en ${applicationName}"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.3"
+}

@@ -18,9 +18,9 @@ enum AppAppearance: String, CaseIterable, Identifiable {
     
     var title: String {
         switch self {
-        case .system: "System"
-        case .light: "Light"
-        case .dark: "Dark"
+        case .system: String(localized: "System")
+        case .light: String(localized: "Light")
+        case .dark: String(localized: "Dark")
         }
     }
     
@@ -43,10 +43,10 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .system: return "System"
-        case .english: return "English"
-        case .spanish: return "Español"
-        case .catalan: return "Català"
+        case .system: return String(localized: "System")
+        case .english: return String(localized: "English")
+        case .spanish: return String(localized: "Español")
+        case .catalan: return String(localized: "Català")
         }
     }
 

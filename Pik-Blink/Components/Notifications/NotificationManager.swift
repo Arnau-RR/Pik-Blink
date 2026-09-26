@@ -67,13 +67,13 @@ final class NotificationManager: NSObject {
 
         let done = UNNotificationAction(
             identifier: "DONE",
-            title: "Completar",
+            title: String(localized: "Completar"),
             options: [.foreground]
         )
 
         let snooze = UNNotificationAction(
             identifier: "SNOOZE_15",
-            title: "Posponer 15 min"
+            title: String(localized: "Posponer 15 min")
         )
 
         let category = UNNotificationCategory(
@@ -118,7 +118,7 @@ final class NotificationManager: NSObject {
         let content = UNMutableNotificationContent()
 
         content.title = item.text
-        content.subtitle = "Hoy · \(formattedHour)"
+        content.subtitle = String(localized: "Hoy · \(formattedHour)")
         content.body = ""
 
         content.sound = .default
@@ -167,7 +167,8 @@ final class NotificationManager: NSObject {
         let content = UNMutableNotificationContent()
 
         content.title = item.text
-        content.subtitle = "Cuando llegues a \(item.placeName ?? "la ubicación")"
+        let placeName = item.placeName ?? String(localized: "la ubicación")
+        content.subtitle = String(localized: "Cuando llegues a \(placeName)")
         content.body = ""
 
         content.sound = .default
@@ -229,7 +230,7 @@ final class NotificationManager: NSObject {
             let content = UNMutableNotificationContent()
 
             content.title = delivered.request.content.title
-            content.subtitle = "En \(minutes) min"
+            content.subtitle = String(localized: "En \(minutes) min")
             content.body = ""
 
             content.sound = .default

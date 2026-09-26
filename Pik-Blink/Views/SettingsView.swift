@@ -77,20 +77,6 @@ struct SettingsView: View {
                                 value: AppAppearance(rawValue: appearance)?.title ?? "System"
                             )
                         }
-                        
-//                        NavigationLink {
-//                            SettingsDetailView(title: "Appearance") {
-//                                Section {
-//                                    Text("Theme settings")
-//                                }
-//                            }
-//                        } label: {
-//                            SettingsRow(
-//                                title: "Appearance",
-//                                icon: "circle.lefthalf.filled",
-//                                value: "System"
-//                            )
-                        //}
 
                         
                         NavigationLink {

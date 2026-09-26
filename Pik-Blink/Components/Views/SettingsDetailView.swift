@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct SettingsDetailView<Content: View>: View {
-    let title: String
+    let title: LocalizedStringKey
     let content: Content
 
     init(
-        title: String,
+        title: LocalizedStringKey,
         @ViewBuilder content: () -> Content
     ) {
         self.title = title

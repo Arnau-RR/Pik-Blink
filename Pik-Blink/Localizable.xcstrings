@@ -5,10 +5,23 @@
 
     },
     "%@" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "%lld/%lld %@" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld/%2$lld %3$@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -19,6 +32,12 @@
     },
     "%lld/%lld characters" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld/%2$lld caràcters"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -28,52 +47,169 @@
       }
     },
     "1.0.0" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "1.0.0"
+          }
+        }
+      }
     },
     "About" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Quant a"
+          }
+        }
+      }
     },
     "Add Favorite Place" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Afegeix un lloc preferit"
+          }
+        }
+      }
     },
     "Add Place" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Afegeix un lloc"
+          }
+        }
+      }
     },
     "App" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "App"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aparença"
+          }
+        }
+      }
     },
     "Archive" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Arxiva"
+          }
+        }
+      }
     },
     "Buscar un lloc" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cerca un lloc"
+          }
+        }
+      }
     },
-    "Buscar un lugar" : {
+    "Buscar un lloc o adreça..." : {
 
     },
     "Cancel" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cancel·la"
+          }
+        }
+      }
+    },
+    "Capture ideas in a blink." : {
+
+    },
+    "Català" : {
 
     },
     "Change" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Canvia"
+          }
+        }
+      }
     },
     "Choice" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Opció"
+          }
+        }
+      }
     },
     "Choose a location" : {
 
     },
     "Choose how Pik Blink appears. System follows your device settings." : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tria l’aspecte de Pik Blink. L’opció Sistema segueix la configuració del dispositiu."
+          }
+        }
+      }
     },
     "Choose Location" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tria una ubicació"
+          }
+        }
+      }
     },
     "Choose your default reminder" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tria el recordatori per defecte"
+          }
+        }
+      }
+    },
+    "Completar" : {
 
     },
     "Configure Siri shortcuts" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Configura les dreceres de Siri"
+          }
+        }
+      }
     },
     "create.pik.intent.title" : {
       "extractionState" : "stale",
@@ -98,11 +234,31 @@
         }
       }
     },
+    "Cuando llegues a %@" : {
+
+    },
     "Custom" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Personalitzat"
+          }
+        }
+      }
+    },
+    "Dark" : {
 
     },
     "Date" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Data"
+          }
+        }
+      }
     },
     "date.parameter.question" : {
       "extractionState" : "stale",
@@ -150,31 +306,130 @@
         }
       }
     },
-    "Draft" : {
+    "Default reminder" : {
 
+    },
+    "Default Reminder" : {
+
+    },
+    "Draft" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Esborrany"
+          }
+        }
+      }
     },
     "Draft not found" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No s’ha trobat l’esborrany"
+          }
+        }
+      }
     },
     "Edit text" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Edita el text"
+          }
+        }
+      }
+    },
+    "En %lld min" : {
+
+    },
+    "English" : {
+
+    },
+    "Español" : {
+
+    },
+    "Export Data" : {
 
     },
     "Export your Pik Blink data" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Exporta les dades de Pik Blink"
+          }
+        }
+      }
     },
     "Favorite name" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Nom del favorit"
+          }
+        }
+      }
+    },
+    "Favorite Places" : {
 
+    },
+    "Favoritos" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Preferits"
+          }
+        }
+      }
     },
     "General" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "General"
+          }
+        }
+      }
     },
     "Home" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Inici"
+          }
+        }
+      }
     },
     "How should I remind you?" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Com t’ho recordo?"
+          }
+        }
+      }
+    },
+    "Hoy · %@" : {
 
     },
     "iCloud Sync" : {
+
+    },
+    "la ubicación" : {
+
+    },
+    "Language" : {
+
+    },
+    "Light" : {
 
     },
     "list.swap.delete" : {
@@ -223,7 +478,14 @@
       }
     },
     "Location" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Ubicació"
+          }
+        }
+      }
     },
     "location.parameter.question" : {
       "extractionState" : "stale",
@@ -338,7 +600,14 @@
       }
     },
     "New Pik" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Nou Pik"
+          }
+        }
+      }
     },
     "new.item.picker.when" : {
       "localizations" : {
@@ -493,6 +762,12 @@
           }
         }
       }
+    },
+    "new.item.popup.location.favourites.description.add." : {
+
+    },
+    "new.item.popup.location.search.place.button" : {
+
     },
     "new.item.popup.location.title" : {
 
@@ -696,52 +971,6 @@
         }
       }
     },
-    "new.item.time.+1.hour" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+ 1 Hora"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+1 Hour"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "+ 1 Hora"
-          }
-        }
-      }
-    },
-    "new.item.time.afternoon" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tarda"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afternoon"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tarde"
-          }
-        }
-      }
-    },
     "new.item.time.custom" : {
       "localizations" : {
         "ca" : {
@@ -760,29 +989,6 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Personalizado"
-          }
-        }
-      }
-    },
-    "new.item.time.morning" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matí"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Morning"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mañana"
           }
         }
       }
@@ -810,83 +1016,133 @@
       }
     },
     "No favorite places yet" : {
-
-    },
-    "None" : {
-
-    },
-    "Notification settings" : {
-
-    },
-    "Option" : {
-
-    },
-    "Pick a date" : {
-
-    },
-    "Pick custom date" : {
-
-    },
-    "Pick location" : {
-
-    },
-    "Pik" : {
-
-    },
-    "Pik Draft" : {
-
-    },
-    "pik.parameter.question" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quin Pik vols guardar?"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "What Pik do you want to save?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Qué Pik quieres guardar?"
+            "state" : "machine_translated",
+            "value" : "Encara no hi ha cap lloc preferit"
           }
         }
       }
     },
-    "pik.parameter.title" : {
-      "extractionState" : "stale",
+    "None" : {
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "machine_translated",
+            "value" : "Cap"
+          }
+        }
+      }
+    },
+    "Notification settings" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Configuració de les notificacions"
+          }
+        }
+      }
+    },
+    "Notifications" : {
+
+    },
+    "Option" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Opció"
+          }
+        }
+      }
+    },
+    "Pick a date" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tria una data"
+          }
+        }
+      }
+    },
+    "Pick custom date" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tria una data personalitzada"
+          }
+        }
+      }
+    },
+    "Pick location" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tria un lloc"
+          }
+        }
+      }
+    },
+    "Pik" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
             "value" : "Pik"
           }
-        },
-        "en" : {
+        }
+      }
+    },
+    "Pik Blink" : {
+
+    },
+    "Pik Draft" : {
+      "localizations" : {
+        "ca" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pik"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pik"
+            "state" : "machine_translated",
+            "value" : "Esborrany de Pik"
           }
         }
       }
     },
     "Place" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Lloc"
+          }
+        }
+      }
+    },
+    "Posponer 15 min" : {
 
     },
     "Privacy" : {
-
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Privadesa"
+          }
+        }
+      }
+    },
+    "Pulsa en una de tus ubicaciones almacenadas" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Toca una de les ubicacions desades"
+          }
+        }
+      }
     },
     "Quick Reminder" : {
 
@@ -1097,7 +1353,19 @@
         }
       }
     },
+    "Seleccionar" : {
+
+    },
+    "Send Feedback" : {
+
+    },
     "Set reminder" : {
+
+    },
+    "Siri Shortcuts" : {
+
+    },
+    "System" : {
 
     },
     "System follows your device language." : {

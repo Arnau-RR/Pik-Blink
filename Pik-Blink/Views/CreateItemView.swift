@@ -13,6 +13,9 @@ struct CreateItemView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     
+    @Query(sort: \FavoritePlace.name)
+    private var favoritePlaces: [FavoritePlace]
+    
     @FocusState private var focusedField: Field?
     
     @StateObject private var viewModel = CreateItemViewModel()
@@ -23,7 +26,7 @@ struct CreateItemView: View {
             VStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 20) {
                     HeaderView(
-                        title: String(localized: "new.item.title"),
+                        title: "new.item.title",
                         subtitle: "Capture ideas in a blink."
                     ) {}
                 }
@@ -202,9 +205,8 @@ extension CreateItemView {
     
     private var selectWherePickerView: some View {
         ReminderBox {
-            VStack (spacing: 15){
-                HStack (spacing: 10){
-                    
+            VStack(spacing: 15) {
+                HStack(spacing: 10) {
                     Image(systemName: "location.circle")
                         .resizable()
                         .scaledToFit()
@@ -239,17 +241,62 @@ extension CreateItemView {
                     .padding(.horizontal, 16)
                     .frame(height: 52)
                     .background(
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        RoundedRectangle(cornerRadius: 16)
                             .fill(Color(red: 0.22, green: 0.22, blue: 0.24))
                     )
                 }
                 .buttonStyle(.plain)
                 
+                HStack(spacing: 10) {
+                    Image(systemName: "star")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 15)
+                    
+                    SectionHeader(
+                        title: String(localized: "Favoritos"),
+                        subtitle: String(localized: "Pulsa en una de tus ubicaciones almacenadas"),
+                        titleFont: .system(size: 12),
+                        subtitleFont: .footnote
+                    )
+                }
+                
+                // FAVORITOS
+                if favoritePlaces.isEmpty {
+                    HStack(spacing: 6) {
+                        Image(systemName: "star")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                        
+                        Text("new.item.popup.location.favourites.description.add.")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                } else {
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(favoritePlaces) { place in
+                                GlassTextButton(
+                                    title: place.label,
+                                    isSelected: viewModel.selectedPlace?.name == place.name,
+                                    backgroundColor: Color(.systemBackground)
+                                ) {
+                                    viewModel.selectFavorite(place)
+                                }
+                            }
+                        }
+                    }
+                    
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
                 if let place = viewModel.selectedPlace {
                     PlaceCard(place: place)
                         .id(place.id)
                 }
-                
             }
         }
     }
@@ -313,7 +360,7 @@ extension CreateItemView {
             .listStyle(.plain)
             .searchable(
                 text: $viewModel.search.query,
-                prompt: "Buscar un lugar"
+                prompt: "new.item.popup.location.search.place.button"
             )
         }
     }

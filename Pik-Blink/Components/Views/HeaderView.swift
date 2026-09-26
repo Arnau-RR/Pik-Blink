@@ -9,13 +9,13 @@ import SwiftUI
 
 struct HeaderView<Actions: View>: View {
 
-    let title: String
-    let subtitle: String?
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey?
     @ViewBuilder let actions: Actions
 
     init(
-        title: String,
-        subtitle: String? = nil,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil,
         @ViewBuilder actions: () -> Actions
     ) {
         self.title = title
@@ -31,7 +31,7 @@ struct HeaderView<Actions: View>: View {
                 Text(title)
                     .font(.system(size: 34, weight: .bold))
 
-                if let subtitle, !subtitle.isEmpty {
+                if let subtitle {
                     Text(subtitle)
                         .font(.footnote)
                         .foregroundStyle(.secondary)

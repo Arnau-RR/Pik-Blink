@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchBar: View {
     @Binding var text: String
 
-    var placeholder: String = "Buscar un lloc o adreça..."
+    var placeholder: String = String(localized: "Buscar un lloc o adreça...")
 
     var body: some View {
         HStack(spacing: 10) {

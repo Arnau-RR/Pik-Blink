@@ -77,32 +77,6 @@ final class CreateItemViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func saveMockPik() throws {
-        guard let modelContext else {
-            throw SavePikError.missingModelContext
-        }
-
-        let mockItem = PikItem(
-            text: "Comprar café y leche",
-            transcription: nil,
-            audioPath: nil,
-            reminderType: .date,
-            remindAt: Calendar.current.date(byAdding: .hour, value: 2, to: Date()),
-            placeName: nil,
-            placeAddress: nil,
-            latitude: nil,
-            longitude: nil,
-            source: .text,
-            status: .pending
-        )
-
-        modelContext.insert(mockItem)
-        try modelContext.save()
-
-        // Programar la notificación del mock
-        //notifications.schedule(for: mockItem)
-    }
-    
     func checkPikTextEmpty() -> Bool {
         return pikItemText
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -183,7 +157,6 @@ final class CreateItemViewModel: ObservableObject {
         }
     }
 
-    
     @MainActor
     func savePikLocal() throws {
         try savePik(
@@ -194,50 +167,6 @@ final class CreateItemViewModel: ObservableObject {
             source: audioPath == nil ? .text : .voice
         )
     }
-//    func savePik() throws {
-//        guard let modelContext else {
-//            throw SavePikError.missingModelContext
-//        }
-//
-//        let type: ReminderType
-//
-//        if selectedPlace != nil {
-//            type = .location
-//        } else if reminderDate != nil {
-//            type = .date
-//        } else {
-//            type = .none
-//        }
-//
-//        let item = PikItem(
-//            text: pikItemText.trimmingCharacters(in: .whitespacesAndNewlines),
-//            transcription: audioPath != nil ? pikItemText : nil,
-//            audioPath: audioPath,
-//
-//            reminderType: type,
-//            remindAt: type == .date ? reminderDate : nil,
-//
-//            placeName: type == .location ? selectedPlace?.name : nil,
-//            placeAddress: type == .location ? selectedPlace?.address : nil,
-//            latitude: type == .location ? selectedPlace?.coordinate.latitude : nil,
-//            longitude: type == .location ? selectedPlace?.coordinate.longitude : nil,
-//
-//            source: audioPath == nil ? .text : .voice,
-//            status: .pending
-//        )
-//
-//        // Guardar en SwiftData
-//        modelContext.insert(item)
-//        try modelContext.save()
-//
-//        // Pedir permiso de ubicación si hace falta
-//        if type == .location {
-//            notifications.requestLocationPermission()
-//        }
-//
-//        // Programar la notificación
-//        notifications.schedule(for: item)
-//    }
     
     @MainActor
     func savePik(
@@ -280,43 +209,6 @@ final class CreateItemViewModel: ObservableObject {
         notifications.schedule(for: item)
     }
     
-//    @MainActor
-//    func savePik() throws {
-//        guard let modelContext else {
-//            throw SavePikError.missingModelContext
-//        }
-//        
-//        let type: ReminderType
-//
-//        if selectedPlace != nil {
-//            type = .location
-//        } else if reminderDate != nil {
-//            type = .date
-//        } else {
-//            type = .none
-//        }
-//
-//        let item = PikItem(
-//            text: pikItemText.trimmingCharacters(in: .whitespacesAndNewlines),
-//            transcription: isRecording ? pikItemText : nil,
-//            audioPath: audioPath,
-//
-//            reminderType: type,
-//            remindAt: type == .date ? reminderDate : nil,
-//
-//            placeName: type == .location ? selectedPlace?.name : nil,
-//            placeAddress: type == .location ? selectedPlace?.address : nil,
-//            latitude: type == .location ? selectedPlace?.coordinate.latitude : nil,
-//            longitude: type == .location ? selectedPlace?.coordinate.longitude : nil,
-//
-//            source: audioPath == nil ? .text : .voice,
-//            status: .pending
-//        )
-//        
-//        modelContext.insert(item)
-//        try modelContext.save()
-//    }
-    
 
     @MainActor
     func selectCompletion(_ completion: MKLocalSearchCompletion) {
@@ -329,5 +221,19 @@ final class CreateItemViewModel: ObservableObject {
                 print(error)
             }
         }
+    }
+    
+    @MainActor
+    func selectFavorite(_ favorite: FavoritePlace) {
+        selectedPlace = SelectedPlace(
+            name: favorite.name,
+            address: favorite.address,
+            coordinate: CLLocationCoordinate2D(
+                latitude: favorite.latitude,
+                longitude: favorite.longitude
+            )
+        )
+
+        showPlacePicker = false
     }
 }
