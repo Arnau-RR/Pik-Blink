@@ -19,15 +19,6 @@ struct ReminderChoiceView: View {
 
             HStack(spacing: 10) {
 
-//                ChoiceButton(
-//                    title: "None",
-//                    icon: "minus.circle",
-//                    intent: SetReminderChoiceIntent(
-//                        draft: draft,
-//                        choice: .none
-//                    )
-//                )
-
                 ChoiceButton(
                     title: "When",
                     icon: "calendar",

@@ -1,53 +1,19 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "New Pik in ${applicationName}" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ca" : {
-          "stringSet" : {
-            "state" : "needs_review",
-            "values" : [
-              "Nou Pik a ${applicationName}"
-            ]
-          }
-        },
-        "en" : {
-          "stringSet" : {
-            "state" : "new",
-            "values" : [
-              "New Pik in ${applicationName}",
-              "Create Pik in ${applicationName}",
-              "Nou Pik a ${applicationName}",
-              "Crea un Pik a ${applicationName}",
-              "Nuevo Pik en ${applicationName}",
-              "Crear Pik en ${applicationName}"
-            ]
-          }
-        },
-        "es" : {
-          "stringSet" : {
-            "state" : "needs_review",
-            "values" : [
-              "Nuevo Pik en ${applicationName}"
-            ]
-          }
-        }
-      }
-    },
-    "Nuevo Pik en \\(.applicationName)" : {
+    "Nuevo \\(.applicationName)" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringSet" : {
             "state" : "new",
             "values" : [
-              "Nuevo Pik en \\(.applicationName)",
-              "Crear Pik en \\(.applicationName)",
-              "Nou Pik a \\(.applicationName)",
-              "Crea un Pik a \\(.applicationName)",
-              "New Pik in \\(.applicationName)",
-              "Create Pik in \\(.applicationName)"
+              "Nuevo \\(.applicationName)",
+              "Crear \\(.applicationName)",
+              "Nou \\(.applicationName)",
+              "Crea \\(.applicationName)",
+              "New \\(.applicationName)",
+              "Create \\(.applicationName)"
             ]
           }
         }

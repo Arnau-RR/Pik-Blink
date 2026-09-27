@@ -5,7 +5,6 @@
 //  Created by Arnau on 25/09/2026.
 //
 
-
 import SwiftUI
 import AppIntents
 

@@ -1,10 +1,9 @@
-//////
-//////  PikSnippetTextField.swift
-//////  Pik-Blink
-//////
-//////  Created by Arnau on 25/09/2026.
-//////
-//////
+//
+//  PikSnippetTextField.swift
+//  Pik-Blink
+//
+//  Created by Arnau on 25/09/2026.
+//
 //
 
 import SwiftUI
@@ -22,14 +21,9 @@ struct PikSnippetTextField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
 
-            // Título fuera del recuadro
             VStack(alignment: .leading, spacing: 7) {
                 Text(title)
                     .font(.headline)
-
-//                Text(subtitle)
-//                    .font(.caption)
-//                    .foregroundStyle(.secondary)
             }
 
             // Campo

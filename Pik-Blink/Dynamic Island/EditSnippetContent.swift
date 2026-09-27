@@ -1,15 +1,3 @@
-////
-////  EditSnippetContent.swift
-////  Pik-Blink
-////
-////  Created by Arnau on 25/09/2026.
-////
-//
-//import SwiftUI
-//import AppIntents
-//import SwiftData
-//
-
 //
 //  EditSnippetContent.swift
 //  Pik-Blink

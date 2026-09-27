@@ -8,23 +8,6 @@
 import SwiftUI
 import AppIntents
 
-//enum QuickReminderOption: String, AppEnum {
-//
-//    case today
-//    case tonight
-//    case tomorrow
-//    case custom
-//
-//    static let typeDisplayRepresentation =
-//        TypeDisplayRepresentation(name: "Quick Reminder")
-//
-//    static let caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-//        .today: "Today",
-//        .tonight: "Tonight",
-//        .tomorrow: "Tomorrow",
-//        .custom: "Custom"
-//    ]
-//}
 
 enum QuickReminderOption: String, AppEnum {
     case thirtyMinutes
