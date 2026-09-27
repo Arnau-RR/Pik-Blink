@@ -10,37 +10,37 @@ import SwiftData
 
 struct PikViewList: View {
     @Environment(\.modelContext) private var context
-    
+
     @Query(sort: \PikItem.createdAt, order: .reverse)
     private var piks: [PikItem]
-    
+
     @StateObject private var viewModel = PikViewModel()
-    
+
     var body: some View {
-        
+
         VStack() {
             HeaderView(
-                title: "Pik Blink",
-                subtitle: "Capture ideas in a blink."
+                title: "main.view.header.title",
+                subtitle: "main.view.header.subtitle"
             ) {
                 GlassIconButton(icon: "magnifyingglass") {
                     viewModel.createNewItemPressed.toggle()
                 }
-                
+
                 GlassIconButton(icon: "plus") {
                     viewModel.createNewItemPressed.toggle()
                 }
             }
             .padding(.horizontal, 20)
-            
+
             Picker("", selection: $viewModel.selectedTab) {
-                Text(localized( "main.view.picker.pending" )).tag(0)
-                Text(localized( "main.view.picker.completed")).tag(1)
-                Text(localized( "main.view.picker.archived")).tag(2)
+                Text(String(localized: "main.view.picker.pending")).tag(0)
+                Text(String(localized: "main.view.picker.completed")).tag(1)
+                Text(String(localized: "main.view.picker.archived")).tag(2)
             }
             .pickerStyle(.segmented)
             .padding()
-            
+
             List {
                 ListItems(
                     listElements: viewModel.filteredPiks(from: piks),
@@ -59,7 +59,7 @@ struct PikViewList: View {
             }
             .layoutPriority(1)
         }
-        
+
         .sheet(
             isPresented: $viewModel.createNewItemPressed) {
             NavigationStack {
@@ -68,7 +68,7 @@ struct PikViewList: View {
                     .presentationDragIndicator(.visible)
             }
         }
-        
+
         .sheet(
             isPresented: $viewModel.editExistingItemPressed ) {
             NavigationStack {
@@ -77,7 +77,7 @@ struct PikViewList: View {
                     .presentationDragIndicator(.visible)
             }
         }
-        
+
         .task {
             NotificationManager.shared.registerCategories()
 
@@ -90,9 +90,9 @@ struct PikViewList: View {
 
             viewModel.createNewItemPressed = true
         }
-        
+
     }
-    
+
 }
 
 #Preview {

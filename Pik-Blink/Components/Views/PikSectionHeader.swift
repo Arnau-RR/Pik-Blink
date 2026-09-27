@@ -41,9 +41,7 @@ struct PikSectionHeader: View {
                     .font(.caption.weight(.bold))
                     .foregroundStyle(.secondary)
             }
-            .frame(maxWidth: .infinity, alignment: .leading) // ocupa toda la fila
-            .contentShape(Rectangle())                        // toda la fila es pulsable
-            //.padding(.vertical, 8)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .buttonStyle(.plain)
         .textCase(nil)

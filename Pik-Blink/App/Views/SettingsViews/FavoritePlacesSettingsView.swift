@@ -5,7 +5,6 @@
 //  Created by Arnau on 25/09/2026.
 //
 
-
 import SwiftUI
 import SwiftData
 
@@ -19,11 +18,11 @@ struct FavoritePlacesSettingsView: View {
     @State private var showAdd = false
 
     var body: some View {
-        SettingsDetailView(title: "Favorite Places") {
+        SettingsDetailView(title: "settings.favoritePlaces.title") {
 
             Section {
                 if places.isEmpty {
-                    Text("No favorite places yet")
+                    Text(String(localized: "settings.favoritePlaces.empty.message"))
                         .foregroundStyle(.secondary)
                 } else {
                     ForEach(places) { place in
@@ -47,7 +46,10 @@ struct FavoritePlacesSettingsView: View {
                 Button {
                     showAdd = true
                 } label: {
-                    Label("Add Favorite Place", systemImage: "plus.circle.fill")
+                    Label(
+                        String(localized: "settings.favoritePlaces.add.button"),
+                        systemImage: "plus.circle.fill"
+                    )
                 }
             }
         }

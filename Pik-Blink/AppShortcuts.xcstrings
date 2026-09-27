@@ -1,19 +1,19 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Nuevo \\(.applicationName)" : {
+    "Nuevo ${applicationName}" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringSet" : {
             "state" : "new",
             "values" : [
-              "Nuevo \\(.applicationName)",
-              "Crear \\(.applicationName)",
-              "Nou \\(.applicationName)",
-              "Crea \\(.applicationName)",
-              "New \\(.applicationName)",
-              "Create \\(.applicationName)"
+              "Nuevo ${applicationName}",
+              "Crear ${applicationName}",
+              "Nou ${applicationName}",
+              "Crea ${applicationName}",
+              "New ${applicationName}",
+              "Create ${applicationName}"
             ]
           }
         }

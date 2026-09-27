@@ -13,7 +13,7 @@ struct AppearanceSettingsView: View {
     private var appearance = AppAppearance.system.rawValue
 
     var body: some View {
-        SettingsDetailView(title: "Appearance") {
+        SettingsDetailView(title:"settings.appearance.title") {
 
             Section {
                 ForEach(AppAppearance.allCases) { option in
@@ -34,7 +34,7 @@ struct AppearanceSettingsView: View {
                     .foregroundStyle(.primary)
                 }
             } footer: {
-                Text("Choose how Pik Blink appears. System follows your device settings.")
+                Text(String(localized: "settings.appearance.footer.description"))
             }
         }
     }

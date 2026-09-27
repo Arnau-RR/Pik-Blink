@@ -25,11 +25,11 @@ struct AddFavoritePlaceView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Favorite name") {
-                    TextField("Home", text: $label)
+                Section(String(localized: "settings.favoritePlaces.add.favoriteName.section")) {
+                    TextField(String(localized: "settings.favoritePlaces.add.favoriteName.placeholder"), text: $label)
                 }
 
-                Section("Location") {
+                Section(String(localized: "settings.favoritePlaces.add.location.section")) {
                     Button {
                         showLocationPicker = true
                     } label: {
@@ -45,23 +45,26 @@ struct AddFavoritePlaceView: View {
                             }
                             .padding(.vertical, 2)
                         } else {
-                            Label("Choose a location", systemImage: "mappin.and.ellipse")
+                            Label(
+                                String(localized: "settings.favoritePlaces.add.location.placeholder"),
+                                systemImage: "mappin.and.ellipse"
+                            )
                         }
                     }
                     .buttonStyle(.plain)
                 }
             }
-            .navigationTitle("Add Place")
+            .navigationTitle(String(localized: "settings.favoritePlaces.add.navigation.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") {
+                    Button(String(localized: "settings.favoritePlaces.add.cancel.button")) {
                         dismiss()
                     }
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Save") {
+                    Button(String(localized: "settings.favoritePlaces.add.save.button")) {
                         saveFavorite()
                     }
                     .fontWeight(.semibold)

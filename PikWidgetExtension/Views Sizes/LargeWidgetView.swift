@@ -26,13 +26,13 @@ struct LargeWidgetView: View {
             // LEFT
             VStack(alignment: .leading, spacing: 4) {
 
-                Text("Today")
+                Text(String(localized: "widget.large.today.title"))
                     .font(.headline)
 
                 Text("\(entry.piks.count)")
                     .font(.system(size: 36, weight: .bold))
 
-                Text("pending")
+                Text(String(localized: "widget.large.pending.label"))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
 
@@ -40,7 +40,6 @@ struct LargeWidgetView: View {
             }
             .frame(width: 72, alignment: .topLeading)
             .padding()
-            //.frame(width: 78, alignment: .topLeading)
 
             Divider()
 
@@ -52,15 +51,14 @@ struct LargeWidgetView: View {
                     Spacer()
 
                     VStack(alignment: .center, spacing: 4) {
-                        Text("Nothing for today")
+                        Text(String(localized: "widget.large.empty.title"))
                             .font(.headline)
 
-                        Text("Enjoy your day ✨")
+                        Text(String(localized: "widget.large.empty.subtitle"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                     .frame(width: 190)
-
 
                     Spacer()
 
@@ -97,10 +95,15 @@ struct LargeWidgetView: View {
                     if remaining > 0 {
                         Divider()
 
-                        Text("+\(remaining) more")
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity)
+                        Text(
+                            String(
+                                localized: "widget.large.remaining.count",
+                                defaultValue: "+\(remaining) more"
+                            )
+                        )
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity)
                     }
                 }
             }
@@ -109,11 +112,11 @@ struct LargeWidgetView: View {
 
     private func subtitle(for pik: PikItem) -> String {
         if pik.reminderType == .location {
-            return pik.placeName ?? "Location"
+            return pik.placeName ?? String(localized: "widget.large.location.label")
         }
 
         guard let date = pik.remindAt else {
-            return "No reminder"
+            return String(localized: "widget.large.no.reminder")
         }
 
         return date.formatted(.dateTime.hour().minute())

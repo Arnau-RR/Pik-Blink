@@ -12,7 +12,7 @@ struct DateTimeCard: View {
     let onTap: () -> Void
 
     private var formattedDate: String {
-        guard let date else { return String(localized: "Seleccionar") }
+        guard let date else { return String(localized: "new.item.date.time.placeholder") }
 
         let formatter = DateFormatter()
         formatter.locale = .current
@@ -31,7 +31,7 @@ struct DateTimeCard: View {
                     .frame(width: 42, height: 42)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("new.item.popup.date.time.title")
+                    Text(String(localized: "new.item.date.time.title"))
                         .font(.headline)
                         .foregroundStyle(.primary)
 

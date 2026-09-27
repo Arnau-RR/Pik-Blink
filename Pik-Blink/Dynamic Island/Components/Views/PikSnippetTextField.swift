@@ -4,7 +4,6 @@
 //
 //  Created by Arnau on 25/09/2026.
 //
-//
 
 import SwiftUI
 import AppIntents
@@ -14,8 +13,8 @@ struct PikSnippetTextField: View {
     let draft: PikDraftEntity
     let text: String
 
-    private let title = "Pik Blink"
-    private let subtitle = "Capture your idea in a blink."
+    private let title = String(localized: "snippet.text.field.header.title")
+    private let subtitle = String(localized: "snippet.text.field.header.subtitle")
     private let characterLimit = 100
 
     var body: some View {
@@ -30,7 +29,7 @@ struct PikSnippetTextField: View {
             Button(intent: SetTextIntent(draft: draft)) {
                 VStack(alignment: .leading) {
                     if text.isEmpty {
-                        Text("Tap to write…")
+                        Text(String(localized: "snippet.text.field.placeholder"))
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(minHeight: 40, alignment: .topLeading)
@@ -54,11 +53,16 @@ struct PikSnippetTextField: View {
 
             HStack {
                 Spacer()
-                Text("\(text.count)/\(characterLimit) characters")
-                    .font(.caption2)
-                    .foregroundStyle(
-                        text.count >= characterLimit ? .red : .secondary
+                Text(
+                    String(
+                        localized: "snippet.text.field.character.counter",
+                        defaultValue: "\(text.count)/\(characterLimit) characters"
                     )
+                )
+                .font(.caption2)
+                .foregroundStyle(
+                    text.count >= characterLimit ? .red : .secondary
+                )
             }
             .padding(.horizontal, 4)
         }

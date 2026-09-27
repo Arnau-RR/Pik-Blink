@@ -1,9 +1,8 @@
-////
-////  WhenQuickReminderView.swift
-////  Pik-Blink
-////
-////  Created by Arnau on 25/09/2026.
-////
+//
+//  WhenQuickReminderView.swift
+//  Pik-Blink
+//
+//  Created by Arnau on 25/09/2026.
 //
 
 import SwiftUI
@@ -22,8 +21,8 @@ struct WhenQuickReminderView: View {
         VStack(alignment: .leading, spacing: 12) {
 
             HStack {
-                Text("When should I remind you?")
-                    .font(.headline)
+                Text(String(localized: "reminder.quick.selection.title"))
+                    .font(.caption2)
 
                 Spacer()
 
@@ -31,7 +30,7 @@ struct WhenQuickReminderView: View {
                     draft: draft,
                     choice: .none
                 )) {
-                    Text("Change")
+                    Text(String(localized: "reminder.quick.selection.change.button"))
                 }
                 .buttonStyle(.borderless)
             }
@@ -39,7 +38,7 @@ struct WhenQuickReminderView: View {
             LazyVGrid(columns: columns, spacing: 12) {
 
                 ChoiceButton(
-                    title: "+30 min",
+                    title: String(localized: "reminder.quick.option.thirty.minutes"),
                     icon: "timer",
                     intent: SetQuickReminderIntent(
                         draft: draft,
@@ -48,7 +47,7 @@ struct WhenQuickReminderView: View {
                 )
 
                 ChoiceButton(
-                    title: "+1 h",
+                    title: String(localized: "reminder.quick.option.one.hour"),
                     icon: "timer",
                     intent: SetQuickReminderIntent(
                         draft: draft,
@@ -57,7 +56,7 @@ struct WhenQuickReminderView: View {
                 )
 
                 ChoiceButton(
-                    title: "+2 h",
+                    title: String(localized: "reminder.quick.option.two.hours"),
                     icon: "timer",
                     intent: SetQuickReminderIntent(
                         draft: draft,
@@ -66,7 +65,7 @@ struct WhenQuickReminderView: View {
                 )
 
                 ChoiceButton(
-                    title: "Custom",
+                    title: String(localized: "reminder.quick.option.custom"),
                     icon: "calendar",
                     intent: PickCustomDateIntent(draft: draft)
                 )

@@ -69,6 +69,7 @@
 		578550943068771E00880D5D /* Exceptions for "Pik-Blink" folder in "PikWidgetExtensionExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Localizable.xcstrings,
 				Models/FavoritePlace.swift,
 				Models/PikDraft.swift,
 				Models/PikItem.swift,

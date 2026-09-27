@@ -5,7 +5,6 @@
 //  Created by Arnau on 26/09/2026.
 //
 
-
 import WidgetKit
 import SwiftUI
 
@@ -21,8 +20,8 @@ struct PikWidget: Widget {
         ) { entry in
             PikWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Pik")
-        .description("Create and view your Piks.")
+        .configurationDisplayName(LocalizedStringResource("widget.configuration.display.name"))
+        .description(LocalizedStringResource("widget.configuration.description"))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }

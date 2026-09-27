@@ -8,7 +8,6 @@
 import SwiftUI
 import MapKit
 
-
 struct LocationPickerView: View {
 
     @Environment(\.dismiss) private var dismiss
@@ -43,13 +42,13 @@ struct LocationPickerView: View {
             .listStyle(.plain)
             .searchable(
                 text: $search.query,
-                prompt: "Search a place"
+                prompt: String(localized: "location.picker.search.placeholder")
             )
-            .navigationTitle("Choose Location")
+            .navigationTitle(String(localized: "location.picker.navigation.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") {
+                    Button(String(localized: "location.picker.cancel.button")) {
                         dismiss()
                     }
                 }

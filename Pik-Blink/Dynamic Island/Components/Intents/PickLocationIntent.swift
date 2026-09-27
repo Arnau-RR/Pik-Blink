@@ -11,12 +11,13 @@ import SwiftUI
 
 struct PickLocationIntent: AppIntent {
 
-    static let title: LocalizedStringResource = "Pick location"
+    static let title: LocalizedStringResource = "app.intent.pick.location.title"
+    static var isDiscoverable: Bool = false
 
     @Dependency
     private var modelContainer: ModelContainer
 
-    @Parameter(title: "Draft")
+    @Parameter(title: "app.intent.pick.location.parameter.draft")
     var draft: PikDraftEntity
 
     init() {}
@@ -47,7 +48,7 @@ struct PickLocationIntent: AppIntent {
             }
 
         guard let model = try context.fetch(descriptor).first else {
-            return .result { Text("Draft not found") }
+            return .result { Text("app.intent.pick.location.error.draft.not.found") }
         }
 
         // Activa el modo de selección de ubicación

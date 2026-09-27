@@ -18,30 +18,29 @@ struct FavoritePlacesView: View {
         VStack(alignment: .leading, spacing: 12) {
 
             HStack {
-                Text("Where should I remind you?")
-                    .font(.headline)
-                
+                Text(String(localized: "favorite.places.snippet.title"))
+                    .font(.caption2)
+
                 Spacer()
                 Button(intent: SetReminderChoiceIntent(
-                           draft: draft,
-                           choice: .none
-                       )) {
-                           Text("Change")
-                               .font(.subheadline)
-                       }
-                       .buttonStyle(.borderless)
+                    draft: draft,
+                    choice: .none
+                )) {
+                    Text(String(localized: "favorite.places.snippet.change.button"))
+                        .font(.caption2)
+                }
+                .buttonStyle(.borderless)
             }
             .padding(.horizontal, 5)
-           
 
             if favorites.isEmpty {
 
-                Text("No favourite places yet.")
+                Text(String(localized: "favorite.places.snippet.empty.message"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
             } else {
-                
+
                 HStack(spacing: 12) {
                     ForEach(favorites) { place in
                         ChoiceButton(

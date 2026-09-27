@@ -8,7 +8,6 @@
 import SwiftUI
 import AppIntents
 
-
 enum QuickReminderOption: String, AppEnum {
     case thirtyMinutes
     case oneHour
@@ -16,13 +15,13 @@ enum QuickReminderOption: String, AppEnum {
     case custom
 
     static let typeDisplayRepresentation =
-        TypeDisplayRepresentation(name: "Quick Reminder")
+        TypeDisplayRepresentation(name: "quick.reminder.type.display")
 
     static let caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-        .thirtyMinutes: "+30 min",
-        .oneHour: "+1 hour",
-        .twoHours: "+2 hours",
-        .custom: "Custom"
+        .thirtyMinutes: DisplayRepresentation(title: LocalizedStringResource("quick.reminder.option.thirty.minutes")),
+        .oneHour: DisplayRepresentation(title: LocalizedStringResource("quick.reminder.option.one.hour")),
+        .twoHours: DisplayRepresentation(title: LocalizedStringResource("quick.reminder.option.two.hours")),
+        .custom: DisplayRepresentation(title: LocalizedStringResource("quick.reminder.option.custom"))
     ]
 }
 

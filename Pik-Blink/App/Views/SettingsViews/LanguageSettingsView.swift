@@ -13,7 +13,7 @@ struct LanguageSettingsView: View {
     private var language = AppLanguage.system.rawValue
 
     var body: some View {
-        SettingsDetailView(title: "Language") {
+        SettingsDetailView(title: "settings.language.title") {
 
             Section {
                 ForEach(AppLanguage.allCases) { option in
@@ -34,7 +34,7 @@ struct LanguageSettingsView: View {
                     .foregroundStyle(.primary)
                 }
             } footer: {
-                Text("System follows your device language.")
+                Text(String(localized: "settings.language.footer.description"))
             }
         }
     }

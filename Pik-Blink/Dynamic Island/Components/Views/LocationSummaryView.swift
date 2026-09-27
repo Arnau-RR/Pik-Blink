@@ -23,7 +23,7 @@ struct LocationSummaryView: View {
 
             VStack(alignment: .leading, spacing: 2) {
 
-                Text("Location")
+                Text(String(localized: "location.summary.title"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
@@ -34,7 +34,7 @@ struct LocationSummaryView: View {
                     draft: draft,
                     choice: .none
                 )) {
-                    Text("Canvia")
+                    Text(String(localized: "location.summary.change.button"))
                 }
                 .buttonStyle(.borderless)
             }

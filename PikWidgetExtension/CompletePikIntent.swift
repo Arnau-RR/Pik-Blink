@@ -12,6 +12,7 @@ import WidgetKit
 struct CompletePikIntent: AppIntent {
 
     static var title: LocalizedStringResource = "Complete Pik"
+    static var isDiscoverable: Bool = false
 
     @Parameter(title: "Pik ID")
     var id: String

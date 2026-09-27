@@ -238,7 +238,7 @@ extension CreateItemView {
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(.white.opacity(0.55))
                         
-                        Text("Buscar un lloc")
+                        Text(String(localized: "new.item.select.reminder.where.search.place.button"))
                             .font(.subheadline.weight(.medium))
                             .foregroundStyle(.white.opacity(0.85))
                         
@@ -264,8 +264,8 @@ extension CreateItemView {
                         .frame(height: 15)
                     
                     SectionHeader(
-                        title: String(localized: "Favoritos"),
-                        subtitle: String(localized: "Pulsa en una de tus ubicaciones almacenadas"),
+                        title: String(localized: "new.item.select.reminder.where.favoutire.title"),
+                        subtitle: String(localized: "new.item.select.reminder.where.favoutire.description"),
                         titleFont: .system(size: 12),
                         subtitleFont: .footnote
                     )

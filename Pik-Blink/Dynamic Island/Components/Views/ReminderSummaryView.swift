@@ -22,8 +22,8 @@ struct ReminderSummaryView: View {
 
             VStack(alignment: .leading, spacing: 2) {
 
-                Text("Reminder")
-                    .font(.caption)
+                Text(String(localized: "reminder.summary.view.title"))
+                    .font(.caption2)
                     .foregroundStyle(.secondary)
 
                 Text(date.formatted(
@@ -35,20 +35,24 @@ struct ReminderSummaryView: View {
                         .minute()
                 ))
                 .font(.subheadline.weight(.medium))
-                
-                Button(intent: SetReminderChoiceIntent(
-                    draft: draft,
-                    choice: .none
-                )) {
-                    Text("Canvia")
-                }
-                .buttonStyle(.borderless)
+                .lineLimit(1)
+                .minimumScaleFactor(0.9)
             }
 
-            Spacer()
+            Spacer(minLength: 8)
+
+            Button(intent: SetReminderChoiceIntent(
+                draft: draft,
+                choice: .none
+            )) {
+                Text(String(localized: "reminder.summary.view.change.button"))
+                    .font(.caption.weight(.medium))
+            }
+            .buttonStyle(.borderless)
         }
-        .padding(14)
-        .background(.gray.opacity(0.08))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(.gray.opacity(0.12))
+        .clipShape(RoundedRectangle(cornerRadius: 14))
     }
 }

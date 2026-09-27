@@ -11,17 +11,18 @@ import SwiftUI
 
 struct PickCustomDateIntent: AppIntent {
 
-    static let title: LocalizedStringResource = "Pick custom date"
+    static let title: LocalizedStringResource = "app.intent.pick.custom.date.title"
+    static var isDiscoverable: Bool = false
 
     @Dependency
     private var modelContainer: ModelContainer
 
-    @Parameter(title: "Draft")
+    @Parameter(title: "app.intent.pick.custom.date.parameter.draft")
     var draft: PikDraftEntity
 
     @Parameter(
-        title: "Reminder date",
-        requestValueDialog: "When should I remind you?"
+        title: "app.intent.pick.custom.date.parameter.reminder.date",
+        requestValueDialog: IntentDialog("app.intent.pick.custom.date.dialog.request")
     )
     var date: Date
 
@@ -39,7 +40,7 @@ struct PickCustomDateIntent: AppIntent {
         let descriptor = FetchDescriptor<PikDraft>(
             predicate: #Predicate<PikDraft> { $0.id == draftID }
         )
-        
+
         let favorites = try context.fetch(FetchDescriptor<FavoritePlace>())
             .map {
                 FavoritePlaceSnippet(
@@ -52,7 +53,7 @@ struct PickCustomDateIntent: AppIntent {
             }
 
         guard let model = try context.fetch(descriptor).first else {
-            return .result { Text("Draft not found") }
+            return .result { Text("app.intent.pick.custom.date.error.draft.not.found") }
         }
 
         model.remindAt = date

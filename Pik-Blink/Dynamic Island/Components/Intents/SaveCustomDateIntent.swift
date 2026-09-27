@@ -5,22 +5,22 @@
 //  Created by Arnau on 25/09/2026.
 //
 
-
 import AppIntents
 import SwiftData
 import SwiftUI
 
 struct SaveCustomDateIntent: AppIntent {
 
-    static let title: LocalizedStringResource = "Save custom date"
+    static let title: LocalizedStringResource = "app.intent.save.custom.date.title"
+    static var isDiscoverable: Bool = false
 
     @Dependency
     private var modelContainer: ModelContainer
 
-    @Parameter(title: "Draft")
+    @Parameter(title: "app.intent.save.custom.date.parameter.draft")
     var draft: PikDraftEntity
 
-    @Parameter(title: "Date")
+    @Parameter(title: "app.intent.save.custom.date.parameter.date")
     var date: Date
 
     init() {}
@@ -42,7 +42,7 @@ struct SaveCustomDateIntent: AppIntent {
                 $0.id == draftID
             }
         )
-        
+
         let favorites = try context.fetch(FetchDescriptor<FavoritePlace>())
             .map {
                 FavoritePlaceSnippet(
@@ -56,7 +56,7 @@ struct SaveCustomDateIntent: AppIntent {
 
         guard let model = try context.fetch(descriptor).first else {
             return .result {
-                Text("Draft not found")
+                Text("app.intent.save.custom.date.error.draft.not.found")
             }
         }
 
@@ -75,7 +75,6 @@ struct SaveCustomDateIntent: AppIntent {
                 draft: entity,
                 model: model,
                 favorites: favorites
-                
             )
         }
     }

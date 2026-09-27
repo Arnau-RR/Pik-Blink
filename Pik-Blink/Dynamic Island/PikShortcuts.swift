@@ -13,14 +13,14 @@ struct PikShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: NewPikIntent(),
             phrases: [
-                "Nuevo \\(.applicationName)",
-                "Crear \\(.applicationName)",
-                "Nou \\(.applicationName)",
-                "Crea \\(.applicationName)",
-                "New \\(.applicationName)",
-                "Create \\(.applicationName)"
+                "Nuevo \(.applicationName)",
+                "Crear \(.applicationName)",
+                "Nou \(.applicationName)",
+                "Crea \(.applicationName)",
+                "New \(.applicationName)",
+                "Create \(.applicationName)"
             ],
-            shortTitle: "New Pik",
+            shortTitle: LocalizedStringResource("app.shortcuts.new.short.title"),
             systemImageName: "plus.circle"
         )
     }

@@ -14,13 +14,13 @@ struct ReminderChoiceView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
 
-            Text("How should I remind you?")
+            Text(String(localized: "reminder.choice.title"))
                 .font(.caption)
 
             HStack(spacing: 10) {
 
                 ChoiceButton(
-                    title: "When",
+                    title: String(localized: "reminder.choice.option.when"),
                     icon: "calendar",
                     intent: SetReminderChoiceIntent(
                         draft: draft,
@@ -29,7 +29,7 @@ struct ReminderChoiceView: View {
                 )
 
                 ChoiceButton(
-                    title: "Where",
+                    title: String(localized: "reminder.choice.option.where"),
                     icon: "location",
                     intent: PickLocationIntent(draft: draft)
                 )
