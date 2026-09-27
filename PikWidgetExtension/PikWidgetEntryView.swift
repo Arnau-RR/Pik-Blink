@@ -22,6 +22,9 @@ struct PikWidgetEntryView: View {
 
         case .systemMedium:
             mediumWidget
+            
+        case .systemLarge:
+            largeWidget
 
         default:
             smallWidget
@@ -45,6 +48,17 @@ private extension PikWidgetEntryView {
     var mediumWidget: some View {
 
         MediumWidgetView(entry: entry)
+            .containerBackground(Color(.systemBackground), for: .widget)
+            .widgetURL(URL(string: "pikblink://list"))
+    }
+}
+
+// MARK: - Large
+private extension PikWidgetEntryView {
+
+    var largeWidget: some View {
+
+        LargeWidgetView(entry: entry)
             .containerBackground(Color(.systemBackground), for: .widget)
             .widgetURL(URL(string: "pikblink://list"))
     }
