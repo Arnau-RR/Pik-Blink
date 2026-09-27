@@ -55,6 +55,16 @@ struct PikItemRow: View {
                     }
                     .foregroundStyle(.secondary)
                 }
+             else {
+                HStack(spacing: 4) {
+                    Image(systemName: "bell.slash")
+                        .font(.caption2)
+
+                    Text("No reminder")
+                        .font(.caption)
+                }
+                .foregroundStyle(.tertiary)
+            }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
