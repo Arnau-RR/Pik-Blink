@@ -191,6 +191,22 @@ extension PikItem {
 // MARK: - Mock Data
 
 extension PikItem {
+    
+    var subtitle: String? {
+           switch reminderType {
+           case .date:
+               guard let remindAt else { return nil }
+               return remindAt.formatted(
+                   .dateTime.hour().minute()
+               )
+
+           case .location:
+               return placeName
+
+           default:
+               return nil
+           }
+       }
 
     static var mockList: [PikItem] {
 

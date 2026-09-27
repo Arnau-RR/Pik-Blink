@@ -15,10 +15,11 @@ final class PikViewModel: ObservableObject {
 
     @Published var createNewItemPressed = false
     @Published var editExistingItemPressed = false
-    @Published var piksSavedInDB: [PikItem] = []
+    //@Published var piksSavedInDB: [PikItem] = []
     @Published var selectedTab = 0
     @Published var notificationAuthorized = false
 
+    private var allPiks: [PikItem] = []
     private var modelContext: ModelContext?
     private let notifications = NotificationManager.shared
     
@@ -27,25 +28,34 @@ final class PikViewModel: ObservableObject {
 
     // MARK: - Filters
 
-    var filteredPiks: [PikItem] {
+//    var filteredPiks: [PikItem] {
+//        switch selectedTab {
+//        case 0: return pendingPiks
+//        case 1: return completedPiks
+//        case 2: return archivedPiks
+//        default: return []
+//        }
+//    }
+    
+    func filteredPiks(from piks: [PikItem]) -> [PikItem] {
         switch selectedTab {
-        case 0: return pendingPiks
-        case 1: return completedPiks
-        case 2: return archivedPiks
+        case 0: return piks.filter { $0.status == .pending }
+        case 1: return piks.filter { $0.status == .completed }
+        case 2: return piks.filter { $0.status == .archived }
         default: return []
         }
     }
 
-    var pendingPiks: [PikItem] {
-        piksSavedInDB.filter { $0.status == .pending }
+    func pendingPiks(from piks: [PikItem]) -> [PikItem] {
+        piks.filter { $0.status == .pending }
     }
 
-    var archivedPiks: [PikItem] {
-        piksSavedInDB.filter { $0.status == .archived }
+    func archivedPiks(from piks: [PikItem]) -> [PikItem] {
+        piks.filter { $0.status == .archived }
     }
 
-    var completedPiks: [PikItem] {
-        piksSavedInDB.filter { $0.status == .completed }
+    func completedPiks(from piks: [PikItem]) -> [PikItem] {
+        piks.filter { $0.status == .completed }
     }
 
     // MARK: - Setup
@@ -71,31 +81,31 @@ final class PikViewModel: ObservableObject {
     }
 
     // MARK: - Data
+//
+//    func loadPiksStored() async {
+//        guard let modelContext else { return }
+//
+//        do {
+//            let descriptor = FetchDescriptor<PikItem>(
+//                sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+//            )
+//
+//            piksSavedInDB = try modelContext.fetch(descriptor)
+//
+//        } catch {
+//            print("Error cargando PikItems:", error)
+//        }
+//    }
 
-    func loadPiksStored() async {
-        guard let modelContext else { return }
-
-        do {
-            let descriptor = FetchDescriptor<PikItem>(
-                sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
-            )
-
-            piksSavedInDB = try modelContext.fetch(descriptor)
-
-        } catch {
-            print("Error cargando PikItems:", error)
-        }
-    }
-
-    func reload() {
-        guard let modelContext else { return }
-
-        let descriptor = FetchDescriptor<PikItem>(
-            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
-        )
-
-        piksSavedInDB = (try? modelContext.fetch(descriptor)) ?? []
-    }
+//    func reload() {
+//        guard let modelContext else { return }
+//
+//        let descriptor = FetchDescriptor<PikItem>(
+//            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+//        )
+//
+//        piksSavedInDB = (try? modelContext.fetch(descriptor)) ?? []
+//    }
 
     // MARK: - Actions
     
@@ -174,8 +184,6 @@ final class PikViewModel: ObservableObject {
 
         modelContext.delete(item)
         try? modelContext.save()
-
-        piksSavedInDB.removeAll { $0.id == item.id }
     }
 
     // MARK: - Notifications

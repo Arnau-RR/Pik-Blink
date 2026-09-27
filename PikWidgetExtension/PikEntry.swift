@@ -68,26 +68,42 @@ struct PikProvider: AppIntentTimelineProvider {
 
         let calendar = Calendar.current
         let start = calendar.startOfDay(for: .now)
-        let end = calendar.date(byAdding: .day, value: 1, to: start)!
+//        let end = calendar.date(byAdding: .day, value: 1, to: start)!
 
+        
         return all.filter { pik in
             guard pik.status == .pending else { return false }
 
-            guard let type = pik.reminderType else {
-                return true
-            }
-
-            switch type {
+            switch pik.reminderType ?? .none {
             case .none:
                 return true
 
             case .location:
-                return true
+                return false      // ❌ No mostrar ubicaciones
 
             case .date:
                 guard let date = pik.remindAt else { return false }
-                return date >= start && date < end
+                return calendar.isDateInToday(date)   // Solo recordatorios de hoy
             }
         }
+//        return all.filter { pik in
+//            guard pik.status == .pending else { return false }
+//
+//            guard let type = pik.reminderType else {
+//                return true
+//            }
+//
+//            switch type {
+//            case .none:
+//                return true
+//
+//            case .location:
+//                return true
+//
+//            case .date:
+//                guard let date = pik.remindAt else { return false }
+//                return date >= start && date < end
+//            }
+//        }
     }
 }

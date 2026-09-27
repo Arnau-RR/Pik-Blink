@@ -10,6 +10,10 @@ import SwiftData
 
 struct PikViewList: View {
     @Environment(\.modelContext) private var context
+    
+    @Query(sort: \PikItem.createdAt, order: .reverse)
+    private var piks: [PikItem]
+    
     @StateObject private var viewModel = PikViewModel()
     
     var body: some View {
@@ -39,7 +43,7 @@ struct PikViewList: View {
             
             List {
                 ListItems(
-                    listElements: viewModel.filteredPiks,
+                    listElements: viewModel.filteredPiks(from: piks),
                     showArchivedActions: viewModel.selectedTab == 2
                 ) { item in
                     viewModel.onPressed(item)
@@ -57,11 +61,7 @@ struct PikViewList: View {
         }
         
         .sheet(
-            isPresented: $viewModel.createNewItemPressed,
-            onDismiss: {
-                viewModel.reload()
-            }
-        ) {
+            isPresented: $viewModel.createNewItemPressed) {
             NavigationStack {
                 CreateItemView()
                     .presentationDetents([.large])
@@ -70,11 +70,7 @@ struct PikViewList: View {
         }
         
         .sheet(
-            isPresented: $viewModel.editExistingItemPressed,
-            onDismiss: {
-                viewModel.reload()
-            }
-        ) {
+            isPresented: $viewModel.editExistingItemPressed ) {
             NavigationStack {
                 CreateItemView(itemToEdit: viewModel.selectedPik)
                     .presentationDetents([.large])
@@ -86,14 +82,7 @@ struct PikViewList: View {
             NotificationManager.shared.registerCategories()
 
             viewModel.configure(modelContext: context)
-            await viewModel.loadPiksStored()
             viewModel.checkNotificationAuthorization()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .pikCreated)) { _ in
-            viewModel.reload()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .pikCompleted)) { _ in
-            viewModel.reload()
         }
         .onOpenURL { url in
             guard url.scheme == "pikblink",
