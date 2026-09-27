@@ -31,6 +31,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "578F8E803061309A0088FC22"
                BuildableName = "Pik-Blink.app"
+               BlueprintName = "Pik-Blink"
                ReferencedContainer = "container:Pik-Blink.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,6 +63,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "578F8E803061309A0088FC22"
             BuildableName = "Pik-Blink.app"
+            BlueprintName = "Pik-Blink"
             ReferencedContainer = "container:Pik-Blink.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -97,6 +99,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "578F8E803061309A0088FC22"
             BuildableName = "Pik-Blink.app"
+            BlueprintName = "Pik-Blink"
             ReferencedContainer = "container:Pik-Blink.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

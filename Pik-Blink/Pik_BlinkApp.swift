@@ -13,22 +13,22 @@ enum AppAppearance: String, CaseIterable, Identifiable {
     case system
     case light
     case dark
-    
+
     var id: String { rawValue }
-    
+
     var title: String {
         switch self {
-        case .system: String(localized: "System")
-        case .light: String(localized: "Light")
-        case .dark: String(localized: "Dark")
+        case .system: return String(localized: "System")
+        case .light: return String(localized: "Light")
+        case .dark: return String(localized: "Dark")
         }
     }
-    
+
     var colorScheme: ColorScheme? {
         switch self {
-        case .system: nil
-        case .light: .light
-        case .dark: .dark
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
         }
     }
 }
@@ -62,46 +62,59 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 
 @main
 struct Pik_BlinkApp: App {
+
+    /// Debe coincidir con el App Group de ambos targets
+    static let sharedGroupID = "group.com.arnaurivas.PikBlink"
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             PikItem.self,
             PikDraft.self,
             FavoritePlace.self
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-        
+
+        let sharedURL = FileManager.default
+            .containerURL(
+                forSecurityApplicationGroupIdentifier: Pik_BlinkApp.sharedGroupID
+            )!
+            .appendingPathComponent("Pik.sqlite")
+
+        let configuration = ModelConfiguration(
+            schema: schema,
+            url: sharedURL
+        )
+
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return try ModelContainer(
+                for: schema,
+                configurations: configuration
+            )
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-    
+
     @AppStorage("appLanguage") private var language = AppLanguage.system.rawValue
     @AppStorage("appAppearance") private var appearance = AppAppearance.system.rawValue
-    
+
     init() {
         let container = sharedModelContainer
-        
+
         AppDependencyManager.shared.add(
             dependency: container
         )
-        
-        Bundle.setLanguage(language == AppLanguage.system.rawValue ? nil : language)
 
-        
-            print("Bundle path for es:", Bundle.main.path(forResource: "es", ofType: "lproj") ?? "NOT FOUND")
-            print("Bundle path for ca:", Bundle.main.path(forResource: "ca", ofType: "lproj") ?? "NOT FOUND")
-            print("Localizations disponibles:", Bundle.main.localizations)
-        
+        Bundle.setLanguage(
+            language == AppLanguage.system.rawValue ? nil : language
+        )
     }
-    
+
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environment(
                     \.locale,
-                     AppLanguage(rawValue: language)?.locale ?? .autoupdatingCurrent
+                    AppLanguage(rawValue: language)?.locale ?? .autoupdatingCurrent
                 )
                 .preferredColorScheme(
                     AppAppearance(rawValue: appearance)?.colorScheme

@@ -7,6 +7,7 @@
 
 import AppIntents
 import SwiftData
+import WidgetKit
 
 struct SaveDraftIntent: AppIntent {
     
@@ -77,6 +78,16 @@ struct SaveDraftIntent: AppIntent {
         
         NotificationCenter.default.post(name: .pikCreated, object: nil)
         
+        WidgetCenter.shared.reloadTimelines(ofKind: "PikWidget")
+        
+        CFNotificationCenterPostNotification(
+            CFNotificationCenterGetDarwinNotifyCenter(),
+            CFNotificationName("com.arnaurivas.PikBlink.reload" as CFString),
+            nil,
+            nil,
+            true
+        )
+
         return .result(
             dialog: IntentDialog("Pik guardado")
         )

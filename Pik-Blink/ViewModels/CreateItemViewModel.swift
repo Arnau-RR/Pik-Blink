@@ -9,6 +9,7 @@ import Combine
 import Foundation
 import SwiftData
 internal import MapKit
+import WidgetKit
 
 enum SavePikError: Error {
     case missingModelContext
@@ -201,6 +202,10 @@ final class CreateItemViewModel: ObservableObject {
 
         modelContext.insert(item)
         try modelContext.save()
+        
+        try? modelContext.container.mainContext.save()
+        
+        WidgetCenter.shared.reloadTimelines(ofKind: "PikWidget")
 
         if type == .location {
             notifications.requestLocationPermission()
