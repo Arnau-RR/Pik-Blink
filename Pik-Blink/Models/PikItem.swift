@@ -9,6 +9,18 @@ import Foundation
 import SwiftData
 import CoreLocation
 
+enum QuickReminderSelection: Int, Codable {
+    case thirtyMinutes
+    case oneHour
+    case twoHours
+    case custom
+}
+
+enum PlaceSelection: Int, Codable {
+    case search
+    case favorite
+}
+
 // MARK: - Pik Item
 
 @Model
@@ -34,10 +46,12 @@ final class PikItem {
     // MARK: Reminder
 
     var reminderType: ReminderType?
+    var quickReminder: QuickReminderSelection?
     var remindAt: Date?
 
     // MARK: Location
 
+    var placeSelection: PlaceSelection?
     var placeName: String?
     var placeAddress: String?
     var latitude: Double?
@@ -55,8 +69,10 @@ final class PikItem {
         transcription: String? = nil,
         imagePath: String? = nil,
         audioPath: String? = nil,
-        reminderType: ReminderType? = .none,
+        reminderType: ReminderType? = ReminderType.none,
+        quickReminder: QuickReminderSelection? = nil,
         remindAt: Date? = nil,
+        placeSelection: PlaceSelection? = nil,
         placeName: String? = nil,
         placeAddress: String? = nil,
         latitude: Double? = nil,
@@ -72,8 +88,10 @@ final class PikItem {
         self.createdAt = .now
 
         self.reminderType = reminderType
+        self.quickReminder = quickReminder
         self.remindAt = remindAt
 
+        self.placeSelection = placeSelection
         self.placeName = placeName
         self.placeAddress = placeAddress
         self.latitude = latitude

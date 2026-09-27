@@ -63,22 +63,48 @@ struct SetQuickReminderIntent: AppIntent {
         let now = Date()
         
         switch option {
-            
+
         case .thirtyMinutes:
             model.isPickingCustomDate = false
+            model.quickReminder = .thirtyMinutes
+            model.reminderType = .date
             model.remindAt = calendar.date(byAdding: .minute, value: 30, to: now)
-            
+
         case .oneHour:
             model.isPickingCustomDate = false
+            model.quickReminder = .oneHour
+            model.reminderType = .date
             model.remindAt = calendar.date(byAdding: .hour, value: 1, to: now)
-            
+
         case .twoHours:
             model.isPickingCustomDate = false
+            model.quickReminder = .twoHours
+            model.reminderType = .date
             model.remindAt = calendar.date(byAdding: .hour, value: 2, to: now)
-            
+
         case .custom:
             model.isPickingCustomDate = true
+            model.quickReminder = .custom
+            model.reminderType = .date
         }
+        
+//        switch option {
+//            
+//        case .thirtyMinutes:
+//            model.isPickingCustomDate = false
+//            model.remindAt = calendar.date(byAdding: .minute, value: 30, to: now)
+//            
+//        case .oneHour:
+//            model.isPickingCustomDate = false
+//            model.remindAt = calendar.date(byAdding: .hour, value: 1, to: now)
+//            
+//        case .twoHours:
+//            model.isPickingCustomDate = false
+//            model.remindAt = calendar.date(byAdding: .hour, value: 2, to: now)
+//            
+//        case .custom:
+//            model.isPickingCustomDate = true
+//        }
         
         try context.save()
         

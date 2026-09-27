@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftData
-internal import MapKit
+import MapKit
 
 struct CreateItemView: View {
     @Environment(\.dismiss) private var dismiss
@@ -15,6 +15,12 @@ struct CreateItemView: View {
     
     @Query(sort: \FavoritePlace.name)
     private var favoritePlaces: [FavoritePlace]
+    
+    let itemToEdit: PikItem?
+
+    init(itemToEdit: PikItem? = nil) {
+        self.itemToEdit = itemToEdit
+    }
     
     @FocusState private var focusedField: Field?
     
@@ -143,6 +149,10 @@ struct CreateItemView: View {
         }
         .task {
             viewModel.configure(modelContext: modelContext)
+            
+            if let itemToEdit {
+                viewModel.load(item: itemToEdit)
+            }
         }
         .sheet(isPresented: $viewModel.showDatePicker) {
             NavigationStack {

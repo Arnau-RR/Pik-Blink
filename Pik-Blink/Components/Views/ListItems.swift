@@ -12,6 +12,7 @@ struct ListItems: View {
     let listElements: [PikItem]
     let showArchivedActions: Bool
     
+    let onPress: (PikItem) -> Void
     let onToggle: (PikItem) -> Void
     let onArchive: (PikItem) -> Void
     let onUnarchive: (PikItem) -> Void
@@ -31,9 +32,16 @@ struct ListItems: View {
         ForEach(sections, id: \.date) { section in
             Section(section.date.sectionTitle) {
                 ForEach(section.items) { item in
-                    PikItemRow(item: item) {
-                        onToggle(item)
+                    Button {
+                        onPress(item)
+                    } label: {
+                        PikItemRow(item: item) {
+                            onToggle(item)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
                     }
+                    .buttonStyle(.plain)
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         if showArchivedActions {
                             
@@ -53,12 +61,6 @@ struct ListItems: View {
                             }
                             .tint(.indigo)
                         }
-                        //                        Button {
-                        //                            onArchive(item)
-                        //                        } label: {
-                        //                            Label("list.swipe.archive", systemImage: "archivebox")
-                        //                        }
-                        //                        .tint(.indigo)
                         
                         Button(role: .destructive) {
                             onDelete(item)
@@ -74,6 +76,8 @@ struct ListItems: View {
 
 #Preview {
     ListItems(listElements: PikItem.mockList, showArchivedActions: true) { item in
+        print("Pressed \(item)")
+    } onToggle: {item in 
         print("Toggle \(item)")
     } onArchive: { item in
         print("Archive \(item)")

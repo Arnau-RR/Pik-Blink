@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import MapKit
+import MapKit
 
 @MainActor
 final class CompleterService: NSObject, MKLocalSearchCompleterDelegate {

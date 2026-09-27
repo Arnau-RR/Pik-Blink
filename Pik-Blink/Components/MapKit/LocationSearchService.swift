@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-internal import MapKit
+import MapKit
 import Combine
 
 class LocationSearchService: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {

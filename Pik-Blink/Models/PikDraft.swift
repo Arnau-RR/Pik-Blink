@@ -19,8 +19,10 @@ final class PikDraft {
     var text: String
 
     var reminderType: ReminderType
+    var quickReminder: QuickReminderSelection?
     var remindAt: Date?
 
+    var placeSelection: PlaceSelection?
     var placeLabel: String?
     var placeName: String?
     var placeAddress: String?
@@ -40,8 +42,10 @@ final class PikDraft {
         self.text = ""
 
         self.reminderType = .none
+        self.quickReminder = nil
         self.remindAt = nil
 
+        self.placeSelection = nil
         self.placeName = nil
         self.placeAddress = nil
         self.latitude = nil

@@ -6,7 +6,7 @@
 //
 
 import AppIntents
-internal import MapKit
+import MapKit
 
 struct PlaceQuery: EntityStringQuery {
 

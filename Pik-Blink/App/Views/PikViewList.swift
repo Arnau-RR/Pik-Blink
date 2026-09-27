@@ -42,6 +42,8 @@ struct PikViewList: View {
                     listElements: viewModel.filteredPiks,
                     showArchivedActions: viewModel.selectedTab == 2
                 ) { item in
+                    viewModel.onPressed(item)
+                } onToggle: { item in
                     viewModel.toggle(item)
                 } onArchive: { item in
                     viewModel.archive(item)
@@ -62,6 +64,19 @@ struct PikViewList: View {
         ) {
             NavigationStack {
                 CreateItemView()
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.visible)
+            }
+        }
+        
+        .sheet(
+            isPresented: $viewModel.editExistingItemPressed,
+            onDismiss: {
+                viewModel.reload()
+            }
+        ) {
+            NavigationStack {
+                CreateItemView(itemToEdit: viewModel.selectedPik)
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
             }

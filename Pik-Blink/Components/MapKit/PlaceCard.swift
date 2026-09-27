@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-internal import MapKit
+import MapKit
 
 struct PlaceCard: View {
     let place: SelectedPlace

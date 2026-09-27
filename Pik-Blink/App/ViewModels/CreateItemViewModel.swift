@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 import SwiftData
-internal import MapKit
+import MapKit
 import WidgetKit
 
 enum SavePikError: Error {
@@ -23,7 +23,9 @@ enum Field {
 final class CreateItemViewModel: ObservableObject {
     
     static let shared = CreateItemViewModel()
-
+    
+    @Published var editingItem: PikItem?
+    
     @Published var pikItemText = ""
     @Published var selectedTab = 0
 
@@ -44,6 +46,8 @@ final class CreateItemViewModel: ObservableObject {
     
     @Published var search = LocationSearchService()
     @Published var selectedPlace: SelectedPlace?
+    
+    @Published var placeSelection: PlaceSelection?
 
     private let audio = AudioRecorder()
     private let speech = SpeechRecognizer()
@@ -53,7 +57,7 @@ final class CreateItemViewModel: ObservableObject {
     let dateRange: PartialRangeFrom<Date> = Calendar.current.startOfDay(for: .now)...
 
     /// Texto que ya existía antes de empezar una nueva grabación
-    private var baseText = ""
+    private var textFieldBaseText = ""
     
     private var modelContext: ModelContext?
 
@@ -62,20 +66,50 @@ final class CreateItemViewModel: ObservableObject {
     }
 
     init() {
+                
+        // Audio & Speech
         speech.$transcript
             .receive(on: DispatchQueue.main)
             .sink { [weak self] transcript in
                 guard let self else { return }
 
-                if self.baseText.isEmpty {
+                if self.textFieldBaseText.isEmpty {
                     self.pikItemText = transcript
                 } else if transcript.isEmpty {
-                    self.pikItemText = self.baseText
+                    self.pikItemText = self.textFieldBaseText
                 } else {
-                    self.pikItemText = self.baseText + " " + transcript
+                    self.pikItemText = self.textFieldBaseText + " " + transcript
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func load(item: PikItem) {
+        editingItem = item
+
+        textFieldBaseText = item.displayText
+        pikItemText = item.text
+        audioPath = item.audioPath
+
+        reminderDate = item.remindAt
+                
+        selected = item.quickReminder.map {
+            switch $0 {
+            case .thirtyMinutes: return .thirtyMinutes
+            case .oneHour:       return .oneHour
+            case .twoHours:      return .twoHours
+            case .custom:        return .custom
+            }
+        }
+        
+        if let place = item.location {
+            selectedTab = 1
+            selectedPlace = place
+            placeSelection = item.placeSelection
+
+        } else {
+            selectedTab = 0
+        }
     }
     
     func checkPikTextEmpty() -> Bool {
@@ -92,7 +126,7 @@ final class CreateItemViewModel: ObservableObject {
                 isRecording = false
             }
         } else {
-            baseText = pikItemText
+            textFieldBaseText = pikItemText
             Task {
                 try? audio.start()
                 try? await speech.start()
@@ -160,14 +194,58 @@ final class CreateItemViewModel: ObservableObject {
 
     @MainActor
     func savePikLocal() throws {
-        try savePik(
-            text: pikItemText,
-            reminderDate: reminderDate,
-            selectedPlace: selectedPlace,
-            audioPath: audioPath,
-            source: audioPath == nil ? .text : .voice
-        )
+        if let item = editingItem {
+                try update(item)
+            } else {
+                try savePik(
+                    text: pikItemText,
+                    reminderDate: reminderDate,
+                    selectedPlace: selectedPlace,
+                    audioPath: audioPath,
+                    source: audioPath == nil ? .text : .voice
+                )
+            }
     }
+    
+    @MainActor
+    private func update(_ item: PikItem) throws {
+        guard let modelContext else {
+            throw SavePikError.missingModelContext
+        }
+
+        let type: ReminderType =
+            selectedPlace != nil ? .location :
+            reminderDate != nil ? .date : .none
+
+        item.text = pikItemText.trimmingCharacters(in: .whitespacesAndNewlines)
+        item.transcription = audioPath != nil ? pikItemText : nil
+        item.audioPath = audioPath
+
+        item.reminderType = type
+        
+        item.quickReminder = selected.map {
+                switch $0 {
+                case .thirtyMinutes: return .thirtyMinutes
+                case .oneHour:       return .oneHour
+                case .twoHours:      return .twoHours
+                case .custom:        return .custom
+                }
+            }
+        
+        item.remindAt = type == .date ? reminderDate : nil
+
+        item.placeSelection = placeSelection
+        item.placeName = type == .location ? selectedPlace?.name : nil
+        item.placeAddress = type == .location ? selectedPlace?.address : nil
+        item.latitude = type == .location ? selectedPlace?.coordinate.latitude : nil
+        item.longitude = type == .location ? selectedPlace?.coordinate.longitude : nil
+
+        try modelContext.save()
+        WidgetCenter.shared.reloadTimelines(ofKind: "PikWidget")
+
+        notifications.update(for: item)
+    }
+    
     
     @MainActor
     func savePik(
@@ -191,7 +269,16 @@ final class CreateItemViewModel: ObservableObject {
             transcription: audioPath != nil ? text : nil,
             audioPath: audioPath,
             reminderType: type,
+            quickReminder: selected.map {
+                    switch $0 {
+                    case .thirtyMinutes: return .thirtyMinutes
+                    case .oneHour:       return .oneHour
+                    case .twoHours:      return .twoHours
+                    case .custom:        return .custom
+                    }
+                },
             remindAt: type == .date ? reminderDate : nil,
+            placeSelection: placeSelection,
             placeName: type == .location ? selectedPlace?.name : nil,
             placeAddress: type == .location ? selectedPlace?.address : nil,
             latitude: type == .location ? selectedPlace?.coordinate.latitude : nil,
@@ -222,6 +309,7 @@ final class CreateItemViewModel: ObservableObject {
                 let place = try await search.resolve(completion)
                 selectedPlace = place
                 showPlacePicker = false
+                placeSelection = .search
             } catch {
                 print(error)
             }
@@ -238,6 +326,7 @@ final class CreateItemViewModel: ObservableObject {
                 longitude: favorite.longitude
             )
         )
+        placeSelection = .favorite
 
         showPlacePicker = false
     }

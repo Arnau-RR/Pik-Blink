@@ -5,7 +5,7 @@
 //  Created by Arnau on 23/09/2026.
 //
 
-internal import MapKit
+import MapKit
 
 struct SelectedPlace: Identifiable {
     let id = UUID()

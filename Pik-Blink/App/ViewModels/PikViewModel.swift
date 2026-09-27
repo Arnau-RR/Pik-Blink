@@ -14,12 +14,16 @@ import SwiftData
 final class PikViewModel: ObservableObject {
 
     @Published var createNewItemPressed = false
+    @Published var editExistingItemPressed = false
     @Published var piksSavedInDB: [PikItem] = []
     @Published var selectedTab = 0
     @Published var notificationAuthorized = false
 
     private var modelContext: ModelContext?
     private let notifications = NotificationManager.shared
+    
+    var selectedPik: PikItem?
+
 
     // MARK: - Filters
 
@@ -94,6 +98,13 @@ final class PikViewModel: ObservableObject {
     }
 
     // MARK: - Actions
+    
+    func onPressed(_ item: PikItem) {
+        //guard let modelContext else { return }
+        
+        selectedPik = item
+        editExistingItemPressed.toggle()
+    }
 
     func toggle(_ item: PikItem) {
         guard let modelContext else { return }
