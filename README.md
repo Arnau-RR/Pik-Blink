@@ -50,8 +50,7 @@ Create reminders in seconds, receive notifications based on **time** or **locati
 ## Home
 
 <p align="center">
-  <img src="Assets/home.png" width="270"/>
-  <img src="Assets/quick_capture.png" width="270"/>
+  <img src="Assets/Home.PNG" width="270"/>
 </p>
 
 ## Smart reminders
@@ -67,16 +66,22 @@ Choose **when** or **where** you want to be reminded in just one tap.
 
 ## Widgets
 
+### Small Widget
+
+<p align="center">
+  <img src="Assets/Small Widget.png" width="700"/>
+</p>
+
 ### Medium Widget
 
 <p align="center">
-  <img src="Assets/widget_medium.png" width="700"/>
+  <img src="Assets/Medium Widget.png" width="700"/>
 </p>
 
 ### Large Widget
 
 <p align="center">
-  <img src="Assets/widget_large.png" width="700"/>
+  <img src="Assets/Large Widget.png" width="700"/>
 </p>
 
 Your most important reminders are always visible directly from the Home Screen.
