@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
+    @Environment(\.scenePhase) private var scenePhase
+
     
     var body: some View {
         
@@ -22,6 +24,11 @@ struct MainView: View {
             }
         }
         .tabBarMinimizeBehavior(.onScrollDown)
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                Task { await LiveActivityManager.shared.endExpired() }
+            }
+        }
     }
 }
     

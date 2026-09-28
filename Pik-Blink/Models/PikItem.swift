@@ -104,7 +104,7 @@ final class PikItem {
 
 // MARK: - Reminder Type
 
-enum ReminderType: Int, Codable {
+enum ReminderType: Int, Codable, Sendable {
     case none
     case date
     case location

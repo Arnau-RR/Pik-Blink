@@ -1,8 +1,8 @@
 //
-//  CompletePikIntent.swift
+//  SnoozePikIntent.swift
 //  Pik-Blink
 //
-//  Created by Arnau on 27/09/2026.
+//  Created by Arnau on 28/09/2026.
 //
 
 import AppIntents
@@ -10,9 +10,9 @@ import SwiftData
 import WidgetKit
 import ActivityKit
 
-struct CompletePikIntent: LiveActivityIntent {
+struct SnoozePikIntent: LiveActivityIntent {
 
-    static var title: LocalizedStringResource = "Complete Pik"
+    static var title: LocalizedStringResource = "live.activity.snooze"
     static var isDiscoverable: Bool = false
 
     @Parameter(title: "Pik ID")
@@ -44,20 +44,34 @@ struct CompletePikIntent: LiveActivityIntent {
 
         if let pik = items.first(where: { $0.id.uuidString == id }) {
 
-            pik.status = .completed
+            // Posponer 15 minutos desde ahora
+            pik.reminderType = .date
+            pik.remindAt = Date().addingTimeInterval(15 * 60)
+
             try context.save()
 
-            NotificationManager.shared.remove(for: pik)
+            NotificationManager.shared.update(for: pik)
 
             if let activity = Activity<PikLiveActivityAttributes>.activities.first(
                 where: { $0.attributes.id == pik.id }
             ) {
-                await activity.end(
+
+                let newDate = pik.remindAt!
+
+                let state = PikLiveActivityAttributes.ContentState(
+                    title: pik.text,
+                    reminderType: .date,
+                    reminderDate: newDate,
+                    placeName: pik.placeName,
+                    isCompleted: false
+                )
+
+                await activity.update(
                     ActivityContent(
-                        state: activity.content.state,
-                        staleDate: nil
-                    ),
-                    dismissalPolicy: .immediate
+                        state: state,
+                        staleDate: newDate,
+                        relevanceScore: 100
+                    )
                 )
             }
 

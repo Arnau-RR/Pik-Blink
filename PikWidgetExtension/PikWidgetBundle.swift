@@ -12,5 +12,6 @@ import SwiftUI
 struct PikWidgetBundle: WidgetBundle {
     var body: some Widget {
         PikWidget()
+        PikLiveActivity()
     }
 }

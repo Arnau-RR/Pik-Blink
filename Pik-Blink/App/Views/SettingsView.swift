@@ -34,45 +34,45 @@ struct SettingsView: View {
 
                     Section("settings.section.general") {
 
-                        NavigationLink {
-                            SettingsDetailView(title: "settings.notifications.title") {
-                                Section {
-                                    Text("settings.notifications.description")
-                                }
-                            }
-                        } label: {
-                            SettingsRow(
-                                title: "settings.notifications.row.title",
-                                icon: "bell"
-                            )
-                        }
-
-                        NavigationLink {
-                            SettingsDetailView(title: "settings.defaultReminder.title") {
-                                Section {
-                                    Text("settings.defaultReminder.description")
-                                }
-                            }
-                        } label: {
-                            SettingsRow(
-                                title: "settings.defaultReminder.row.title",
-                                icon: "clock",
-                                value: "settings.defaultReminder.row.value"
-                            )
-                        }
-
-                        NavigationLink {
-                            SettingsDetailView(title: "settings.siriShortcuts.title") {
-                                Section {
-                                    Text("settings.siriShortcuts.description")
-                                }
-                            }
-                        } label: {
-                            SettingsRow(
-                                title: "settings.siriShortcuts.row.title",
-                                icon: "sparkles"
-                            )
-                        }
+//                        NavigationLink {
+//                            SettingsDetailView(title: "settings.notifications.title") {
+//                                Section {
+//                                    Text("settings.notifications.description")
+//                                }
+//                            }
+//                        } label: {
+//                            SettingsRow(
+//                                title: "settings.notifications.row.title",
+//                                icon: "bell"
+//                            )
+//                        }
+//
+//                        NavigationLink {
+//                            SettingsDetailView(title: "settings.defaultReminder.title") {
+//                                Section {
+//                                    Text("settings.defaultReminder.description")
+//                                }
+//                            }
+//                        } label: {
+//                            SettingsRow(
+//                                title: "settings.defaultReminder.row.title",
+//                                icon: "clock",
+//                                value: "settings.defaultReminder.row.value"
+//                            )
+//                        }
+//
+//                        NavigationLink {
+//                            SettingsDetailView(title: "settings.siriShortcuts.title") {
+//                                Section {
+//                                    Text("settings.siriShortcuts.description")
+//                                }
+//                            }
+//                        } label: {
+//                            SettingsRow(
+//                                title: "settings.siriShortcuts.row.title",
+//                                icon: "sparkles"
+//                            )
+//                        }
 
                         NavigationLink {
                             AppearanceSettingsView()
@@ -109,29 +109,29 @@ struct SettingsView: View {
                     }
 
                     // MARK: Privacy
-
-                    Section("settings.section.privacy") {
-
-                        Toggle(isOn: $iCloudSync) {
-                            Label(
-                                "settings.icloudSync.title",
-                                systemImage: "icloud"
-                            )
-                        }
-
-                        NavigationLink {
-                            SettingsDetailView(title: "settings.exportData.title") {
-                                Section {
-                                    Text("settings.exportData.description")
-                                }
-                            }
-                        } label: {
-                            SettingsRow(
-                                title: "settings.exportData.row.title",
-                                icon: "square.and.arrow.up"
-                            )
-                        }
-                    }
+//
+//                    Section("settings.section.privacy") {
+//
+//                        Toggle(isOn: $iCloudSync) {
+//                            Label(
+//                                "settings.icloudSync.title",
+//                                systemImage: "icloud"
+//                            )
+//                        }
+//
+//                        NavigationLink {
+//                            SettingsDetailView(title: "settings.exportData.title") {
+//                                Section {
+//                                    Text("settings.exportData.description")
+//                                }
+//                            }
+//                        } label: {
+//                            SettingsRow(
+//                                title: "settings.exportData.row.title",
+//                                icon: "square.and.arrow.up"
+//                            )
+//                        }
+//                    }
 
                     // MARK: About
 
@@ -156,18 +156,18 @@ struct SettingsView: View {
                             )
                         }
 
-                        NavigationLink {
-                            SettingsDetailView(title: "settings.feedback.title") {
-                                Section {
-                                    Text("settings.feedback.description")
-                                }
-                            }
-                        } label: {
-                            SettingsRow(
-                                title: "settings.feedback.row.title",
-                                icon: "square.and.pencil"
-                            )
-                        }
+//                        NavigationLink {
+//                            SettingsDetailView(title: "settings.feedback.title") {
+//                                Section {
+//                                    Text("settings.feedback.description")
+//                                }
+//                            }
+//                        } label: {
+//                            SettingsRow(
+//                                title: "settings.feedback.row.title",
+//                                icon: "square.and.pencil"
+//                            )
+//                        }
                     }
                 }
                 .listStyle(.insetGrouped)
