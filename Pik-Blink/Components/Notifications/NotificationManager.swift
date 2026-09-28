@@ -111,31 +111,40 @@ final class NotificationManager: NSObject {
 
         guard let date = item.remindAt else { return }
 
-        let formattedHour = date.formatted(
-            .dateTime.hour().minute()
-        )
+        let formattedHour = date.formatted(.dateTime.hour().minute())
 
         let content = UNMutableNotificationContent()
-
         content.title = item.text
         content.subtitle = "Hoy · \(formattedHour)"
         content.body = ""
-
         content.sound = .default
         content.categoryIdentifier = "PIK_REMINDER"
         content.threadIdentifier = "pik-reminders"
         content.summaryArgument = "Pik"
         content.interruptionLevel = .timeSensitive
 
-        let components = Calendar.current.dateComponents(
-            [.year, .month, .day, .hour, .minute],
-            from: date
-        )
+        let trigger: UNNotificationTrigger
 
-        let trigger = UNCalendarNotificationTrigger(
-            dateMatching: components,
-            repeats: false
-        )
+        let interval = date.timeIntervalSinceNow
+
+        // Recordatorios próximos → trigger relativo
+        if interval > 0 && interval <= 24 * 60 * 60 {
+            trigger = UNTimeIntervalNotificationTrigger(
+                timeInterval: interval,
+                repeats: false
+            )
+        } else {
+            // Fechas lejanas → calendario
+            let components = Calendar.current.dateComponents(
+                [.year, .month, .day, .hour, .minute],
+                from: date
+            )
+
+            trigger = UNCalendarNotificationTrigger(
+                dateMatching: components,
+                repeats: false
+            )
+        }
 
         let request = UNNotificationRequest(
             identifier: item.id.uuidString,
@@ -145,6 +154,45 @@ final class NotificationManager: NSObject {
 
         UNUserNotificationCenter.current().add(request)
     }
+    
+//    private func scheduleDate(for item: PikItem) {
+//
+//        guard let date = item.remindAt else { return }
+//
+//        let formattedHour = date.formatted(
+//            .dateTime.hour().minute()
+//        )
+//
+//        let content = UNMutableNotificationContent()
+//
+//        content.title = item.text
+//        content.subtitle = "Hoy · \(formattedHour)"
+//        content.body = ""
+//
+//        content.sound = .default
+//        content.categoryIdentifier = "PIK_REMINDER"
+//        content.threadIdentifier = "pik-reminders"
+//        content.summaryArgument = "Pik"
+//        content.interruptionLevel = .timeSensitive
+//
+//        let components = Calendar.current.dateComponents(
+//            [.year, .month, .day, .hour, .minute],
+//            from: date
+//        )
+//
+//        let trigger = UNCalendarNotificationTrigger(
+//            dateMatching: components,
+//            repeats: false
+//        )
+//
+//        let request = UNNotificationRequest(
+//            identifier: item.id.uuidString,
+//            content: content,
+//            trigger: trigger
+//        )
+//
+//        UNUserNotificationCenter.current().add(request)
+//    }
 
     // MARK: - Location Reminder
 
