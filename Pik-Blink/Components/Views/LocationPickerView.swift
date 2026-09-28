@@ -42,13 +42,13 @@ struct LocationPickerView: View {
             .listStyle(.plain)
             .searchable(
                 text: $search.query,
-                prompt: String(localized: "location.picker.search.placeholder")
+                prompt: "location.picker.search.placeholder"
             )
-            .navigationTitle(String(localized: "location.picker.navigation.title"))
+            .navigationTitle("location.picker.navigation.title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(String(localized: "location.picker.cancel.button")) {
+                    Button("location.picker.cancel.button") {
                         dismiss()
                     }
                 }

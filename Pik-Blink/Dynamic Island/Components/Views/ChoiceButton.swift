@@ -10,7 +10,7 @@ import AppIntents
 
 struct ChoiceButton<I: AppIntent>: View {
 
-    let title: String
+    let title: Text
     let icon: String
     let intent: I
 
@@ -20,7 +20,8 @@ struct ChoiceButton<I: AppIntent>: View {
                 Image(systemName: icon)
                     .font(.title3)
 
-                Text(title)
+                //Text(title)
+                title
                     .font(.caption)
             }
             .frame(maxWidth: .infinity)

@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct SectionHeader: View {
-
-    let title: String?
-    let subtitle: String?
-
+    let title: LocalizedStringKey?
+    let subtitle: LocalizedStringKey?
     let titleFont: Font
     let subtitleFont: Font
 
     init(
-        title: String? = nil,
-        subtitle: String? = nil,
+        title: LocalizedStringKey? = nil,
+        subtitle: LocalizedStringKey? = nil,
         titleFont: Font = .title3,
         subtitleFont: Font = .subheadline
     ) {
@@ -29,14 +27,13 @@ struct SectionHeader: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-
-            if let title, !title.isEmpty {
+            if let title {
                 Text(title)
                     .font(titleFont)
                     .fontWeight(.semibold)
             }
 
-            if let subtitle, !subtitle.isEmpty {
+            if let subtitle {
                 Text(subtitle)
                     .font(subtitleFont)
                     .foregroundStyle(.secondary)

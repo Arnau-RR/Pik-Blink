@@ -9,6 +9,7 @@
 import Combine
 import Foundation
 import SwiftData
+import WidgetKit
 
 @MainActor
 final class PikViewModel: ObservableObject {
@@ -145,6 +146,7 @@ final class PikViewModel: ObservableObject {
         }
 
         try? modelContext.save()
+        reloadWidgets()
     }
 
     func archive(_ item: PikItem) {
@@ -154,6 +156,7 @@ final class PikViewModel: ObservableObject {
 
         item.status = .archived
         try? modelContext.save()
+        reloadWidgets()
     }
     
     func unarchive(_ item: PikItem) {
@@ -175,6 +178,7 @@ final class PikViewModel: ObservableObject {
         }
 
         try? modelContext.save()
+        reloadWidgets()
     }
 
     func delete(_ item: PikItem) {
@@ -184,8 +188,21 @@ final class PikViewModel: ObservableObject {
 
         modelContext.delete(item)
         try? modelContext.save()
+        reloadWidgets()
     }
 
+    private func reloadWidgets() {
+        WidgetCenter.shared.reloadTimelines(ofKind: "PikWidget")
+
+        CFNotificationCenterPostNotification(
+            CFNotificationCenterGetDarwinNotifyCenter(),
+            CFNotificationName("com.arnaurivas.PikBlink.reload" as CFString),
+            nil,
+            nil,
+            true
+        )
+    }
+    
     // MARK: - Notifications
 
     func scheduleNotification(for item: PikItem) {

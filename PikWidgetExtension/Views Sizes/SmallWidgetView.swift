@@ -30,10 +30,10 @@ struct SmallWidgetView: View {
             .frame(width: 68, height: 68)
 
             VStack(spacing: 2) {
-                Text(String(localized: "widget.small.new.pik.title"))
+                Text("widget.small.new.pik.title")
                     .font(.headline)
 
-                Text(String(localized: "widget.small.tap.to.capture.subtitle"))
+                Text("widget.small.tap.to.capture.subtitle")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }

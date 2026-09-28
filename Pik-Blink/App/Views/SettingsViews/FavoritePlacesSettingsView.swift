@@ -22,7 +22,7 @@ struct FavoritePlacesSettingsView: View {
 
             Section {
                 if places.isEmpty {
-                    Text(String(localized: "settings.favoritePlaces.empty.message"))
+                    Text("settings.favoritePlaces.empty.message")
                         .foregroundStyle(.secondary)
                 } else {
                     ForEach(places) { place in
@@ -47,7 +47,7 @@ struct FavoritePlacesSettingsView: View {
                     showAdd = true
                 } label: {
                     Label(
-                        String(localized: "settings.favoritePlaces.add.button"),
+                        "settings.favoritePlaces.add.button",
                         systemImage: "plus.circle.fill"
                     )
                 }

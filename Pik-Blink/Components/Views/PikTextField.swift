@@ -13,7 +13,6 @@ struct PikTextField: View {
     let focusedField: FocusState<Field?>.Binding
     var onMicTap: () -> Void = {}
 
-    private let placeholder = String(localized: "new.item.textfield.placeholder")
     private let characterLimit = 100
 
     var body: some View {
@@ -24,7 +23,7 @@ struct PikTextField: View {
                 ZStack(alignment: .topLeading) {
 
                     if text.isEmpty {
-                        Text(placeholder)
+                        Text("new.item.textfield.placeholder")
                             .foregroundStyle(.secondary)
                             .padding(.top, 8)
                             .padding(.leading, 5)
@@ -33,7 +32,7 @@ struct PikTextField: View {
                     VStack(alignment: .leading, spacing: 4) {
 
                         if !text.isEmpty {
-                            Text(placeholder)
+                            Text("new.item.textfield.placeholder")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                                 .padding(.leading, 5)
@@ -70,11 +69,15 @@ struct PikTextField: View {
 
             HStack {
                 Spacer()
-                Text("\(text.count)/\(characterLimit) \(String(localized: "new.item.textfield.characters"))",)
+                Text("\(text.count)/\(characterLimit)",)
+                    .font(.caption)
+                    .foregroundStyle(text.count >= characterLimit ? .red : .secondary)
+                
+                Text("new.item.textfield.characters",)
                     .font(.caption)
                     .foregroundStyle(text.count >= characterLimit ? .red : .secondary)
             }
-            .padding(.horizontal, 4)
+            //.padding(.horizontal, 4)
         }
     }
 }

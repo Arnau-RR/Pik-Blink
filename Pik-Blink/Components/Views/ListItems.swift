@@ -50,14 +50,51 @@ struct ListItems: View {
             !futureItems.contains(where: { $0.id == item.id })
         }
 
-        let grouped = Dictionary(grouping: remaining) {
-            calendar.startOfDay(for: $0.createdAt)
+        let grouped = Dictionary(grouping: remaining) { item in
+            let referenceDate: Date
+
+            if item.reminderType == .date, let remindAt = item.remindAt {
+                referenceDate = remindAt
+            } else {
+                referenceDate = item.createdAt
+            }
+
+            return calendar.startOfDay(for: referenceDate)
         }
 
         return grouped
-            .map { ($0.key, $0.value.sorted { $0.createdAt > $1.createdAt }) }
-            .sorted { $0.0 > $1.0 }
+            .map { date, items in
+                (
+                    date,
+                    items.sorted {
+                        let lhs = ($0.reminderType == .date ? $0.remindAt : $0.createdAt) ?? $0.createdAt
+                        let rhs = ($1.reminderType == .date ? $1.remindAt : $1.createdAt) ?? $1.createdAt
+                        return lhs > rhs
+                    }
+                )
+            }
+            .sorted { $0.date > $1.date }
     }
+//    private var daySections: [(date: Date, items: [PikItem])] {
+//        let calendar = Calendar.current
+//
+//        let remaining = listElements.filter { item in
+//            item.reminderType != .location &&
+//            !futureItems.contains(where: { $0.id == item.id })
+//        }
+//
+//        let grouped = Dictionary(grouping: remaining) { item in
+//            if item.reminderType == .date, let remindAt = item.remindAt {
+//                return calendar.startOfDay(for: remindAt)
+//            } else {
+//                return calendar.startOfDay(for: item.createdAt)
+//            }
+//        }
+//
+//        return grouped
+//            .map { ($0.key, $0.value.sorted { $0.createdAt > $1.createdAt }) }
+//            .sorted { $0.0 > $1.0 }
+//    }
 
     var body: some View {
         Group {
@@ -70,7 +107,7 @@ struct ListItems: View {
                     }
                 } header: {
                     PikSectionHeader(
-                        title: String(localized: "main.list.section.locations"),
+                        title: Text("main.list.section.locations"),
                         systemImage: "location.fill",
                         count: locationItems.count,
                         isExpanded: locationsExpanded
@@ -88,7 +125,7 @@ struct ListItems: View {
                     }
                 } header: {
                     PikSectionHeader(
-                        title: String(localized: "main.list.section.future"),
+                        title: Text("main.list.section.future"),
                         systemImage: "clock.badge",
                         count: futureItems.count,
                         isExpanded: futureExpanded
@@ -138,7 +175,7 @@ struct ListItems: View {
                 Button {
                     onUnarchive(item)
                 } label: {
-                    Label(String(localized: "main.list.action.unarchive"), systemImage: "arrow.uturn.backward.circle")
+                    Label("main.list.action.unarchive", systemImage: "arrow.uturn.backward.circle")
                 }
                 .tint(.green)
 
@@ -146,7 +183,7 @@ struct ListItems: View {
                 Button {
                     onArchive(item)
                 } label: {
-                    Label(String(localized: "main.list.action.archive"), systemImage: "archivebox")
+                    Label("main.list.action.archive", systemImage: "archivebox")
                 }
                 .tint(.indigo)
             }
@@ -154,7 +191,7 @@ struct ListItems: View {
             Button(role: .destructive) {
                 onDelete(item)
             } label: {
-                Label(String(localized: "main.list.action.delete"), systemImage: "trash")
+                Label("main.list.action.delete", systemImage: "trash")
             }
         }
     }
@@ -206,27 +243,27 @@ extension Date {
         return "calendar"
     }
 
-    var sectionTitle: String {
-        let calendar = Calendar.current
+    var sectionTitle: Text {
+            let calendar = Calendar.current
 
-        if calendar.isDateInToday(self) {
-            return String(localized: "main.list.section.today")
+            if calendar.isDateInToday(self) {
+                return Text("main.list.section.today")
+            }
+
+            if calendar.isDateInYesterday(self) {
+                return Text("main.list.section.yesterday")
+            }
+
+            let start = calendar.startOfDay(for: self)
+            let today = calendar.startOfDay(for: .now)
+            let days = calendar.dateComponents([.day], from: start, to: today).day ?? 0
+
+            if days <= 6 {
+                return Text(formatted(.dateTime.weekday(.wide)).capitalized)
+            }
+
+            return Text(
+                formatted(.dateTime.weekday(.wide).day().month(.wide)).capitalized
+            )
         }
-
-        if calendar.isDateInYesterday(self) {
-            return String(localized: "main.list.section.yesterday")
-        }
-
-        let start = calendar.startOfDay(for: self)
-        let today = calendar.startOfDay(for: .now)
-        let days = calendar.dateComponents([.day], from: start, to: today).day ?? 0
-
-        if days <= 6 {
-            return formatted(.dateTime.weekday(.wide)).capitalized
-        }
-
-        return formatted(
-            .dateTime.weekday(.wide).day().month(.wide)
-        ).capitalized
-    }
 }

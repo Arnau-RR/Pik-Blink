@@ -24,13 +24,13 @@ struct MediumWidgetView: View {
 
             VStack(alignment: .leading, spacing: 2) {
 
-                Text(String(localized: "widget.medium.today.title"))
+                Text("widget.medium.today.title")
                     .font(.headline)
 
                 Text("\(entry.piks.count)")
                     .font(.system(size: 34, weight: .bold))
 
-                Text(String(localized: "widget.medium.pending.label"))
+                Text("widget.medium.pending.label")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
 
@@ -50,10 +50,10 @@ struct MediumWidgetView: View {
                     Spacer()
 
                     VStack(alignment: .center, spacing: 4) {
-                        Text(String(localized: "widget.medium.empty.title"))
+                        Text("widget.medium.empty.title")
                             .font(.subheadline)
 
-                        Text(String(localized: "widget.medium.empty.subtitle"))
+                        Text("widget.medium.empty.subtitle")
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
@@ -79,7 +79,7 @@ struct MediumWidgetView: View {
                                     .font(.footnote)
                                     .lineLimit(1)
 
-                                Text(subtitle(for: pik))
+                                subtitle(for: pik)
                                     .font(.caption2)
                                     .foregroundStyle(.secondary)
                             }
@@ -109,15 +109,19 @@ struct MediumWidgetView: View {
         }
     }
 
-    private func subtitle(for pik: PikItem) -> String {
+    private func subtitle(for pik: PikItem) -> Text {
         if pik.reminderType == .location {
-            return pik.placeName ?? String(localized: "widget.medium.location.label")
+            if let placeName = pik.placeName {
+                return Text(verbatim: placeName)
+            } else {
+                return Text("widget.medium.location.label")
+            }
         }
 
         guard let date = pik.remindAt else {
-            return String(localized: "widget.medium.no.reminder")
+            return Text("widget.medium.no.reminder")
         }
 
-        return date.formatted(.dateTime.hour().minute())
+        return Text(date.formatted(.dateTime.hour().minute()))
     }
 }

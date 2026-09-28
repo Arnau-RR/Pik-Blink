@@ -13,15 +13,13 @@ struct PikSnippetTextField: View {
     let draft: PikDraftEntity
     let text: String
 
-    private let title = String(localized: "snippet.text.field.header.title")
-    private let subtitle = String(localized: "snippet.text.field.header.subtitle")
     private let characterLimit = 100
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
 
             VStack(alignment: .leading, spacing: 7) {
-                Text(title)
+                Text("snippet.text.field.header.title")
                     .font(.headline)
             }
 
@@ -29,12 +27,12 @@ struct PikSnippetTextField: View {
             Button(intent: SetTextIntent(draft: draft)) {
                 VStack(alignment: .leading) {
                     if text.isEmpty {
-                        Text(String(localized: "snippet.text.field.placeholder"))
+                        Text("snippet.text.field.placeholder")
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(minHeight: 40, alignment: .topLeading)
                     } else {
-                        Text(text)
+                        Text("snippet.text.field.header.title")
                             .foregroundStyle(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(minHeight: 40, alignment: .topLeading)

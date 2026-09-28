@@ -18,7 +18,7 @@ struct FavoritePlacesView: View {
         VStack(alignment: .leading, spacing: 12) {
 
             HStack {
-                Text(String(localized: "favorite.places.snippet.title"))
+                Text("favorite.places.snippet.title")
                     .font(.caption2)
 
                 Spacer()
@@ -26,7 +26,7 @@ struct FavoritePlacesView: View {
                     draft: draft,
                     choice: .none
                 )) {
-                    Text(String(localized: "favorite.places.snippet.change.button"))
+                    Text("favorite.places.snippet.change.button")
                         .font(.caption2)
                 }
                 .buttonStyle(.borderless)
@@ -35,7 +35,7 @@ struct FavoritePlacesView: View {
 
             if favorites.isEmpty {
 
-                Text(String(localized: "favorite.places.snippet.empty.message"))
+                Text("favorite.places.snippet.empty.message")
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
@@ -44,7 +44,7 @@ struct FavoritePlacesView: View {
                 HStack(spacing: 12) {
                     ForEach(favorites) { place in
                         ChoiceButton(
-                            title: place.label,
+                            title: Text(place.label),
                             icon: "location.fill",
                             intent: SetFavoritePlaceIntent(
                                 draft: draft,

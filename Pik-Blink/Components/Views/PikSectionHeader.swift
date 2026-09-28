@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PikSectionHeader: View {
-    let title: String
+    let title: Text
     let systemImage: String
     let count: Int
     let isExpanded: Bool
@@ -27,10 +27,10 @@ struct PikSectionHeader: View {
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
+                    title
                         .font(.headline)
 
-                    Text("\(count) items")
+                    Text("main.list.section.item.count \(count)")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }

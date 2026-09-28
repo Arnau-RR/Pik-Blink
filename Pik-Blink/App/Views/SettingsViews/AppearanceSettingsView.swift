@@ -34,7 +34,7 @@ struct AppearanceSettingsView: View {
                     .foregroundStyle(.primary)
                 }
             } footer: {
-                Text(String(localized: "settings.appearance.footer.description"))
+                Text("settings.appearance.footer.description")
             }
         }
     }

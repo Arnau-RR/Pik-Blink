@@ -21,7 +21,7 @@ struct WhenQuickReminderView: View {
         VStack(alignment: .leading, spacing: 12) {
 
             HStack {
-                Text(String(localized: "reminder.quick.selection.title"))
+                Text("reminder.quick.selection.title")
                     .font(.caption2)
 
                 Spacer()
@@ -30,7 +30,7 @@ struct WhenQuickReminderView: View {
                     draft: draft,
                     choice: .none
                 )) {
-                    Text(String(localized: "reminder.quick.selection.change.button"))
+                    Text("reminder.quick.selection.change.button")
                 }
                 .buttonStyle(.borderless)
             }
@@ -38,7 +38,7 @@ struct WhenQuickReminderView: View {
             LazyVGrid(columns: columns, spacing: 12) {
 
                 ChoiceButton(
-                    title: String(localized: "reminder.quick.option.thirty.minutes"),
+                    title: Text("reminder.quick.option.thirty.minutes"),
                     icon: "timer",
                     intent: SetQuickReminderIntent(
                         draft: draft,
@@ -47,7 +47,7 @@ struct WhenQuickReminderView: View {
                 )
 
                 ChoiceButton(
-                    title: String(localized: "reminder.quick.option.one.hour"),
+                    title: Text("reminder.quick.option.one.hour"),
                     icon: "timer",
                     intent: SetQuickReminderIntent(
                         draft: draft,
@@ -56,7 +56,7 @@ struct WhenQuickReminderView: View {
                 )
 
                 ChoiceButton(
-                    title: String(localized: "reminder.quick.option.two.hours"),
+                    title: Text("reminder.quick.option.two.hours"),
                     icon: "timer",
                     intent: SetQuickReminderIntent(
                         draft: draft,
@@ -65,7 +65,7 @@ struct WhenQuickReminderView: View {
                 )
 
                 ChoiceButton(
-                    title: String(localized: "reminder.quick.option.custom"),
+                    title: Text("reminder.quick.option.custom"),
                     icon: "calendar",
                     intent: PickCustomDateIntent(draft: draft)
                 )

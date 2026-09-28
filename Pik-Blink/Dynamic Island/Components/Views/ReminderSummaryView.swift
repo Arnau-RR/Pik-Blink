@@ -22,7 +22,7 @@ struct ReminderSummaryView: View {
 
             VStack(alignment: .leading, spacing: 2) {
 
-                Text(String(localized: "reminder.summary.view.title"))
+                Text("reminder.summary.view.title")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
 
@@ -45,7 +45,7 @@ struct ReminderSummaryView: View {
                 draft: draft,
                 choice: .none
             )) {
-                Text(String(localized: "reminder.summary.view.change.button"))
+                Text("reminder.summary.view.change.button")
                     .font(.caption.weight(.medium))
             }
             .buttonStyle(.borderless)

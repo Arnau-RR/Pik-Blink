@@ -13,11 +13,11 @@ struct MainView: View {
     var body: some View {
         
         TabView {
-            Tab(String(localized: "tab.bar.pik.option"), systemImage: "list.bullet") {
+            Tab("tab.bar.pik.option", systemImage: "list.bullet") {
                 PikViewList()
             }
            
-            Tab(String(localized: "tab.bar.settings.option"), systemImage: "gear") {
+            Tab("tab.bar.settings.option", systemImage: "gear") {
                 SettingsView()
             }
         }

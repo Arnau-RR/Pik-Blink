@@ -11,16 +11,16 @@ import SwiftUI
 
 struct SetReminderChoiceIntent: AppIntent {
 
-    static let title: LocalizedStringResource = "app.intent.set.reminder.choice.title"
-    static var isDiscoverable: Bool = false
-
     @Dependency
     private var modelContainer: ModelContainer
 
-    @Parameter(title: "app.intent.set.reminder.choice.parameter.draft")
+    static let title: LocalizedStringResource = "app.intent.set.reminder.choice.title"
+    static var isDiscoverable = false
+
+    @Parameter(title: LocalizedStringResource("app.intent.set.reminder.choice.parameter.draft"))
     var draft: PikDraftEntity
 
-    @Parameter(title: "app.intent.set.reminder.choice.parameter.choice")
+    @Parameter(title: LocalizedStringResource("app.intent.set.reminder.choice.parameter.choice"))
     var choice: ReminderChoice
 
     init() {}

@@ -34,7 +34,7 @@ struct LanguageSettingsView: View {
                     .foregroundStyle(.primary)
                 }
             } footer: {
-                Text(String(localized: "settings.language.footer.description"))
+                Text("settings.language.footer.description")
             }
         }
     }

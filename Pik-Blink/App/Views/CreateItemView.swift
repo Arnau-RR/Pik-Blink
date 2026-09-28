@@ -52,15 +52,15 @@ struct CreateItemView: View {
                         .frame(height: 150)
                         
                         SectionHeader(
-                            title: String(localized: "new.item.select.reminder.title"),
-                            subtitle: String(localized: "new.item.select.reminder.description")
+                            title: "new.item.select.reminder.title",
+                            subtitle: "new.item.select.reminder.description"
                         )
                         
                         Picker("", selection: $viewModel.selectedTab) {
-                            Label(String(localized: "new.item.picker.when"), systemImage: "clock")
+                            Label("new.item.picker.when", systemImage: "clock")
                                 .tag(0)
                             
-                            Label(String(localized: "new.item.picker.where"), systemImage: "checkmark.circle")
+                            Label("new.item.picker.where", systemImage: "checkmark.circle")
                                 .tag(1)
                         }
                         .pickerStyle(.segmented)
@@ -97,13 +97,13 @@ struct CreateItemView: View {
                     }
                 
                 GlassPopup(
-                    title: String(localized: "new.item.popup.close.title"),
-                    subtitle: String(localized: "new.item.popup.close.description"),
+                    title: "new.item.popup.close.title",
+                    subtitle: "new.item.popup.close.description",
                     actions: [
-                        GlassPopupAction(title: String(localized: "new.item.popup.close.cancel")) {
+                        GlassPopupAction(title: "new.item.popup.close.cancel") {
                             viewModel.showPopup = false
                         },
-                        GlassPopupAction(title: String(localized: "new.item.popup.close.accept"), role: .destructive) {
+                        GlassPopupAction(title: "new.item.popup.close.accept", role: .destructive) {
                             viewModel.showPopup = false
                             dismiss()
                         }
@@ -124,7 +124,7 @@ struct CreateItemView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                Button(String(localized: "new.item.popup.close.cancel")) {
+                Button("new.item.popup.close.cancel") {
                     if !viewModel.checkPikTextEmpty() {
                         viewModel.showPopup = true
                     } else {
@@ -134,7 +134,7 @@ struct CreateItemView: View {
             }
             
             ToolbarItem(placement: .topBarTrailing) {
-                Button(String(localized: "new.item.popup.close.accept")) {
+                Button("new.item.popup.close.accept") {
                     do {
                         try viewModel.savePikLocal()
                         dismiss()
@@ -181,8 +181,8 @@ extension CreateItemView {
                         .frame(height: 20)
                     
                     SectionHeader(
-                        title: String(localized: "new.item.select.reminder.when.title"),
-                        subtitle: String(localized: "new.item.select.reminder.when.description"),
+                        title: "new.item.select.reminder.when.title",
+                        subtitle: "new.item.select.reminder.when.description",
                         titleFont: .system(size: 15),
                         subtitleFont: .footnote
                     )
@@ -223,8 +223,8 @@ extension CreateItemView {
                         .frame(height: 20)
                     
                     SectionHeader(
-                        title: String(localized: "new.item.select.reminder.where.title"),
-                        subtitle: String(localized: "new.item.select.reminder.where.description"),
+                        title: "new.item.select.reminder.where.title",
+                        subtitle: "new.item.select.reminder.where.description",
                         titleFont: .system(size: 15),
                         subtitleFont: .footnote
                     )
@@ -238,7 +238,7 @@ extension CreateItemView {
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(.white.opacity(0.55))
                         
-                        Text(String(localized: "new.item.select.reminder.where.search.place.button"))
+                        Text("new.item.select.reminder.where.search.place.button")
                             .font(.subheadline.weight(.medium))
                             .foregroundStyle(.white.opacity(0.85))
                         
@@ -264,8 +264,8 @@ extension CreateItemView {
                         .frame(height: 15)
                     
                     SectionHeader(
-                        title: String(localized: "new.item.select.reminder.where.favoutire.title"),
-                        subtitle: String(localized: "new.item.select.reminder.where.favoutire.description"),
+                        title: "new.item.select.reminder.where.favoutire.title",
+                        subtitle: "new.item.select.reminder.where.favoutire.description",
                         titleFont: .system(size: 12),
                         subtitleFont: .footnote
                     )

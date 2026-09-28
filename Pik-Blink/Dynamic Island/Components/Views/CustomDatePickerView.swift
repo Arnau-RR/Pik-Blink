@@ -18,7 +18,7 @@ struct CustomDatePickerView: View {
 
         VStack(alignment: .leading, spacing: 14) {
 
-            Text(String(localized: "custom.date.picker.title"))
+            Text("custom.date.picker.title")
                 .font(.headline)
 
             DatePicker(
@@ -34,7 +34,7 @@ struct CustomDatePickerView: View {
                 date: date
             )) {
 
-                Text(String(localized: "custom.date.picker.save.button"))
+                Text("custom.date.picker.save.button")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)

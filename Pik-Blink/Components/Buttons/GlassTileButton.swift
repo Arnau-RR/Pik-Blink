@@ -9,14 +9,14 @@ import SwiftUI
 
 struct GlassTileButton: View {
 
-    let title: String
+    let title: LocalizedStringKey
     let icon: String
     let isSelected: Bool
     let backgroundColor: Color
     var action: () -> Void
 
     init(
-        title: String,
+        title: LocalizedStringKey,
         icon: String,
         isSelected: Bool,
         backgroundColor: Color = .clear,

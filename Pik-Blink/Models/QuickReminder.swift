@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 enum QuickReminder: CaseIterable {
     case thirtyMinutes
@@ -14,12 +14,12 @@ enum QuickReminder: CaseIterable {
     case twoHours
     case custom
 
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
         case .thirtyMinutes: "+ 30m"
         case .oneHour: "+ 1h"
         case .twoHours: "+ 2h"
-        case .custom: String(localized: "new.item.time.custom")
+        case .custom: "new.item.time.custom"
         }
     }
 

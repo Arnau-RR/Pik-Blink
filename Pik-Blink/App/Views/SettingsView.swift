@@ -32,44 +32,44 @@ struct SettingsView: View {
 
                     // MARK: General
 
-                    Section(String(localized: "settings.section.general")) {
+                    Section("settings.section.general") {
 
                         NavigationLink {
-                            SettingsDetailView(title: LocalizedStringKey("settings.notifications.title")) {
+                            SettingsDetailView(title: "settings.notifications.title") {
                                 Section {
-                                    Text(String(localized: "settings.notifications.description"))
+                                    Text("settings.notifications.description")
                                 }
                             }
                         } label: {
                             SettingsRow(
-                                title: LocalizedStringKey("settings.notifications.row.title"),
+                                title: "settings.notifications.row.title",
                                 icon: "bell"
                             )
                         }
 
                         NavigationLink {
-                            SettingsDetailView(title: LocalizedStringKey("settings.defaultReminder.title")) {
+                            SettingsDetailView(title: "settings.defaultReminder.title") {
                                 Section {
-                                    Text(String(localized: "settings.defaultReminder.description"))
+                                    Text("settings.defaultReminder.description")
                                 }
                             }
                         } label: {
                             SettingsRow(
-                                title: LocalizedStringKey("settings.defaultReminder.row.title"),
+                                title: "settings.defaultReminder.row.title",
                                 icon: "clock",
-                                value: String(localized: "settings.defaultReminder.row.value")
+                                value: "settings.defaultReminder.row.value"
                             )
                         }
 
                         NavigationLink {
-                            SettingsDetailView(title: LocalizedStringKey("settings.siriShortcuts.title")) {
+                            SettingsDetailView(title: "settings.siriShortcuts.title") {
                                 Section {
-                                    Text(String(localized: "settings.siriShortcuts.description"))
+                                    Text("settings.siriShortcuts.description")
                                 }
                             }
                         } label: {
                             SettingsRow(
-                                title: LocalizedStringKey("settings.siriShortcuts.row.title"),
+                                title: "settings.siriShortcuts.row.title",
                                 icon: "sparkles"
                             )
                         }
@@ -78,9 +78,9 @@ struct SettingsView: View {
                             AppearanceSettingsView()
                         } label: {
                             SettingsRow(
-                                title: LocalizedStringKey("settings.appearance.row.title"),
+                                title: "settings.appearance.row.title",
                                 icon: "circle.lefthalf.filled",
-                                value: AppAppearance(rawValue: appearance)?.title ?? String(localized: "settings.appearance.system")
+                                value: AppAppearance(rawValue: appearance)?.title ?? "settings.appearance.system"
                             )
                         }
 
@@ -88,16 +88,16 @@ struct SettingsView: View {
                             LanguageSettingsView()
                         } label: {
                             SettingsRow(
-                                title: LocalizedStringKey("settings.language.row.title"),
+                                title: "settings.language.row.title",
                                 icon: "globe",
-                                value: AppLanguage(rawValue: language)?.title ?? String(localized: "settings.language.system")
+                                value: AppLanguage(rawValue: language)?.title ?? "settings.language.system"
                             )
                         }
                     }
 
                     // MARK: Location
 
-                    Section(String(localized: "settings.section.location")) {
+                    Section("settings.section.location") {
                         NavigationLink {
                             FavoritePlacesSettingsView()
                         } label: {
@@ -110,24 +110,24 @@ struct SettingsView: View {
 
                     // MARK: Privacy
 
-                    Section(String(localized: "settings.section.privacy")) {
+                    Section("settings.section.privacy") {
 
                         Toggle(isOn: $iCloudSync) {
                             Label(
-                                String(localized: "settings.icloudSync.title"),
+                                "settings.icloudSync.title",
                                 systemImage: "icloud"
                             )
                         }
 
                         NavigationLink {
-                            SettingsDetailView(title: LocalizedStringKey("settings.exportData.title")) {
+                            SettingsDetailView(title: "settings.exportData.title") {
                                 Section {
-                                    Text(String(localized: "settings.exportData.description"))
+                                    Text("settings.exportData.description")
                                 }
                             }
                         } label: {
                             SettingsRow(
-                                title: LocalizedStringKey("settings.exportData.row.title"),
+                                title: "settings.exportData.row.title",
                                 icon: "square.and.arrow.up"
                             )
                         }
@@ -135,13 +135,13 @@ struct SettingsView: View {
 
                     // MARK: About
 
-                    Section(String(localized: "settings.section.about")) {
+                    Section("settings.section.about") {
 
                         NavigationLink {
-                            SettingsDetailView(title: LocalizedStringKey("settings.version.title")) {
-                                Section(String(localized: "settings.version.section.app")) {
+                            SettingsDetailView(title: "settings.version.title") {
+                                Section("settings.version.section.app") {
                                     HStack {
-                                        Text(String(localized: "settings.version.label"))
+                                        Text("settings.version.label")
                                         Spacer()
                                         Text("1.0.0")
                                             .foregroundStyle(.secondary)
@@ -150,21 +150,21 @@ struct SettingsView: View {
                             }
                         } label: {
                             SettingsRow(
-                                title: LocalizedStringKey("settings.version.row.title"),
+                                title: "settings.version.row.title",
                                 icon: "info.circle",
                                 value: "1.0.0"
                             )
                         }
 
                         NavigationLink {
-                            SettingsDetailView(title: LocalizedStringKey("settings.feedback.title")) {
+                            SettingsDetailView(title: "settings.feedback.title") {
                                 Section {
-                                    Text(String(localized: "settings.feedback.description"))
+                                    Text("settings.feedback.description")
                                 }
                             }
                         } label: {
                             SettingsRow(
-                                title: LocalizedStringKey("settings.feedback.row.title"),
+                                title: "settings.feedback.row.title",
                                 icon: "square.and.pencil"
                             )
                         }

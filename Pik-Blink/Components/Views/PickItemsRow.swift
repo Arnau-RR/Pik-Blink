@@ -60,7 +60,7 @@ struct PikItemRow: View {
                         Image(systemName: "bell.slash")
                             .font(.caption2)
 
-                        Text(String(localized: "main.list.item.no.reminder"))
+                        Text("main.list.item.no.reminder")
                             .font(.caption)
                     }
                     .foregroundStyle(.tertiary)

@@ -26,13 +26,13 @@ struct LargeWidgetView: View {
             // LEFT
             VStack(alignment: .leading, spacing: 4) {
 
-                Text(String(localized: "widget.large.today.title"))
+                Text("widget.large.today.title")
                     .font(.headline)
 
                 Text("\(entry.piks.count)")
                     .font(.system(size: 36, weight: .bold))
 
-                Text(String(localized: "widget.large.pending.label"))
+                Text("widget.large.pending.label")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
 
@@ -51,10 +51,10 @@ struct LargeWidgetView: View {
                     Spacer()
 
                     VStack(alignment: .center, spacing: 4) {
-                        Text(String(localized: "widget.large.empty.title"))
+                        Text("widget.large.empty.title")
                             .font(.headline)
 
-                        Text(String(localized: "widget.large.empty.subtitle"))
+                        Text("widget.large.empty.subtitle")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -80,7 +80,7 @@ struct LargeWidgetView: View {
                                     .font(.subheadline)
                                     .lineLimit(1)
 
-                                Text(subtitle(for: pik))
+                                subtitle(for: pik)
                                     .font(.caption2)
                                     .foregroundStyle(.secondary)
                             }
@@ -110,15 +110,30 @@ struct LargeWidgetView: View {
         }
     }
 
-    private func subtitle(for pik: PikItem) -> String {
+    private func subtitle(for pik: PikItem) -> Text {
         if pik.reminderType == .location {
-            return pik.placeName ?? String(localized: "widget.large.location.label")
+            if let placeName = pik.placeName {
+                return Text(verbatim: placeName)
+            } else {
+                return Text("widget.large.location.label")
+            }
         }
 
         guard let date = pik.remindAt else {
-            return String(localized: "widget.large.no.reminder")
+            return Text("widget.large.no.reminder")
         }
 
-        return date.formatted(.dateTime.hour().minute())
+        return Text(date.formatted(.dateTime.hour().minute()))
     }
+//    private func subtitle(for pik: PikItem) -> String {
+//        if pik.reminderType == .location {
+//            return pik.placeName ?? "widget.large.location.label"
+//        }
+//
+//        guard let date = pik.remindAt else {
+//            return "widget.large.no.reminder"
+//        }
+//
+//        return date.formatted(.dateTime.hour().minute())
+//    }
 }

@@ -17,24 +17,24 @@
     "%lld" : {
 
     },
-    "%lld items" : {
-
-    },
-    "%lld/%lld %@" : {
+    "%lld/%lld" : {
       "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%1$lld/%2$lld %3$@"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$lld/%2$lld %3$@"
+            "value" : "%1$lld/%2$lld"
           }
         }
       }
+    },
+    "+ 1h" : {
+
+    },
+    "+ 2h" : {
+
+    },
+    "+ 30m" : {
+
     },
     "1.0.0" : {
       "localizations" : {
@@ -971,6 +971,7 @@
       }
     },
     "Català" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -993,6 +994,7 @@
       }
     },
     "Completar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -1059,6 +1061,7 @@
       }
     },
     "Cuando llegues a %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -1125,6 +1128,7 @@
       }
     },
     "Dark" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -1190,10 +1194,8 @@
         }
       }
     },
-    "En %lld min" : {
-
-    },
     "English" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -1210,6 +1212,7 @@
       }
     },
     "Español" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -1320,6 +1323,7 @@
       }
     },
     "Hoy · %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1330,6 +1334,7 @@
       }
     },
     "la ubicación" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1340,6 +1345,7 @@
       }
     },
     "Light" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1569,6 +1575,28 @@
         }
       }
     },
+    "main.list.section.item.count %lld" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld elements"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld items"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld elementos"
+          }
+        }
+      }
+    },
     "main.list.section.locations" : {
       "localizations" : {
         "ca" : {
@@ -1674,7 +1702,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Capture ideas in a blink. Pik Blink"
+            "value" : "Pik Blink"
           }
         }
       }
@@ -1762,6 +1790,7 @@
       }
     },
     "new.item.date.time.placeholder" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -1894,6 +1923,7 @@
       }
     },
     "new.item.popup.close.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -1916,6 +1946,7 @@
       }
     },
     "new.item.popup.close.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -2394,6 +2425,7 @@
       }
     },
     "Posponer 15 min" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2740,6 +2772,7 @@
       }
     },
     "reminder.summary.relative.today" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -2762,6 +2795,7 @@
       }
     },
     "reminder.summary.relative.tomorrow" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -2850,6 +2884,7 @@
       }
     },
     "search.bar.placeholder" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -2916,6 +2951,7 @@
       }
     },
     "settings.appearance.system" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3004,6 +3040,7 @@
       }
     },
     "settings.defaultReminder.row.value" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3510,6 +3547,7 @@
       }
     },
     "settings.language.system" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3906,6 +3944,7 @@
       }
     },
     "snippet.text.field.header.subtitle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3972,6 +4011,7 @@
       }
     },
     "System" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -4462,20 +4502,20 @@
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca per capturar"
+            "state" : "needs_review",
+            "value" : "Toca per crear"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap to capture"
+            "value" : "Tap to create"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca para capturar"
+            "state" : "needs_review",
+            "value" : "Toca para crear"
           }
         }
       }

@@ -28,10 +28,10 @@ struct ReminderSummary: View {
         let calendar = Calendar.current
 
         if calendar.isDateInToday(date) {
-            return String(localized: "reminder.summary.relative.today")
+            return "reminder.summary.relative.today"
         }
         if calendar.isDateInTomorrow(date) {
-            return String(localized: "reminder.summary.relative.tomorrow")
+            return "reminder.summary.relative.tomorrow"
         }
 
         return ""

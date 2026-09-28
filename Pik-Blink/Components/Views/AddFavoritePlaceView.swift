@@ -25,11 +25,11 @@ struct AddFavoritePlaceView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(String(localized: "settings.favoritePlaces.add.favoriteName.section")) {
-                    TextField(String(localized: "settings.favoritePlaces.add.favoriteName.placeholder"), text: $label)
+                Section("settings.favoritePlaces.add.favoriteName.section") {
+                    TextField("settings.favoritePlaces.add.favoriteName.placeholder", text: $label)
                 }
 
-                Section(String(localized: "settings.favoritePlaces.add.location.section")) {
+                Section("settings.favoritePlaces.add.location.section") {
                     Button {
                         showLocationPicker = true
                     } label: {
@@ -46,7 +46,7 @@ struct AddFavoritePlaceView: View {
                             .padding(.vertical, 2)
                         } else {
                             Label(
-                                String(localized: "settings.favoritePlaces.add.location.placeholder"),
+                                "settings.favoritePlaces.add.location.placeholder",
                                 systemImage: "mappin.and.ellipse"
                             )
                         }
@@ -54,17 +54,17 @@ struct AddFavoritePlaceView: View {
                     .buttonStyle(.plain)
                 }
             }
-            .navigationTitle(String(localized: "settings.favoritePlaces.add.navigation.title"))
+            .navigationTitle("settings.favoritePlaces.add.navigation.title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(String(localized: "settings.favoritePlaces.add.cancel.button")) {
+                    Button("settings.favoritePlaces.add.cancel.button") {
                         dismiss()
                     }
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(String(localized: "settings.favoritePlaces.add.save.button")) {
+                    Button("settings.favoritePlaces.add.save.button") {
                         saveFavorite()
                     }
                     .fontWeight(.semibold)

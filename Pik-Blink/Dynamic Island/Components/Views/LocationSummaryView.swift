@@ -23,7 +23,7 @@ struct LocationSummaryView: View {
 
             VStack(alignment: .leading, spacing: 2) {
 
-                Text(String(localized: "location.summary.title"))
+                Text("location.summary.title")
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
@@ -34,7 +34,7 @@ struct LocationSummaryView: View {
                     draft: draft,
                     choice: .none
                 )) {
-                    Text(String(localized: "location.summary.change.button"))
+                    Text("location.summary.change.button")
                 }
                 .buttonStyle(.borderless)
             }
