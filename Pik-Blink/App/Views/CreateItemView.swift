@@ -32,7 +32,7 @@ struct CreateItemView: View {
             VStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 20) {
                     HeaderView(
-                        title: "new.item.title",
+                        title: itemToEdit == nil ? "new.item.title" : "edit.item.title",
                         subtitle: "Capture ideas in a blink."
                     ) {}
                 }

@@ -1194,6 +1194,28 @@
         }
       }
     },
+    "edit.item.title" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Pik"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Pik"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Pik"
+          }
+        }
+      }
+    },
     "English" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3258,6 +3280,7 @@
       }
     },
     "settings.defaultReminder.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3280,6 +3303,7 @@
       }
     },
     "settings.defaultReminder.row.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3325,6 +3349,7 @@
       }
     },
     "settings.defaultReminder.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3347,6 +3372,7 @@
       }
     },
     "settings.exportData.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3369,6 +3395,7 @@
       }
     },
     "settings.exportData.row.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3391,6 +3418,7 @@
       }
     },
     "settings.exportData.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3633,6 +3661,7 @@
       }
     },
     "settings.feedback.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3655,6 +3684,7 @@
       }
     },
     "settings.feedback.row.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3677,6 +3707,7 @@
       }
     },
     "settings.feedback.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3743,6 +3774,7 @@
       }
     },
     "settings.icloudSync.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3876,6 +3908,7 @@
       }
     },
     "settings.notifications.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3898,6 +3931,7 @@
       }
     },
     "settings.notifications.row.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -3920,6 +3954,7 @@
       }
     },
     "settings.notifications.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -4008,6 +4043,7 @@
       }
     },
     "settings.section.privacy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -4030,6 +4066,7 @@
       }
     },
     "settings.siriShortcuts.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -4052,6 +4089,7 @@
       }
     },
     "settings.siriShortcuts.row.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -4074,6 +4112,7 @@
       }
     },
     "settings.siriShortcuts.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
