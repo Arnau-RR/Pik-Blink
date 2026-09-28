@@ -13,6 +13,7 @@ struct EditSnippetContent: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
+    @Environment(\.colorScheme) private var colorScheme
 
     let draft: PikDraftEntity
     let model: PikDraft
@@ -22,6 +23,22 @@ struct EditSnippetContent: View {
         !model.text
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .isEmpty
+    }
+    
+    private var backgroundColor: Color {
+        colorScheme == .light
+            ? Color.white.opacity(0.92)
+            : Color(red: 0.12, green: 0.12, blue: 0.14).opacity(0.92)
+    }
+
+    private var primaryColor: Color {
+        colorScheme == .light ? .black : .white
+    }
+
+    private var secondaryColor: Color {
+        colorScheme == .light
+            ? .black.opacity(0.6)
+            : .white.opacity(0.72)
     }
 
     var body: some View {
@@ -75,7 +92,7 @@ struct EditSnippetContent: View {
             }
         }
         .padding()
-        .environment(\.colorScheme, .dark)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     @ViewBuilder
