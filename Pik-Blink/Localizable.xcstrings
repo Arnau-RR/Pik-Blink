@@ -1865,6 +1865,28 @@
         }
       }
     },
+    "main.view.search.prompt" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busca Pik"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Pik"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busca Pik"
+          }
+        }
+      }
+    },
     "New Pik" : {
       "localizations" : {
         "ca" : {

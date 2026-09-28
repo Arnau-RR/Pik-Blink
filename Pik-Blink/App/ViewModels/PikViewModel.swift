@@ -1,10 +1,9 @@
 //
-//  MainViewModel.swift
+//  PikViewModel.swift
 //  Pik-Blink
 //
 //  Created by Arnau on 21/09/2026.
 //
-
 
 import Combine
 import Foundation
@@ -16,25 +15,36 @@ final class PikViewModel: ObservableObject {
 
     @Published var createNewItemPressed = false
     @Published var editExistingItemPressed = false
-    //@Published var piksSavedInDB: [PikItem] = []
     @Published var selectedTab = 0
     @Published var notificationAuthorized = false
 
-    private var allPiks: [PikItem] = []
+    // Search
+    @Published var isSearching = false
+    @Published var searchText = ""
+
     private var modelContext: ModelContext?
     private let notifications = NotificationManager.shared
-    
+
     var selectedPik: PikItem?
 
-
     // MARK: - Filters
-    
+
     func filteredPiks(from piks: [PikItem]) -> [PikItem] {
+        let byStatus: [PikItem]
+
         switch selectedTab {
-        case 0: return piks.filter { $0.status == .pending }
-        case 1: return piks.filter { $0.status == .completed }
-        case 2: return piks.filter { $0.status == .archived }
+        case 0: byStatus = piks.filter { $0.status == .pending }
+        case 1: byStatus = piks.filter { $0.status == .completed }
+        case 2: byStatus = piks.filter { $0.status == .archived }
         default: return []
+        }
+
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else { return byStatus }
+
+        return byStatus.filter {
+            $0.text.localizedCaseInsensitiveContains(query) ||
+            ($0.placeName?.localizedCaseInsensitiveContains(query) ?? false)
         }
     }
 
@@ -48,6 +58,13 @@ final class PikViewModel: ObservableObject {
 
     func completedPiks(from piks: [PikItem]) -> [PikItem] {
         piks.filter { $0.status == .completed }
+    }
+
+    // MARK: - Search
+
+    func toggleSearch() {
+        isSearching.toggle()
+        if !isSearching { searchText = "" }
     }
 
     // MARK: - Setup
@@ -73,10 +90,8 @@ final class PikViewModel: ObservableObject {
     }
 
     // MARK: - Actions
-    
+
     func onPressed(_ item: PikItem) {
-        //guard let modelContext else { return }
-        
         selectedPik = item
         editExistingItemPressed.toggle()
     }
@@ -104,9 +119,9 @@ final class PikViewModel: ObservableObject {
 
         } else {
 
-            // Se completa
+            // Se completa: quita notificación y Live Activity
             item.status = .completed
-            notifications.remove(for: item)
+            notifications.cancel(for: item)
         }
 
         try? modelContext.save()
@@ -115,14 +130,14 @@ final class PikViewModel: ObservableObject {
 
     func archive(_ item: PikItem) {
         guard let modelContext else { return }
-        
-        notifications.remove(for: item)
+
+        notifications.cancel(for: item)
 
         item.status = .archived
         try? modelContext.save()
         reloadWidgets()
     }
-    
+
     func unarchive(_ item: PikItem) {
         guard let modelContext else { return }
 
@@ -148,7 +163,7 @@ final class PikViewModel: ObservableObject {
     func delete(_ item: PikItem) {
         guard let modelContext else { return }
 
-        notifications.remove(for: item)
+        notifications.cancel(for: item)
 
         modelContext.delete(item)
         try? modelContext.save()
@@ -166,7 +181,7 @@ final class PikViewModel: ObservableObject {
             true
         )
     }
-    
+
     // MARK: - Notifications
 
     func scheduleNotification(for item: PikItem) {
@@ -178,6 +193,6 @@ final class PikViewModel: ObservableObject {
     }
 
     func removeNotification(for item: PikItem) {
-        notifications.remove(for: item)
+        notifications.cancel(for: item)
     }
 }

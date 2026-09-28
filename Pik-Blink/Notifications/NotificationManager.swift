@@ -285,8 +285,9 @@ final class NotificationManager: NSObject {
     // MARK: - Cancel (archivar / borrar)
 
     func cancel(for item: PikItem) {
+        let id = item.id
         remove(for: item)
-        Task { await LiveActivityManager.shared.cancel(id: item.id) }
+        Task { await LiveActivityManager.shared.cancel(id: id) }
     }
 
     // MARK: - Snooze

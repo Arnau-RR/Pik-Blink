@@ -21,44 +21,44 @@ enum Field {
 
 @MainActor
 final class CreateItemViewModel: ObservableObject {
-    
+
     static let shared = CreateItemViewModel()
-    
+
     @Published var editingItem: PikItem?
-    
+
     @Published var pikItemText = ""
     @Published var selectedTab = 0
 
     @Published var isRecording = false
     @Published var audioPath: String?
-    
+
     @Published var selected: QuickReminder? = nil
     @Published var reminderDate: Date? = nil
-    
+
     @Published var showCalendar: Bool = false
     @Published var showTime: Bool = false
     @Published var showPopup = false
-    
+
     @Published var showDatePicker = false
     @Published var showPlacePicker = false
-    
+
     @Published var searchBarText = ""
-    
+
     @Published var search = LocationSearchService()
     @Published var selectedPlace: SelectedPlace?
-    
+
     @Published var placeSelection: PlaceSelection?
 
     private let audio = AudioRecorder()
     private let speech = SpeechRecognizer()
     private let notifications = NotificationManager.shared
     private var cancellables = Set<AnyCancellable>()
-        
+
     let dateRange: PartialRangeFrom<Date> = Calendar.current.startOfDay(for: .now)...
 
     /// Texto que ya existía antes de empezar una nueva grabación
     private var textFieldBaseText = ""
-    
+
     private var modelContext: ModelContext?
 
     func configure(modelContext: ModelContext) {
@@ -66,7 +66,7 @@ final class CreateItemViewModel: ObservableObject {
     }
 
     init() {
-                
+
         // Audio & Speech
         speech.$transcript
             .receive(on: DispatchQueue.main)
@@ -83,7 +83,7 @@ final class CreateItemViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+
     func load(item: PikItem) {
         editingItem = item
 
@@ -92,7 +92,7 @@ final class CreateItemViewModel: ObservableObject {
         audioPath = item.audioPath
 
         reminderDate = item.remindAt
-                
+
         selected = item.quickReminder.map {
             switch $0 {
             case .thirtyMinutes: return .thirtyMinutes
@@ -101,7 +101,7 @@ final class CreateItemViewModel: ObservableObject {
             case .custom:        return .custom
             }
         }
-        
+
         if let place = item.location {
             selectedTab = 1
             selectedPlace = place
@@ -111,7 +111,7 @@ final class CreateItemViewModel: ObservableObject {
             selectedTab = 0
         }
     }
-    
+
     func checkPikTextEmpty() -> Bool {
         return pikItemText
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -134,11 +134,11 @@ final class CreateItemViewModel: ObservableObject {
             }
         }
     }
-    
+
     func updateCustomDate(_ date: Date) {
         reminderDate = date
     }
-    
+
     func selectReminder(_ option: QuickReminder) {
 
         // Toggle
@@ -179,7 +179,7 @@ final class CreateItemViewModel: ObservableObject {
             reminderDate = nil
         }
     }
-    
+
     func didChangeTab(to tab: Int) {
         if tab == 0 {
             // Cambia a "Cuando" → borrar ubicación
@@ -195,18 +195,18 @@ final class CreateItemViewModel: ObservableObject {
     @MainActor
     func savePikLocal() throws {
         if let item = editingItem {
-                try update(item)
-            } else {
-                try savePik(
-                    text: pikItemText,
-                    reminderDate: reminderDate,
-                    selectedPlace: selectedPlace,
-                    audioPath: audioPath,
-                    source: audioPath == nil ? .text : .voice
-                )
-            }
+            try update(item)
+        } else {
+            try savePik(
+                text: pikItemText,
+                reminderDate: reminderDate,
+                selectedPlace: selectedPlace,
+                audioPath: audioPath,
+                source: audioPath == nil ? .text : .voice
+            )
+        }
     }
-    
+
     @MainActor
     private func update(_ item: PikItem) throws {
         guard let modelContext else {
@@ -222,16 +222,16 @@ final class CreateItemViewModel: ObservableObject {
         item.audioPath = audioPath
 
         item.reminderType = type
-        
+
         item.quickReminder = selected.map {
-                switch $0 {
-                case .thirtyMinutes: return .thirtyMinutes
-                case .oneHour:       return .oneHour
-                case .twoHours:      return .twoHours
-                case .custom:        return .custom
-                }
+            switch $0 {
+            case .thirtyMinutes: return .thirtyMinutes
+            case .oneHour:       return .oneHour
+            case .twoHours:      return .twoHours
+            case .custom:        return .custom
             }
-        
+        }
+
         item.remindAt = type == .date ? reminderDate : nil
 
         item.placeSelection = placeSelection
@@ -243,10 +243,14 @@ final class CreateItemViewModel: ObservableObject {
         try modelContext.save()
         WidgetCenter.shared.reloadTimelines(ofKind: "PikWidget")
 
+        if type == .location {
+            notifications.requestLocationPermission()
+        }
+
+        // Borra la notificación anterior, reprograma y actualiza/cancela la Live Activity
         notifications.update(for: item)
     }
-    
-    
+
     @MainActor
     func savePik(
         text: String,
@@ -270,13 +274,13 @@ final class CreateItemViewModel: ObservableObject {
             audioPath: audioPath,
             reminderType: type,
             quickReminder: selected.map {
-                    switch $0 {
-                    case .thirtyMinutes: return .thirtyMinutes
-                    case .oneHour:       return .oneHour
-                    case .twoHours:      return .twoHours
-                    case .custom:        return .custom
-                    }
-                },
+                switch $0 {
+                case .thirtyMinutes: return .thirtyMinutes
+                case .oneHour:       return .oneHour
+                case .twoHours:      return .twoHours
+                case .custom:        return .custom
+                }
+            },
             remindAt: type == .date ? reminderDate : nil,
             placeSelection: placeSelection,
             placeName: type == .location ? selectedPlace?.name : nil,
@@ -289,9 +293,9 @@ final class CreateItemViewModel: ObservableObject {
 
         modelContext.insert(item)
         try modelContext.save()
-        
+
         try? modelContext.container.mainContext.save()
-        
+
         WidgetCenter.shared.reloadTimelines(ofKind: "PikWidget")
 
         if type == .location {
@@ -300,7 +304,6 @@ final class CreateItemViewModel: ObservableObject {
 
         notifications.schedule(for: item)
     }
-    
 
     @MainActor
     func selectCompletion(_ completion: MKLocalSearchCompletion) {
@@ -315,7 +318,7 @@ final class CreateItemViewModel: ObservableObject {
             }
         }
     }
-    
+
     @MainActor
     func selectFavorite(_ favorite: FavoritePlace) {
         selectedPlace = SelectedPlace(
