@@ -49,18 +49,24 @@ Create reminders in seconds, receive notifications based on **time** or **locati
 
 ## Home
 
-<p align="center">
-  <img src="Assets/Home.PNG" width="270"/>
-</p>
-
-## Smart reminders
+Capture ideas the moment they happen. The Home screen keeps all your reminders organized by category, making it easy to focus on what matters next.
 
 <p align="center">
-  <img src="Assets/reminder_time.png" width="270"/>
-  <img src="Assets/reminder_location.png" width="270"/>
+  <img src="Assets/Home.PNG" width="270" alt="Pik Home Screen"/>
 </p>
 
-Choose **when** or **where** you want to be reminded in just one tap.
+## Create a Pik
+
+Creating a reminder takes just a few seconds. Add your idea first, then optionally choose **when** or **where** you'd like to be reminded.
+
+### Optional smart reminders
+
+Set a time, a location, or leave both empty—Pik works the way you do.
+
+<p align="center">
+  <img src="Assets/New Pik When.PNG" width="270" alt="Time Reminder"/>
+  <img src="Assets/New Pik Image Where.png" width="270" alt="Location Reminder"/>
+</p>
 
 ---
 
@@ -126,10 +132,18 @@ Your active countdown appears directly on the Lock Screen with a live, updating 
 
 ### Dynamic Island
 
-When a timer is active, it lives in the Dynamic Island. Tap and hold to expand it and view the remaining time, giving you instant access without leaving your current app.
+When a timer is active, it lives in the Dynamic Island, showing the remaining time while you use other apps.
 
 <p align="center">
-  <img src="Assets/Live Activity Compact.png" width="500" alt="Dynamic Island Live Activity"/>
+  <img src="Assets/Live Activity Compact.png" width="500" alt="Dynamic Island Compact"/>
+</p>
+
+### Expanded View
+
+Tap and hold the Dynamic Island to expand the Live Activity and reveal the full countdown with additional timer details.
+
+<p align="center">
+  <img src="Assets/Live Activity Open.png" width="500" alt="Dynamic Island Expanded"/>
 </p>
 
 ---
