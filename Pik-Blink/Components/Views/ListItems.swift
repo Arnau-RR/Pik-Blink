@@ -154,7 +154,11 @@ struct ListItems: View {
             if showArchivedActions {
                 Button {
                     onUnarchive(item)
-                    Task { await LiveActivityManager.shared.update(for: item) }
+                    if item.reminderType == .date,
+                       let date = item.remindAt,
+                       date > .now {
+                        Task { await LiveActivityManager.shared.update(for: item) }
+                    }
                 } label: {
                     Label("main.list.action.unarchive", systemImage: "arrow.uturn.backward.circle")
                 }

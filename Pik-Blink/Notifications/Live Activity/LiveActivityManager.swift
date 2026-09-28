@@ -60,6 +60,7 @@ final class LiveActivityManager {
         }
     }
     
+    
     @MainActor
     func refreshScores() async {
         for activity in Activity<PikLiveActivityAttributes>.activities {

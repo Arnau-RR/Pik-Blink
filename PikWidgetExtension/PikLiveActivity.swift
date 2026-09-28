@@ -266,27 +266,12 @@ private extension PikLiveActivity {
     @ViewBuilder
     func compactTrailing(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
 
-        switch context.state.reminderType {
-
-        case .date:
-
-            if let date = context.state.reminderDate {
-
-                Text(timerInterval: Date()...date, countsDown: true)
-                    .font(.caption2.weight(.bold))
+        if let date = context.state.reminderDate {
+                Text(timerInterval: Date()...date, pauseTime: nil, countsDown: true, showsHours: false)
+                    .font(.system(size: 12, weight: .bold, design: .rounded))
                     .monospacedDigit()
+                    .multilineTextAlignment(.trailing)
+                    .frame(width: 40, alignment: .trailing)
             }
-
-        case .location:
-
-            Image(systemName: "location.fill")
-                .font(.caption)
-
-        case .none:
-
-            Image(systemName: "sparkles")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
     }
 }

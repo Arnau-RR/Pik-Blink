@@ -91,13 +91,14 @@ final class NotificationManager: NSObject {
 
     func schedule(for item: PikItem) {
         
-        Task {
-            await LiveActivityManager.shared.start(for: item)
-        }
+
         
         switch item.reminderType {
         case .date:
             scheduleDate(for: item)
+            Task {
+                await LiveActivityManager.shared.start(for: item)
+            }
 
         case .location:
             scheduleLocation(for: item)
