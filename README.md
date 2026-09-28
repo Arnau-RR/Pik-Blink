@@ -66,42 +66,71 @@ Choose **when** or **where** you want to be reminded in just one tap.
 
 ## Widgets
 
+Keep your most important reminders visible right from your Home Screen. Pik offers three widget sizes designed for different levels of detail.
+
 ### Small Widget
 
+Perfect for instantly capturing a new idea with a single tap.
+
 <p align="center">
-  <img src="Assets/Small Widget.png" width="700"/>
+  <img src="Assets/Small Widget.png" width="500" alt="Pik Small Widget"/>
 </p>
 
 ### Medium Widget
 
+See your next pending reminders while keeping quick access to create new Piks.
+
 <p align="center">
-  <img src="Assets/Medium Widget.png" width="700"/>
+  <img src="Assets/Medium Widget.png" width="500" alt="Pik Medium Widget"/>
 </p>
 
 ### Large Widget
 
-<p align="center">
-  <img src="Assets/Large Widget.png" width="700"/>
-</p>
+A complete overview of your pending tasks, organized and always within reach.
 
-Your most important reminders are always visible directly from the Home Screen.
+<p align="center">
+  <img src="Assets/Large Widget.png" width="500" alt="Pik Large Widget"/>
+</p>
 
 ---
 
-## Dynamic Island & Live Activities
+# Dynamic Island & Live Activities
+
+Pik integrates with **Dynamic Island** and **Live Activities** to capture ideas instantly, follow timers in real time, and receive location-based reminders without opening the app.
+
+### Features
+
+- **Quick Capture** — Create a new Pik directly from the Dynamic Island.
+- **Live Timers** — Track active countdowns with real-time updates.
+- **Location Reminders** — Get contextual reminders when you arrive at a saved place.
 
 <p align="center">
-  <img src="Assets/dynamic_island.png" width="270"/>
-  <img src="Assets/live_activity.png" width="270"/>
+  <img src="Assets/Dynamic Island Home.PNG" width="270" alt="Quick Capture"/>
+  <img src="Assets/Dynamic Island Timer.PNG" width="278" alt="Live Timer"/>
+  <img src="Assets/Dynamic Island Where.png" width="278" alt="Location Reminder"/>
 </p>
 
-### Empty state
+---
+
+## Live Activities
+
+Stay focused without opening the app. Pik uses **Live Activities** to keep timers and reminders visible on your Lock Screen and in the Dynamic Island.
+
+### Lock Screen
+
+Your active countdown appears directly on the Lock Screen with a live, updating timer, making it easy to check the remaining time at a glance.
 
 <p align="center">
-  <img src="Assets/live_activity_empty.png" width="700"/>
+  <img src="Assets/Live Activity Lock Screen.png" width="500" alt="Lock Screen Live Activity"/>
 </p>
 
-Live Activities automatically appear before reminders and stay perfectly integrated with iOS.
+### Dynamic Island
+
+When a timer is active, it lives in the Dynamic Island. Tap and hold to expand it and view the remaining time, giving you instant access without leaving your current app.
+
+<p align="center">
+  <img src="Assets/Live Activity Compact.png" width="500" alt="Dynamic Island Live Activity"/>
+</p>
 
 ---
 
@@ -127,7 +156,7 @@ Live Activities automatically appear before reminders and stay perfectly integra
 - [x] Live Activities
 - [x] Time reminders
 - [x] Location reminders
-- [ ] Interactive Live Activities
+- [x] Interactive Live Activities
 - [ ] Apple Watch app
 - [ ] iCloud Sync
 
