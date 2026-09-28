@@ -74,6 +74,9 @@
 				Models/PikDraft.swift,
 				Models/PikItem.swift,
 				Models/SelectedPlace.swift,
+				"Notifications/Live Activity/LiveActivityManager.swift",
+				"Notifications/Live Activity/PikLiveActivityAttributes.swift",
+				Notifications/NotificationManager.swift,
 			);
 			target = 578550703068723500880D5D /* PikWidgetExtensionExtension */;
 		};
@@ -580,6 +583,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"Pik Blink utiliza tu ubicación para recordarte tareas al llegar a un lugar.\"";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = NSMicrophoneUsageDescription;
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = NSSpeechRecognitionUsageDescription;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -620,6 +624,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"Pik Blink utiliza tu ubicación para recordarte tareas al llegar a un lugar.\"";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = NSMicrophoneUsageDescription;
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = NSSpeechRecognitionUsageDescription;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

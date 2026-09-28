@@ -22,19 +22,19 @@ struct ReminderSummary: View {
         )
     }
 
-    private var relative: String {
-        guard let date else { return "" }
+    private var relative: Text {
+        guard let date else { return Text("") }
 
         let calendar = Calendar.current
 
         if calendar.isDateInToday(date) {
-            return "reminder.summary.relative.today"
+            return Text("reminder.summary.relative.today")
         }
         if calendar.isDateInTomorrow(date) {
-            return "reminder.summary.relative.tomorrow"
+            return Text("reminder.summary.relative.tomorrow")
         }
 
-        return ""
+        return Text("")
     }
 
     var body: some View {
@@ -56,14 +56,14 @@ struct ReminderSummary: View {
                         Text(time)
                             .font(.title3.weight(.bold))
 
-                        if !relative.isEmpty {
-                            Text(relative)
+                        //if !relative.isEmpty {
+                            relative
                                 .font(.caption.weight(.semibold))
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 3)
                                 .background(.blue.opacity(0.12))
                                 .clipShape(Capsule())
-                        }
+                        //}
                     }
 
                     Text(day)

@@ -97,13 +97,13 @@ struct CreateItemView: View {
                     }
                 
                 GlassPopup(
-                    title: "new.item.popup.close.title",
-                    subtitle: "new.item.popup.close.description",
+                    title: Text("new.item.popup.close.title"),
+                    subtitle: Text("new.item.popup.close.description"),
                     actions: [
-                        GlassPopupAction(title: "new.item.popup.close.cancel") {
+                        GlassPopupAction(title: Text("new.item.popup.close.cancel")) {
                             viewModel.showPopup = false
                         },
-                        GlassPopupAction(title: "new.item.popup.close.accept", role: .destructive) {
+                        GlassPopupAction(title: Text("new.item.popup.close.accept"), role: .destructive) {
                             viewModel.showPopup = false
                             dismiss()
                         }

@@ -90,6 +90,11 @@ final class NotificationManager: NSObject {
     // MARK: - Public
 
     func schedule(for item: PikItem) {
+        
+        Task {
+            await LiveActivityManager.shared.start(for: item)
+        }
+        
         switch item.reminderType {
         case .date:
             scheduleDate(for: item)
@@ -257,8 +262,24 @@ final class NotificationManager: NSObject {
     // MARK: - Update
 
     func update(for item: PikItem) {
+
         remove(for: item)
-        schedule(for: item)
+
+        switch item.reminderType ?? .none {
+
+        case .date:
+            scheduleDate(for: item)
+
+        case .location:
+            scheduleLocation(for: item)
+
+        case .none:
+            break
+        }
+
+        Task {
+            await LiveActivityManager.shared.update(for: item)
+        }
     }
 
     // MARK: - Snooze
@@ -337,6 +358,10 @@ final class NotificationManager: NSObject {
                 name: .pikCompleted,
                 object: uuid
             )
+        }
+        
+        Task {
+            await LiveActivityManager.shared.end(id: uuid)
         }
     }
 }

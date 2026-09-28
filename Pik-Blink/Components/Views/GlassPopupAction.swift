@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GlassPopupAction: Identifiable {
     let id = UUID()
-    let title: String
+    let title: Text
     var role: ButtonRole? = nil
     let action: () -> Void
 }
@@ -17,20 +17,20 @@ struct GlassPopupAction: Identifiable {
 struct GlassPopup: View {
     @Environment(\.colorScheme) private var colorScheme
 
-    let title: String
-    let subtitle: String
+    let title: Text
+    let subtitle: Text
     let actions: [GlassPopupAction]
 
     var body: some View {
         VStack(spacing: 22) {
 
             VStack(spacing: 8) {
-                Text(title)
+                title
                     .font(.title3.weight(.bold))
                     .multilineTextAlignment(.center)
                     .foregroundStyle(primaryText)
 
-                Text(subtitle)
+                subtitle
                     .font(.subheadline)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
@@ -41,7 +41,7 @@ struct GlassPopup: View {
                     Button(role: item.role) {
                         item.action()
                     } label: {
-                        Text(item.title)
+                        item.title
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
@@ -129,11 +129,11 @@ struct GlassPopupButtonStyle: ButtonStyle {
         Color.gray.opacity(0.15).ignoresSafeArea()
 
         GlassPopup(
-            title: "¿Cerrar recordatorio?",
-            subtitle: "¿Seguro que quieres cerrar y eliminar el Pik?",
+            title: Text("¿Cerrar recordatorio?"),
+            subtitle:  Text("¿Seguro que quieres cerrar y eliminar el Pik?"),
             actions: [
-                GlassPopupAction(title: "Cancelar") {},
-                GlassPopupAction(title: "Aceptar", role: .destructive) {}
+                GlassPopupAction(title: Text("Cancelar")) {},
+                GlassPopupAction(title: Text("Aceptar"), role: .destructive) {}
             ]
         )
     }
@@ -145,11 +145,11 @@ struct GlassPopupButtonStyle: ButtonStyle {
         Color.black.ignoresSafeArea()
 
         GlassPopup(
-            title: "¿Cerrar recordatorio?",
-            subtitle: "¿Seguro que quieres cerrar y eliminar el Pik?",
+            title:  Text("¿Cerrar recordatorio?"),
+            subtitle:  Text("¿Seguro que quieres cerrar y eliminar el Pik?"),
             actions: [
-                GlassPopupAction(title: "Cancelar") {},
-                GlassPopupAction(title: "Aceptar", role: .destructive) {}
+                GlassPopupAction(title: Text("Cancelar")) {},
+                GlassPopupAction(title: Text("Aceptar"), role: .destructive) {}
             ]
         )
     }

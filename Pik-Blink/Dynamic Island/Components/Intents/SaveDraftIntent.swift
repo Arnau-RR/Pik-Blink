@@ -90,6 +90,10 @@ struct SaveDraftIntent: AppIntent {
             nil,
             true
         )
+        
+        Task {
+            await LiveActivityManager.shared.update(for: item)
+        }
 
         return .result(
             dialog: IntentDialog("app.intent.save.draft.success.saved")
