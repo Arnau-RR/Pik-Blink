@@ -5,9 +5,21 @@
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pik-Blink"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Pik-Blink"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Pik-Blink"
           }
         }
@@ -15,33 +27,95 @@
     },
     "NSLocationAlwaysAndWhenInUseUsageDescription" : {
       "comment" : "Privacy - Location Always and When In Use Usage Description",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Necessitem accés permanent per avisar-te fins i tot amb l'app tancada."
+          }
+        },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "\"Necesitamos acceso permanente para avisarte incluso con la app cerrada.\""
+            "state" : "translated",
+            "value" : "We need permanent access to alert you even when the app is closed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Necesitamos acceso permanente para avisarte incluso con la app cerrada."
           }
         }
       }
     },
     "NSLocationWhenInUseUsageDescription" : {
       "comment" : "Privacy - Location When In Use Usage Description",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pik Blink utilitza la teva ubicació per recordar-te tasques quan arribis a un lloc."
+          }
+        },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "\"Pik Blink utiliza tu ubicación para recordarte tareas al llegar a un lugar.\""
+            "state" : "translated",
+            "value" : "Pik Blink uses your location to remind you of tasks when you arrive at a place."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pik Blink utiliza tu ubicación para recordarte tareas al llegar a un lugar."
           }
         }
       }
     },
     "NSMicrophoneUsageDescription" : {
-      "comment" : "Privacy - Microphone Usage Description"
+      "comment" : "Privacy - Microphone Usage Description",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pik Blink utilitza el micròfon per gravar les teves notes de veu."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pik Blink uses the microphone to record your voice notes."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pik Blink usa el micrófono para grabar tus notas de voz."
+          }
+        }
+      }
     },
     "NSSpeechRecognitionUsageDescription" : {
-      "comment" : "Privacy - Speech Recognition Usage Description"
+      "comment" : "Privacy - Speech Recognition Usage Description",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pik Blink utilitza el reconeixement de veu per convertir la teva veu en text."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pik Blink uses speech recognition to turn your voice into text."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pik Blink usa el reconocimiento de voz para convertir tu voz en texto."
+          }
+        }
+      }
     }
   },
   "version" : "1.3"
