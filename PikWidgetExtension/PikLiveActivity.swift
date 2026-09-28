@@ -24,11 +24,11 @@ struct PikLiveActivity: Widget {
 
                     Image(systemName: "checklist")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.white)
 
                     Text("PIK BLINK")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.white)
                 }
 
                 // MARK: Title
@@ -37,6 +37,8 @@ struct PikLiveActivity: Widget {
                     .font(.title3.weight(.semibold))
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
+                    .foregroundStyle(.white)
+
 
                 Divider()
 
@@ -155,14 +157,19 @@ private extension PikLiveActivity {
                     Label {
                         Text(timerInterval: Date()...date, countsDown: true)
                             .monospacedDigit()
+                            .foregroundStyle(.white)
+
                     } icon: {
                         Image(systemName: "clock")
+                            .foregroundStyle(.white)
+
                     }
 
                     Spacer()
 
                     Text(date, style: .time)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.white)
+
                 }
                 .font(.subheadline)
             }
@@ -173,8 +180,12 @@ private extension PikLiveActivity {
 
                 Label {
                     Text(context.state.placeName ?? String(localized: "live.activity.location.unknown"))
+                        .foregroundStyle(.white)
+
                 } icon: {
                     Image(systemName: "location.fill")
+                        .foregroundStyle(.white)
+
                 }
 
                 Spacer()
@@ -187,6 +198,8 @@ private extension PikLiveActivity {
 
                 Label {
                     Text("live.activity.no.reminder")
+                        .foregroundStyle(.white)
+
                 } icon: {
                     Image(systemName: "sparkles")
                 }
@@ -194,7 +207,7 @@ private extension PikLiveActivity {
                 Spacer()
             }
             .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.white)
         }
     }
 }
