@@ -364,6 +364,11 @@ final class NotificationManager: NSObject {
             await LiveActivityManager.shared.end(id: uuid)
         }
     }
+    
+    func cancel(for item: PikItem) {
+        remove(for: item)
+        Task { await LiveActivityManager.shared.cancel(id: item.id) }
+    }
 }
 
 // MARK: - CLLocationManagerDelegate

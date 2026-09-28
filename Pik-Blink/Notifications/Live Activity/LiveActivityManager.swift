@@ -45,7 +45,7 @@ final class LiveActivityManager {
             let content = ActivityContent(
                 state: state,
                 staleDate: item.remindAt,
-                relevanceScore: 100
+                relevanceScore: score(for: state)
             )
 
             let activity = try Activity.request(
@@ -58,6 +58,28 @@ final class LiveActivityManager {
         } catch {
             print("❌ Activity error:", error)
         }
+    }
+    
+    @MainActor
+    func refreshScores() async {
+        for activity in Activity<PikLiveActivityAttributes>.activities {
+            let state = activity.content.state
+            let content = ActivityContent(
+                state: state,
+                staleDate: activity.content.staleDate,
+                relevanceScore: score(for: state)
+            )
+            await activity.update(content)
+        }
+    }
+    
+    func score(for state: PikLiveActivityAttributes.ContentState) -> Double {
+        guard state.reminderType == .date,
+              let date = state.reminderDate else { return 0 }
+
+        let remaining = max(date.timeIntervalSinceNow, 0)
+        // Cuanto menos tiempo queda, más puntuación (máx 1000, mín ~100)
+        return 100 + 900 / (1 + remaining / 60)
     }
     
 //    func start(for item: PikItem) {
@@ -90,36 +112,78 @@ final class LiveActivityManager {
     @MainActor
     func update(for item: PikItem) async {
 
-        guard let activity = activity(for: item.id) else { return }
+        guard item.status == .pending,
+              (item.reminderType ?? .none) != .none,
+              (item.remindAt ?? .distantFuture) > .now
+        else {
+            await cancel(id: item.id)
+            return
+        }
 
         let state = PikLiveActivityAttributes.ContentState(
             title: item.text,
             reminderType: item.reminderType ?? .none,
             reminderDate: item.remindAt,
             placeName: item.placeName,
-            isCompleted: item.status == .completed
+            isCompleted: false
         )
 
-        await activity.update(
-            .init(state: state, staleDate: item.remindAt)
+        let content = ActivityContent(
+            state: state,
+            staleDate: item.remindAt,
+            relevanceScore: score(for: state)
         )
+
+        if let activity = activity(for: item.id) {
+            await activity.update(content)
+            return
+        }
+
+        guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+
+        do {
+            _ = try Activity.request(
+                attributes: PikLiveActivityAttributes(id: item.id),
+                content: content
+            )
+        } catch {
+            print("❌ Activity error:", error)
+        }
     }
 
     // MARK: End
     @MainActor
     func end(id: UUID) async {
-
         guard let activity = activity(for: id) else { return }
 
-        let finalState = activity.content.state
+        var finalState = activity.content.state
+        finalState.isCompleted = true
+
         await activity.end(
-            ActivityContent(
-                state: finalState,
-                staleDate: nil
-            ),
-            dismissalPolicy: .immediate
+            ActivityContent(state: finalState, staleDate: nil),
+            dismissalPolicy: .after(.now + 5)
         )
     }
+    
+    @MainActor
+    func cancel(id: UUID) async {
+        guard let activity = activity(for: id) else { return }
+        await activity.end(nil, dismissalPolicy: .immediate)
+    }
+    
+//    func end(id: UUID) async {
+//
+//        guard let activity = activity(for: id) else { return }
+//
+//        let finalState = activity.content.state
+//        await activity.end(
+//            ActivityContent(
+//                state: finalState,
+//                staleDate: nil
+//            ),
+//            dismissalPolicy: .immediate
+//        )
+//    }
 
     // MARK: Helpers
 

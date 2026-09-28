@@ -5,6 +5,7 @@
 //  Created by Arnau on 28/09/2026.
 //
 
+
 import ActivityKit
 import WidgetKit
 import SwiftUI
@@ -15,58 +16,118 @@ struct PikLiveActivity: Widget {
 
         ActivityConfiguration(for: PikLiveActivityAttributes.self) { context in
 
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 14) {
 
-                // Header
-                HStack(spacing: 6) {
+                // MARK: Header
+
+                HStack(spacing: 8) {
+
                     Image(systemName: "checklist")
-                        .font(.caption2.weight(.semibold))
+                        .font(.caption.weight(.semibold))
                         .foregroundStyle(.secondary)
 
                     Text("PIK BLINK")
-                        .font(.caption2.weight(.semibold))
+                        .font(.caption.weight(.semibold))
                         .foregroundStyle(.secondary)
                 }
 
-                // Title
+                // MARK: Title
+
                 Text(context.state.title)
-                    .font(.headline)
+                    .font(.title3.weight(.semibold))
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
 
                 Divider()
 
-                // Status row
-                statusRow(context)
+                // MARK: Status
+
+                lockScreenStatus(context)
             }
-            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 16)
+            .activityBackgroundTint(.black)
+            .activitySystemActionForegroundColor(.white)
+            //.padding()
 
         } dynamicIsland: { context in
 
             DynamicIsland {
 
+                // MARK: Expanded
+
                 DynamicIslandExpandedRegion(.center) {
 
-                    VStack(spacing: 10) {
+                    HStack(alignment: .center, spacing: 14) {
 
-                        Text(context.state.title)
-                            .font(.headline)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(2)
+                        ZStack {
 
-                        expandedStatus(context)
+                            Circle()
+                                .fill(.white.opacity(0.12))
+                                .frame(width: 46, height: 46)
+
+                            Image(systemName: compactIcon(context))
+                                .font(.title3)
+                                .foregroundStyle(.white)
+                        }
+
+                        VStack(alignment: .leading, spacing: 3) {
+
+                            Text("PIK BLINK")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+
+                            Text(context.state.title)
+                                .font(.subheadline.weight(.semibold))
+                                .lineLimit(1)
+
+                            expandedStatus(context)
+                        }
+
+                        Spacer()
                     }
+                    .padding(.horizontal, 6)
                     .padding(.vertical, 4)
                 }
 
             } compactLeading: {
 
-                Image(systemName: compactIcon(context))
-                    .font(.caption)
+                ZStack {
+                    Circle()
+                        .fill(.white.opacity(0.15))
+                        .frame(width: 20, height: 20)
+
+                    Image(systemName: compactIcon(context)) // tu asset monocromo
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 11, height: 11)
+                }
+                
+//                Image(systemName: compactIcon(context))
+//                    .font(.caption.weight(.semibold))
 
             } compactTrailing: {
 
-                compactTrailing(context)
+                if context.state.reminderType == .date,
+                      let date = context.state.reminderDate {
+
+                       Text(timerInterval: Date()...date, pauseTime: nil, countsDown: true, showsHours: false)
+                           .font(.system(size: 12, weight: .bold, design: .rounded))
+                           .monospacedDigit()
+                           .multilineTextAlignment(.trailing)
+                           .frame(width: 40, alignment: .trailing)   // ancho fijo, no minWidth
+
+                   } else if context.state.reminderType == .location {
+
+                       Image(systemName: "location.fill")
+                           .font(.system(size: 11, weight: .semibold))
+
+                   } //else {
+
+//                       Image(systemName: "sparkles")
+//                           .font(.system(size: 11, weight: .semibold))
+                   //}
 
             } minimal: {
 
@@ -78,10 +139,10 @@ struct PikLiveActivity: Widget {
 
 // MARK: - Lock Screen
 
-extension PikLiveActivity {
+private extension PikLiveActivity {
 
     @ViewBuilder
-    private func statusRow(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
+    func lockScreenStatus(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
 
         switch context.state.reminderType {
 
@@ -140,10 +201,10 @@ extension PikLiveActivity {
 
 // MARK: - Dynamic Island
 
-extension PikLiveActivity {
+private extension PikLiveActivity {
 
     @ViewBuilder
-    private func expandedStatus(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
+    func expandedStatus(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
 
         switch context.state.reminderType {
 
@@ -151,52 +212,59 @@ extension PikLiveActivity {
 
             if let date = context.state.reminderDate {
 
-                VStack(spacing: 2) {
+                VStack(alignment: .leading, spacing: 0) {
 
                     Text(timerInterval: Date()...date, countsDown: true)
-                        .font(.system(size: 28, weight: .semibold, design: .rounded))
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
                         .monospacedDigit()
 
                     Text(date, style: .time)
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
             }
 
         case .location:
 
-            Label(
-                context.state.placeName ?? String(localized: "live.activity.location.unknown"),
-                systemImage: "location.fill"
-            )
-            .font(.headline)
+            HStack(spacing: 6) {
+
+                Image(systemName: "location.fill")
+                    .font(.caption)
+
+                Text(context.state.placeName ?? String(localized: "live.activity.location.unknown"))
+                    .font(.caption)
+                    .lineLimit(1)
+            }
+            .foregroundStyle(.secondary)
 
         case .none:
 
-            VStack(spacing: 4) {
+            HStack(spacing: 6) {
 
                 Image(systemName: "sparkles")
-                    .font(.title2)
-                    .foregroundStyle(.secondary)
+                    .font(.caption)
 
                 Text("live.activity.no.reminder")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(.caption)
             }
+            .foregroundStyle(.secondary)
         }
     }
 
-    private func compactIcon(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> String {
+    func compactIcon(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> String {
 
         switch context.state.reminderType {
-        case .date: "clock"
-        case .location: "location.fill"
-        case .none: "sparkles"
+        case .date:
+            return "clock.fill"
+        case .location:
+            return "location.fill"
+        case .none:
+            return "sparkles"
         }
     }
 
     @ViewBuilder
-    private func compactTrailing(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
+    func compactTrailing(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
 
         switch context.state.reminderType {
 
@@ -205,8 +273,8 @@ extension PikLiveActivity {
             if let date = context.state.reminderDate {
 
                 Text(timerInterval: Date()...date, countsDown: true)
+                    .font(.caption2.weight(.bold))
                     .monospacedDigit()
-                    .font(.caption2)
             }
 
         case .location:
@@ -218,6 +286,7 @@ extension PikLiveActivity {
 
             Image(systemName: "sparkles")
                 .font(.caption)
+                .foregroundStyle(.secondary)
         }
     }
 }

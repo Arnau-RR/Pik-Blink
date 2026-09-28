@@ -154,6 +154,7 @@ struct ListItems: View {
             if showArchivedActions {
                 Button {
                     onUnarchive(item)
+                    Task { await LiveActivityManager.shared.update(for: item) }
                 } label: {
                     Label("main.list.action.unarchive", systemImage: "arrow.uturn.backward.circle")
                 }
@@ -162,6 +163,7 @@ struct ListItems: View {
             } else {
                 Button {
                     onArchive(item)
+                    Task { await LiveActivityManager.shared.cancel(id: item.id) }
                 } label: {
                     Label("main.list.action.archive", systemImage: "archivebox")
                 }
@@ -170,6 +172,7 @@ struct ListItems: View {
             
             Button(role: .destructive) {
                 onDelete(item)
+                Task { await LiveActivityManager.shared.cancel(id: item.id) }
             } label: {
                 Label("main.list.action.delete", systemImage: "trash")
             }
