@@ -44,7 +44,9 @@ final class LiveActivityManager {
 
             let content = ActivityContent(
                 state: state,
-                staleDate: item.remindAt,
+                staleDate: nil,
+
+               // staleDate: item.remindAt,
                 relevanceScore: score(for: state)
             )
 
@@ -131,7 +133,9 @@ final class LiveActivityManager {
 
         let content = ActivityContent(
             state: state,
-            staleDate: item.remindAt,
+            staleDate: nil,
+
+            //staleDate: item.remindAt,
             relevanceScore: score(for: state)
         )
 
@@ -170,6 +174,15 @@ final class LiveActivityManager {
     func cancel(id: UUID) async {
         guard let activity = activity(for: id) else { return }
         await activity.end(nil, dismissalPolicy: .immediate)
+    }
+    
+    @MainActor
+    func endExpired() async {
+        for activity in Activity<PikLiveActivityAttributes>.activities {
+            if let date = activity.content.state.reminderDate, date < .now {
+                await activity.end(nil, dismissalPolicy: .immediate)
+            }
+        }
     }
     
 //    func end(id: UUID) async {

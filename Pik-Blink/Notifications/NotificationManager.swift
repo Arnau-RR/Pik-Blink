@@ -5,10 +5,6 @@
 //  Created by Arnau on 23/09/2026.
 //
 
-//import Foundation
-//import UserNotifications
-//import CoreLocation
-
 import Foundation
 import UserNotifications
 import CoreLocation
@@ -20,6 +16,15 @@ final class NotificationManager: NSObject {
     static let shared = NotificationManager()
 
     private let locationManager = CLLocationManager()
+
+    private enum ActionID {
+        static let done = "DONE"
+        static let snooze15 = "SNOOZE_15"
+        static let snooze60 = "SNOOZE_60"
+    }
+
+    private static let categoryID = "PIK_REMINDER"
+    private static let threadID = "pik-reminders"
 
     private override init() {
         super.init()
@@ -65,21 +70,35 @@ final class NotificationManager: NSObject {
 
     func registerCategories() {
 
+        // Sin .foreground: completar no abre la app,
+        // markAsCompleted ya guarda en SwiftData.
         let done = UNNotificationAction(
-            identifier: "DONE",
-            title: "Completar",
-            options: [.foreground]
+            identifier: ActionID.done,
+            title: String(localized: "notif.action.done"),
+            options: [],
+            icon: UNNotificationActionIcon(systemImageName: "checkmark.circle")
         )
 
-        let snooze = UNNotificationAction(
-            identifier: "SNOOZE_15",
-            title: "Posponer 15 min"
+        let snooze15 = UNNotificationAction(
+            identifier: ActionID.snooze15,
+            title: String(localized: "notif.action.snooze15"),
+            options: [],
+            icon: UNNotificationActionIcon(systemImageName: "clock.arrow.circlepath")
+        )
+
+        let snooze60 = UNNotificationAction(
+            identifier: ActionID.snooze60,
+            title: String(localized: "notif.action.snooze60"),
+            options: [],
+            icon: UNNotificationActionIcon(systemImageName: "clock")
         )
 
         let category = UNNotificationCategory(
-            identifier: "PIK_REMINDER",
-            actions: [done, snooze],
+            identifier: Self.categoryID,
+            actions: [],//done, snooze15, snooze60],
             intentIdentifiers: [],
+            hiddenPreviewsBodyPlaceholder: String(localized: "notif.hidden.placeholder"),
+            categorySummaryFormat: String(localized: "notif.summary.format"), // "%u recordatorios más"
             options: [.customDismissAction]
         )
 
@@ -87,26 +106,45 @@ final class NotificationManager: NSObject {
             .setNotificationCategories([category])
     }
 
+    // MARK: - Content Builder
+
+    private func makeContent(
+        title: String,
+        subtitle: String,
+        id: UUID,
+        level: UNNotificationInterruptionLevel,
+        relevance: Double = 0.5
+    ) -> UNMutableNotificationContent {
+
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = subtitle
+        content.body = ""
+        content.sound = .default
+        content.categoryIdentifier = Self.categoryID
+        content.threadIdentifier = Self.threadID
+        content.summaryArgument = "Pik"
+        content.summaryArgumentCount = 1
+        content.interruptionLevel = level
+        content.relevanceScore = relevance
+        content.userInfo = ["itemID": id.uuidString]
+        return content
+    }
+
     // MARK: - Public
 
     func schedule(for item: PikItem) {
-        
 
-        
-        switch item.reminderType {
+        switch item.reminderType ?? .none {
+
         case .date:
             scheduleDate(for: item)
-            Task {
-                await LiveActivityManager.shared.start(for: item)
-            }
+            Task { await LiveActivityManager.shared.start(for: item) }
 
         case .location:
             scheduleLocation(for: item)
 
         case .none:
-            break
-
-        case .some(.none):
             break
         }
     }
@@ -117,20 +155,23 @@ final class NotificationManager: NSObject {
 
         guard let date = item.remindAt else { return }
 
-        let formattedHour = date.formatted(.dateTime.hour().minute())
+        let subtitle: String
+        if Calendar.current.isDateInToday(date) {
+            let hour = date.formatted(.dateTime.hour().minute())
+            subtitle = String(localized: "notif.date.subtitle.today \(hour)")
+        } else {
+            subtitle = date.formatted(date: .abbreviated, time: .shortened)
+        }
 
-        let content = UNMutableNotificationContent()
-        content.title = item.text
-        content.subtitle = "Hoy · \(formattedHour)"
-        content.body = ""
-        content.sound = .default
-        content.categoryIdentifier = "PIK_REMINDER"
-        content.threadIdentifier = "pik-reminders"
-        content.summaryArgument = "Pik"
-        content.interruptionLevel = .timeSensitive
+        let content = makeContent(
+            title: item.text,
+            subtitle: subtitle,
+            id: item.id,
+            level: .timeSensitive,
+            relevance: 1.0
+        )
 
         let trigger: UNNotificationTrigger
-
         let interval = date.timeIntervalSinceNow
 
         // Recordatorios próximos → trigger relativo
@@ -160,45 +201,6 @@ final class NotificationManager: NSObject {
 
         UNUserNotificationCenter.current().add(request)
     }
-    
-//    private func scheduleDate(for item: PikItem) {
-//
-//        guard let date = item.remindAt else { return }
-//
-//        let formattedHour = date.formatted(
-//            .dateTime.hour().minute()
-//        )
-//
-//        let content = UNMutableNotificationContent()
-//
-//        content.title = item.text
-//        content.subtitle = "Hoy · \(formattedHour)"
-//        content.body = ""
-//
-//        content.sound = .default
-//        content.categoryIdentifier = "PIK_REMINDER"
-//        content.threadIdentifier = "pik-reminders"
-//        content.summaryArgument = "Pik"
-//        content.interruptionLevel = .timeSensitive
-//
-//        let components = Calendar.current.dateComponents(
-//            [.year, .month, .day, .hour, .minute],
-//            from: date
-//        )
-//
-//        let trigger = UNCalendarNotificationTrigger(
-//            dateMatching: components,
-//            repeats: false
-//        )
-//
-//        let request = UNNotificationRequest(
-//            identifier: item.id.uuidString,
-//            content: content,
-//            trigger: trigger
-//        )
-//
-//        UNUserNotificationCenter.current().add(request)
-//    }
 
     // MARK: - Location Reminder
 
@@ -218,18 +220,15 @@ final class NotificationManager: NSObject {
         region.notifyOnEntry = true
         region.notifyOnExit = false
 
-        let content = UNMutableNotificationContent()
+        let placeName = item.placeName ?? String(localized: "notif.location.unknown")
 
-        content.title = item.text
-        let placeName = item.placeName ?? "la ubicación"
-        content.subtitle = "Cuando llegues a \(placeName)"
-        content.body = ""
-
-        content.sound = .default
-        content.categoryIdentifier = "PIK_REMINDER"
-        content.threadIdentifier = "pik-reminders"
-        content.summaryArgument = "Pik"
-        content.interruptionLevel = .active
+        let content = makeContent(
+            title: item.text,
+            subtitle: String(localized: "notif.location.subtitle \(placeName)"),
+            id: item.id,
+            level: .timeSensitive,
+            relevance: 0.8
+        )
 
         let trigger = UNLocationNotificationTrigger(
             region: region,
@@ -283,46 +282,81 @@ final class NotificationManager: NSObject {
         }
     }
 
+    // MARK: - Cancel (archivar / borrar)
+
+    func cancel(for item: PikItem) {
+        remove(for: item)
+        Task { await LiveActivityManager.shared.cancel(id: item.id) }
+    }
+
     // MARK: - Snooze
 
-    private func reschedule(id: String, minutes: Int) {
+    private func snooze(id: String, minutes: Int) {
 
-        let center = UNUserNotificationCenter.current()
+        guard let uuid = UUID(uuidString: id) else { return }
 
-        center.getDeliveredNotifications { notifications in
+        Task { @MainActor in
+            do {
+                let container = try ModelContainer(for: PikItem.self)
+                let context = ModelContext(container)
 
-            guard let delivered = notifications.first(where: {
-                $0.request.identifier == id
-            }) else { return }
+                let descriptor = FetchDescriptor<PikItem>(
+                    predicate: #Predicate<PikItem> { item in
+                        item.id == uuid
+                    }
+                )
 
-            center.removeDeliveredNotifications(withIdentifiers: [id])
+                guard let item = try context.fetch(descriptor).first else { return }
 
-            let content = UNMutableNotificationContent()
+                item.reminderType = .date
+                item.remindAt = Date().addingTimeInterval(TimeInterval(minutes * 60))
+                try context.save()
 
-            content.title = delivered.request.content.title
-            content.subtitle = "En \(minutes) min"
-            content.body = ""
+                // Borra la notificación entregada, reprograma y actualiza la Live Activity
+                self.update(for: item)
 
-            content.sound = .default
-            content.categoryIdentifier = "PIK_REMINDER"
-            content.threadIdentifier = "pik-reminders"
-            content.summaryArgument = "Pik"
-            content.interruptionLevel = .timeSensitive
-
-            let trigger = UNTimeIntervalNotificationTrigger(
-                timeInterval: TimeInterval(minutes * 60),
-                repeats: false
-            )
-
-            let request = UNNotificationRequest(
-                identifier: id,
-                content: content,
-                trigger: trigger
-            )
-
-            center.add(request)
+            } catch {
+                print("❌ Error posponiendo:", error)
+            }
         }
     }
+    
+//    private func reschedule(id: String, minutes: Int) {
+//
+//        guard let uuid = UUID(uuidString: id) else { return }
+//
+//        let center = UNUserNotificationCenter.current()
+//
+//        center.getDeliveredNotifications { [weak self] notifications in
+//
+//            guard let self,
+//                  let delivered = notifications.first(where: {
+//                      $0.request.identifier == id
+//                  }) else { return }
+//
+//            center.removeDeliveredNotifications(withIdentifiers: [id])
+//
+//            let content = self.makeContent(
+//                title: delivered.request.content.title,
+//                subtitle: String(localized: "notif.snoozed"),
+//                id: uuid,
+//                level: .timeSensitive
+//            )
+//
+//            let trigger = UNTimeIntervalNotificationTrigger(
+//                timeInterval: TimeInterval(minutes * 60),
+//                repeats: false
+//            )
+//
+//            let request = UNNotificationRequest(
+//                identifier: id,
+//                content: content,
+//                trigger: trigger
+//            )
+//
+//            center.add(request)
+//        }
+//    }
 
     // MARK: - Complete
 
@@ -360,15 +394,10 @@ final class NotificationManager: NSObject {
                 object: uuid
             )
         }
-        
+
         Task {
             await LiveActivityManager.shared.end(id: uuid)
         }
-    }
-    
-    func cancel(for item: PikItem) {
-        remove(for: item)
-        Task { await LiveActivityManager.shared.cancel(id: item.id) }
     }
 }
 
@@ -404,11 +433,30 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
 
         switch response.actionIdentifier {
 
-        case "DONE":
+        case ActionID.done:
             markAsCompleted(id)
 
-        case "SNOOZE_15":
-            reschedule(id: id, minutes: 15)
+        case ActionID.snooze15:
+            snooze(id: id, minutes: 15)
+
+            //reschedule(id: id, minutes: 15)
+
+        case ActionID.snooze60:
+            snooze(id: id, minutes: 60)
+
+            //reschedule(id: id, minutes: 60)
+
+        case UNNotificationDefaultActionIdentifier:
+            // Tap en la notificación → deep link al item
+            if let idString = response.notification.request.content.userInfo["itemID"] as? String,
+               let uuid = UUID(uuidString: idString) {
+                await MainActor.run {
+                    NotificationCenter.default.post(
+                        name: .pikOpenItem,
+                        object: uuid
+                    )
+                }
+            }
 
         default:
             break
@@ -420,4 +468,5 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
 
 extension Notification.Name {
     static let pikCompleted = Notification.Name("pikCompleted")
+    static let pikOpenItem = Notification.Name("pikOpenItem")
 }

@@ -28,15 +28,6 @@ final class PikViewModel: ObservableObject {
 
 
     // MARK: - Filters
-
-//    var filteredPiks: [PikItem] {
-//        switch selectedTab {
-//        case 0: return pendingPiks
-//        case 1: return completedPiks
-//        case 2: return archivedPiks
-//        default: return []
-//        }
-//    }
     
     func filteredPiks(from piks: [PikItem]) -> [PikItem] {
         switch selectedTab {
@@ -80,33 +71,6 @@ final class PikViewModel: ObservableObject {
             }
         }
     }
-
-    // MARK: - Data
-//
-//    func loadPiksStored() async {
-//        guard let modelContext else { return }
-//
-//        do {
-//            let descriptor = FetchDescriptor<PikItem>(
-//                sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
-//            )
-//
-//            piksSavedInDB = try modelContext.fetch(descriptor)
-//
-//        } catch {
-//            print("Error cargando PikItems:", error)
-//        }
-//    }
-
-//    func reload() {
-//        guard let modelContext else { return }
-//
-//        let descriptor = FetchDescriptor<PikItem>(
-//            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
-//        )
-//
-//        piksSavedInDB = (try? modelContext.fetch(descriptor)) ?? []
-//    }
 
     // MARK: - Actions
     
