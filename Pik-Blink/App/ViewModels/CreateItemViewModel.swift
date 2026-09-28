@@ -247,7 +247,6 @@ final class CreateItemViewModel: ObservableObject {
             notifications.requestLocationPermission()
         }
 
-        // Borra la notificación anterior, reprograma y actualiza/cancela la Live Activity
         notifications.update(for: item)
     }
 
