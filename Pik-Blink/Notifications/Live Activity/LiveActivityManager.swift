@@ -18,49 +18,134 @@ final class LiveActivityManager {
     @MainActor
     func start(for item: PikItem) {
 
-        print("🚀 Starting Live Activity")
+        guard item.status == .pending else {
+            return
+        }
 
-        if Activity<PikLiveActivityAttributes>.activities.contains(where: {
-               $0.attributes.id == item.id
-           }) {
-               return
-           }
-        
+        guard (item.reminderType ?? .none) == .date,
+              let reminderDate = item.remindAt else {
+            return
+        }
+
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
             print("❌ Live Activities disabled")
             return
         }
 
+        let now = Date()
+        let liveActivityStart = reminderDate.addingTimeInterval(-60 * 60)
+
+        // Si ya estamos dentro de la última hora,
+        // empezamos la Live Activity inmediatamente.
+        let startDate = max(now, liveActivityStart)
+
+        // Evita duplicados
+        if Activity<PikLiveActivityAttributes>.activities.contains(where: {
+            $0.attributes.id == item.id
+        }) {
+            print("ℹ️ Live Activity already exists")
+            return
+        }
+
+        let state = PikLiveActivityAttributes.ContentState(
+            title: item.text,
+            reminderType: item.reminderType ?? .none,
+            reminderDate: item.remindAt,
+            placeName: item.placeName,
+            isCompleted: false
+        )
+
+        let content = ActivityContent(
+            state: state,
+            staleDate: reminderDate,
+            relevanceScore: score(for: state)
+        )
+
         do {
-            let attributes = PikLiveActivityAttributes(id: item.id)
 
-            let state = PikLiveActivityAttributes.ContentState(
-                title: item.text,
-                reminderType: item.reminderType ?? .none,
-                reminderDate: item.remindAt,
-                placeName: item.placeName,
-                isCompleted: false
-            )
+            // Si la Live Activity debe empezar ahora
+            if startDate <= now {
 
-            let content = ActivityContent(
-                state: state,
-                staleDate: nil,
+                let activity = try Activity.request(
+                    attributes: PikLiveActivityAttributes(id: item.id),
+                    content: content,
+                    pushType: nil
+                )
 
-               // staleDate: item.remindAt,
-                relevanceScore: score(for: state)
-            )
+                print("✅ Live Activity started:", activity.id)
 
-            let activity = try Activity.request(
-                attributes: attributes,
-                content: content
-            )
+            } else {
 
-            print("✅ Activity created:", activity.id)
+                // Si todavía falta más de 1 hora,
+                // la dejamos programada.
+                let alertConfiguration = AlertConfiguration(
+                    title: "Pik Blink",
+                    body: "Your reminder is coming up",
+                    sound: .default
+                )
+
+                let activity = try Activity.request(
+                    attributes: PikLiveActivityAttributes(id: item.id),
+                    content: content,
+                    pushType: nil,
+                    style: .standard,
+                    alertConfiguration: alertConfiguration,
+                    start: startDate
+                )
+
+                print("⏳ Live Activity scheduled:", activity.id)
+                print("⏰ Starts at:", startDate)
+            }
 
         } catch {
             print("❌ Activity error:", error)
         }
     }
+//    func start(for item: PikItem) {
+//
+//        print("🚀 Starting Live Activity")
+//
+//        if Activity<PikLiveActivityAttributes>.activities.contains(where: {
+//               $0.attributes.id == item.id
+//           }) {
+//               return
+//           }
+//        
+//        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
+//            print("❌ Live Activities disabled")
+//            return
+//        }
+//
+//        do {
+//            let attributes = PikLiveActivityAttributes(id: item.id)
+//
+//            let state = PikLiveActivityAttributes.ContentState(
+//                title: item.text,
+//                reminderType: item.reminderType ?? .none,
+//                reminderDate: item.remindAt,
+//                placeName: item.placeName,
+//                isCompleted: false
+//            )
+//
+//            let content = ActivityContent(
+//                state: state,
+//                staleDate: nil,
+//
+//               // staleDate: item.remindAt,
+//                relevanceScore: score(for: state)
+//            )
+//
+//            let activity = try Activity.request(
+//                attributes: attributes,
+//                content: content
+//            )
+//
+//            print("✅ Activity created:", activity.id)
+//
+//        } catch {
+//            print("❌ Activity error:", error)
+//        }
+//    }
     
     
     @MainActor
@@ -115,46 +200,72 @@ final class LiveActivityManager {
     @MainActor
     func update(for item: PikItem) async {
 
+        // Primero eliminamos cualquier Live Activity
+        // existente para este recordatorio.
+        await cancel(id: item.id)
+
         guard item.status == .pending,
-              (item.reminderType ?? .none) != .none,
-              (item.remindAt ?? .distantFuture) > .now
+              (item.reminderType ?? .none) == .date,
+              let reminderDate = item.remindAt,
+              reminderDate > .now
         else {
-            await cancel(id: item.id)
             return
         }
 
-        let state = PikLiveActivityAttributes.ContentState(
-            title: item.text,
-            reminderType: item.reminderType ?? .none,
-            reminderDate: item.remindAt,
-            placeName: item.placeName,
-            isCompleted: false
-        )
-
-        let content = ActivityContent(
-            state: state,
-            staleDate: nil,
-
-            //staleDate: item.remindAt,
-            relevanceScore: score(for: state)
-        )
-
-        if let activity = activity(for: item.id) {
-            await activity.update(content)
-            return
-        }
-
-        guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
-
-        do {
-            _ = try Activity.request(
-                attributes: PikLiveActivityAttributes(id: item.id),
-                content: content
-            )
-        } catch {
-            print("❌ Activity error:", error)
-        }
+        // La volvemos a crear/programar con la nueva fecha.
+        start(for: item)
     }
+//    func update(for item: PikItem) async {
+//
+//        guard item.status == .pending,
+//              (item.reminderType ?? .none) != .none,
+//              (item.remindAt ?? .distantFuture) > .now
+//        else {
+//            await cancel(id: item.id)
+//            return
+//        }
+//
+//        let state = PikLiveActivityAttributes.ContentState(
+//            title: item.text,
+//            reminderType: item.reminderType ?? .none,
+//            reminderDate: item.remindAt,
+//            placeName: item.placeName,
+//            isCompleted: false
+//        )
+//
+//        let content = ActivityContent(
+//            state: state,
+//            staleDate: nil,
+//
+//            //staleDate: item.remindAt,
+//            relevanceScore: score(for: state)
+//        )
+//
+//        if let activity = activity(for: item.id) {
+//            await activity.update(content)
+//            return
+//        }
+//
+//        // Si no existe todavía, usamos la misma lógica de
+//        // programación que al crear el recordatorio.
+//        start(for: item)
+//        
+////        if let activity = activity(for: item.id) {
+////            await activity.update(content)
+////            return
+////        }
+////
+////        guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+////
+////        do {
+////            _ = try Activity.request(
+////                attributes: PikLiveActivityAttributes(id: item.id),
+////                content: content
+////            )
+////        } catch {
+////            print("❌ Activity error:", error)
+////        }
+//    }
 
     // MARK: End
     @MainActor
