@@ -30,20 +30,20 @@
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Necessitem accés permanent per avisar-te fins i tot amb l'app tancada."
+            "state" : "translated",
+            "value" : "Pik Blink utilitza la teva ubicació per recordar-te un Pik quan arribis o surtis d'un lloc que hagis escollit."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "We need permanent access to alert you even when the app is closed."
+            "value" : "Pik Blink uses your location to remind you about a Pik when you arrive at or leave a place you choose."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Necesitamos acceso permanente para avisarte incluso con la app cerrada."
+            "state" : "translated",
+            "value" : "Pik Blink utiliza tu ubicación para recordarte un Pik cuando llegues o salgas de un lugar que hayas elegido."
           }
         }
       }
@@ -99,20 +99,20 @@
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pik Blink utilitza el reconeixement de veu per convertir la teva veu en text."
+            "state" : "translated",
+            "value" : "Pik Blink utilitza el reconeixement de veu per convertir la teva veu en text quan creïs un nou Pik."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pik Blink uses speech recognition to turn your voice into text."
+            "value" : "Pik Blink uses speech recognition to convert your voice into text when creating a new Pik."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pik Blink usa el reconocimiento de voz para convertir tu voz en texto."
+            "state" : "translated",
+            "value" : "Pik Blink utiliza el reconocimiento de voz para convertir tu voz en texto al crear un nuevo Pik."
           }
         }
       }
