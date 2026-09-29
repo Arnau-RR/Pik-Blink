@@ -143,7 +143,7 @@ struct SettingsView: View {
                                     HStack {
                                         Text("settings.version.label")
                                         Spacer()
-                                        Text("1.0.0")
+                                        Text("1.0.1")
                                             .foregroundStyle(.secondary)
                                     }
                                 }
@@ -152,7 +152,7 @@ struct SettingsView: View {
                             SettingsRow(
                                 title: "settings.version.row.title",
                                 icon: "info.circle",
-                                value: "1.0.0"
+                                value: "1.0.1"
                             )
                         }
 
