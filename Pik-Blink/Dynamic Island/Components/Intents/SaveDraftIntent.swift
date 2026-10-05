@@ -6,10 +6,11 @@
 //
 
 import AppIntents
+import ActivityKit
 import SwiftData
 import WidgetKit
 
-struct SaveDraftIntent: AppIntent {
+struct SaveDraftIntent: LiveActivityIntent {
 
     static let title: LocalizedStringResource = "app.intent.save.draft.title"
     static var isDiscoverable: Bool = false
@@ -69,9 +70,9 @@ struct SaveDraftIntent: AppIntent {
 
         let notifications = NotificationManager.shared
 
-        context.insert(item)
-        context.delete(model)
-        try context.save()
+//        context.insert(item)
+//        context.delete(model)
+//        try context.save()
 
         if item.reminderType == .location {
             notifications.requestLocationPermission()
@@ -91,9 +92,11 @@ struct SaveDraftIntent: AppIntent {
             true
         )
         
-        Task {
-            await LiveActivityManager.shared.update(for: item)
-        }
+//        Task {
+//            await LiveActivityManager.shared.update(for: item)
+//        }
+        
+        await LiveActivityManager.shared.update(for: item)
 
         return .result(
             dialog: IntentDialog("app.intent.save.draft.success.saved")
