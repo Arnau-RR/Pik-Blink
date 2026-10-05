@@ -5,7 +5,6 @@
 //  Created by Arnau on 28/09/2026.
 //
 
-
 import ActivityKit
 import WidgetKit
 import SwiftUI
@@ -39,19 +38,18 @@ struct PikLiveActivity: Widget {
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundStyle(.white)
 
-
                 Divider()
 
                 // MARK: Status
 
                 lockScreenStatus(context)
+
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 18)
             .padding(.vertical, 16)
             .activityBackgroundTint(.black)
             .activitySystemActionForegroundColor(.white)
-            //.padding()
 
         } dynamicIsland: { context in
 
@@ -96,40 +94,20 @@ struct PikLiveActivity: Widget {
             } compactLeading: {
 
                 ZStack {
+
                     Circle()
                         .fill(.white.opacity(0.15))
                         .frame(width: 20, height: 20)
 
-                    Image(systemName: compactIcon(context)) // tu asset monocromo
+                    Image(systemName: compactIcon(context))
                         .resizable()
                         .scaledToFit()
                         .frame(width: 11, height: 11)
                 }
-                
-//                Image(systemName: compactIcon(context))
-//                    .font(.caption.weight(.semibold))
 
             } compactTrailing: {
 
-                if context.state.reminderType == .date,
-                      let date = context.state.reminderDate {
-
-                       Text(timerInterval: Date()...date, pauseTime: nil, countsDown: true, showsHours: false)
-                           .font(.system(size: 12, weight: .bold, design: .rounded))
-                           .monospacedDigit()
-                           .multilineTextAlignment(.trailing)
-                           .frame(width: 40, alignment: .trailing)   // ancho fijo, no minWidth
-
-                   } else if context.state.reminderType == .location {
-
-                       Image(systemName: "location.fill")
-                           .font(.system(size: 11, weight: .semibold))
-
-                   } //else {
-
-//                       Image(systemName: "sparkles")
-//                           .font(.system(size: 11, weight: .semibold))
-                   //}
+                compactTrailing(context)
 
             } minimal: {
 
@@ -139,12 +117,15 @@ struct PikLiveActivity: Widget {
     }
 }
 
+
 // MARK: - Lock Screen
 
 private extension PikLiveActivity {
 
     @ViewBuilder
-    func lockScreenStatus(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
+    func lockScreenStatus(
+        _ context: ActivityViewContext<PikLiveActivityAttributes>
+    ) -> some View {
 
         switch context.state.reminderType {
 
@@ -155,21 +136,23 @@ private extension PikLiveActivity {
                 HStack {
 
                     Label {
-                        Text(timerInterval: Date()...date, countsDown: true)
-                            .monospacedDigit()
-                            .foregroundStyle(.white)
+
+                        countdownText(
+                            to: date,
+                            font: .subheadline
+                        )
+                        .foregroundStyle(.white)
 
                     } icon: {
+
                         Image(systemName: "clock")
                             .foregroundStyle(.white)
-
                     }
 
                     Spacer()
 
                     Text(date, style: .time)
                         .foregroundStyle(.white)
-
                 }
                 .font(.subheadline)
             }
@@ -179,13 +162,17 @@ private extension PikLiveActivity {
             HStack {
 
                 Label {
-                    Text(context.state.placeName ?? String(localized: "live.activity.location.unknown"))
-                        .foregroundStyle(.white)
+
+                    Text(
+                        context.state.placeName
+                        ?? String(localized: "live.activity.location.unknown")
+                    )
+                    .foregroundStyle(.white)
 
                 } icon: {
+
                     Image(systemName: "location.fill")
                         .foregroundStyle(.white)
-
                 }
 
                 Spacer()
@@ -197,10 +184,12 @@ private extension PikLiveActivity {
             HStack {
 
                 Label {
+
                     Text("live.activity.no.reminder")
                         .foregroundStyle(.white)
 
                 } icon: {
+
                     Image(systemName: "sparkles")
                 }
 
@@ -212,12 +201,15 @@ private extension PikLiveActivity {
     }
 }
 
+
 // MARK: - Dynamic Island
 
 private extension PikLiveActivity {
 
     @ViewBuilder
-    func expandedStatus(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
+    func expandedStatus(
+        _ context: ActivityViewContext<PikLiveActivityAttributes>
+    ) -> some View {
 
         switch context.state.reminderType {
 
@@ -227,9 +219,10 @@ private extension PikLiveActivity {
 
                 VStack(alignment: .leading, spacing: 0) {
 
-                    Text(timerInterval: Date()...date, countsDown: true)
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .monospacedDigit()
+                    countdownText(
+                        to: date,
+                        font: .system(size: 24, weight: .bold, design: .rounded)
+                    )
 
                     Text(date, style: .time)
                         .font(.caption2)
@@ -244,9 +237,12 @@ private extension PikLiveActivity {
                 Image(systemName: "location.fill")
                     .font(.caption)
 
-                Text(context.state.placeName ?? String(localized: "live.activity.location.unknown"))
-                    .font(.caption)
-                    .lineLimit(1)
+                Text(
+                    context.state.placeName
+                    ?? String(localized: "live.activity.location.unknown")
+                )
+                .font(.caption)
+                .lineLimit(1)
             }
             .foregroundStyle(.secondary)
 
@@ -264,27 +260,72 @@ private extension PikLiveActivity {
         }
     }
 
-    func compactIcon(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> String {
+
+    // MARK: Compact Icon
+
+    func compactIcon(
+        _ context: ActivityViewContext<PikLiveActivityAttributes>
+    ) -> String {
 
         switch context.state.reminderType {
+
         case .date:
             return "clock.fill"
+
         case .location:
             return "location.fill"
+
         case .none:
             return "sparkles"
         }
     }
 
+
+    // MARK: Compact Trailing
+
     @ViewBuilder
-    func compactTrailing(_ context: ActivityViewContext<PikLiveActivityAttributes>) -> some View {
+    func compactTrailing(
+        _ context: ActivityViewContext<PikLiveActivityAttributes>
+    ) -> some View {
 
         if let date = context.state.reminderDate {
-                Text(timerInterval: Date()...date, pauseTime: nil, countsDown: true, showsHours: false)
-                    .font(.system(size: 12, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .multilineTextAlignment(.trailing)
-                    .frame(width: 40, alignment: .trailing)
-            }
+
+            countdownText(
+                to: date,
+                font: .system(size: 12, weight: .bold, design: .rounded),
+                showsHours: false
+            )
+            .multilineTextAlignment(.trailing)
+            .frame(width: 40, alignment: .trailing)
+        }
+    }
+
+
+    // MARK: Countdown
+
+    @ViewBuilder
+    func countdownText(
+        to date: Date,
+        font: Font,
+        showsHours: Bool = true
+    ) -> some View {
+
+        if Date() < date {
+
+            Text(
+                timerInterval: Date()...date,
+                pauseTime: nil,
+                countsDown: true,
+                showsHours: showsHours
+            )
+            .font(font)
+            .monospacedDigit()
+
+        } else {
+
+            Text("00:00")
+                .font(font)
+                .monospacedDigit()
+        }
     }
 }

@@ -36,7 +36,11 @@
     "+ 30m" : {
 
     },
+    "00:00" : {
+
+    },
     "1.0.0" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
@@ -45,6 +49,9 @@
           }
         }
       }
+    },
+    "1.0.2" : {
+
     },
     "app.intent.new.pik.title" : {
       "localizations" : {

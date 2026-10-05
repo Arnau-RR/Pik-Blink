@@ -32,7 +32,7 @@ struct PikSnippetTextField: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(minHeight: 40, alignment: .topLeading)
                     } else {
-                        Text("snippet.text.field.header.title")
+                        Text(text)
                             .foregroundStyle(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(minHeight: 40, alignment: .topLeading)
