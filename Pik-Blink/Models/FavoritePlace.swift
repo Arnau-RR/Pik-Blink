@@ -10,25 +10,20 @@ import SwiftData
 
 @Model
 final class FavoritePlace {
-    var label: String
-    var name: String
-    var address: String
-    var latitude: Double
-    var longitude: Double
-    var createdAt: Date
+    var name: String = ""
+    var label: String = ""
+    var address: String = ""
+    var latitude: Double = 0
+    var longitude: Double = 0
+    var createdAt: Date = Date()
 
-    init(
-        label: String,
-        name: String,
-        address: String,
-        latitude: Double,
-        longitude: Double
-    ) {
-        self.label = label
+    init(name: String, label: String, address: String,
+         latitude: Double, longitude: Double) {
         self.name = name
+        self.label = label
         self.address = address
         self.latitude = latitude
         self.longitude = longitude
-        self.createdAt = .now
+        self.createdAt = Date()
     }
 }

@@ -13,12 +13,12 @@ import SwiftData
 @Model
 final class PikDraft {
 
-    @Attribute(.unique)
-    var id: UUID
+    // CloudKit no soporta @Attribute(.unique), por eso se ha quitado.
+    var id: UUID = UUID()
 
-    var text: String
+    var text: String = ""
 
-    var reminderType: ReminderType
+    var reminderType: ReminderType = ReminderType.none
     var quickReminder: QuickReminderSelection?
     var remindAt: Date?
 
@@ -31,11 +31,10 @@ final class PikDraft {
     var longitude: Double?
 
     var audioPath: String?
-    
+
     var isPickingCustomDate: Bool = false
     var isPickingLocation: Bool = false
     var locationName: String?
-    
 
     init() {
         self.id = UUID()
@@ -46,11 +45,16 @@ final class PikDraft {
         self.remindAt = nil
 
         self.placeSelection = nil
+        self.placeLabel = nil
         self.placeName = nil
         self.placeAddress = nil
         self.latitude = nil
         self.longitude = nil
 
         self.audioPath = nil
+
+        self.isPickingCustomDate = false
+        self.isPickingLocation = false
+        self.locationName = nil
     }
 }

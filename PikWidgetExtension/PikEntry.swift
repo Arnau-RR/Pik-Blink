@@ -1,9 +1,8 @@
-////
-////  PikEntry.swift
-////  Pik-Blink
-////
-////  Created by Arnau on 26/09/2026.
-////
+//
+//  PikEntry.swift
+//  Pik-Blink
+//
+//  Created by Arnau on 26/09/2026.
 //
 
 import WidgetKit
@@ -50,14 +49,28 @@ struct PikProvider: AppIntentTimelineProvider {
             FavoritePlace.self
         ])
 
-        let url = FileManager.default
-            .containerURL(
-                forSecurityApplicationGroupIdentifier: "group.com.arnaurivas.PikBlink"
-            )!
-            .appendingPathComponent("Pik.sqlite")
+//        let url = FileManager.default
+//            .containerURL(
+//                forSecurityApplicationGroupIdentifier: "group.com.arnaurivas.PikBlink"
+//            )!
+//            .appendingPathComponent("Pik.sqlite")
 
-        let configuration = ModelConfiguration(schema: schema, url: url)
-        let container = try! ModelContainer(for: schema, configurations: configuration)
+        let configuration = ModelConfiguration(
+            "PikBlink",
+            schema: schema,
+            isStoredInMemoryOnly: false,
+            allowsSave: true,
+            groupContainer: .identifier("group.com.arnaurivas.PikBlink"),
+            cloudKitDatabase: .private("iCloud.com.arnaurivas.PikBlink")
+        )
+
+        let container = try! ModelContainer(
+            for: schema,
+            configurations: configuration
+        )
+        
+//        let configuration = ModelConfiguration(schema: schema, url: url)
+//        let container = try! ModelContainer(for: schema, configurations: configuration)
         let context = ModelContext(container)
 
         let descriptor = FetchDescriptor<PikItem>(

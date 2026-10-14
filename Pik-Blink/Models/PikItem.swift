@@ -26,12 +26,12 @@ enum PlaceSelection: Int, Codable {
 @Model
 final class PikItem {
 
-    @Attribute(.unique)
-    var id: UUID
+    // CloudKit no soporta @Attribute(.unique), por eso se ha quitado.
+    var id: UUID = UUID()
 
     // MARK: Content
 
-    var text: String
+    var text: String = ""
     var transcription: String?
 
     // MARK: Media
@@ -41,7 +41,7 @@ final class PikItem {
 
     // MARK: Dates
 
-    var createdAt: Date
+    var createdAt: Date = Date()
 
     // MARK: Reminder
 
@@ -59,8 +59,8 @@ final class PikItem {
 
     // MARK: State
 
-    var status: PikStatus
-    var source: PikSource
+    var status: PikStatus = PikStatus.pending
+    var source: PikSource = PikSource.text
 
     // MARK: Init
 
@@ -169,6 +169,22 @@ extension PikItem {
         transcription ?? text
     }
 
+    var subtitle: String? {
+        switch reminderType {
+        case .date:
+            guard let remindAt else { return nil }
+            return remindAt.formatted(
+                .dateTime.hour().minute()
+            )
+
+        case .location:
+            return placeName
+
+        default:
+            return nil
+        }
+    }
+
     var location: SelectedPlace? {
         guard reminderType == .location,
               let name = placeName,
@@ -191,22 +207,6 @@ extension PikItem {
 // MARK: - Mock Data
 
 extension PikItem {
-    
-    var subtitle: String? {
-           switch reminderType {
-           case .date:
-               guard let remindAt else { return nil }
-               return remindAt.formatted(
-                   .dateTime.hour().minute()
-               )
-
-           case .location:
-               return placeName
-
-           default:
-               return nil
-           }
-       }
 
     static var mockList: [PikItem] {
 

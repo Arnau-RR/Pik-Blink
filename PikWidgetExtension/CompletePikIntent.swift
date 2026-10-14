@@ -32,12 +32,28 @@ struct CompletePikIntent: LiveActivityIntent {
             FavoritePlace.self
         ])
 
-        let url = FileManager.default
-            .containerURL(forSecurityApplicationGroupIdentifier: "group.com.arnaurivas.PikBlink")!
-            .appendingPathComponent("Pik.sqlite")
+//        let url = FileManager.default
+//            .containerURL(forSecurityApplicationGroupIdentifier: "group.com.arnaurivas.PikBlink")!
+//            .appendingPathComponent("Pik.sqlite")
 
-        let configuration = ModelConfiguration(schema: schema, url: url)
-        let container = try ModelContainer(for: schema, configurations: configuration)
+        
+        let configuration = ModelConfiguration(
+            "PikBlink",
+            schema: schema,
+            isStoredInMemoryOnly: false,
+            allowsSave: true,
+            groupContainer: .identifier("group.com.arnaurivas.PikBlink"),
+            cloudKitDatabase: .private("iCloud.com.arnaurivas.PikBlink")
+        )
+
+        let container = try ModelContainer(
+            for: schema,
+            configurations: configuration
+        )
+
+        
+//        let configuration = ModelConfiguration(schema: schema, url: url)
+//        let container = try ModelContainer(for: schema, configurations: configuration)
         let context = ModelContext(container)
 
         let items = try context.fetch(FetchDescriptor<PikItem>())

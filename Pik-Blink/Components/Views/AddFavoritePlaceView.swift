@@ -108,8 +108,7 @@ struct AddFavoritePlaceView: View {
             }
 
             let favorite = FavoritePlace(
-                label: label.trimmingCharacters(in: .whitespacesAndNewlines),
-                name: name,
+                name: name, label: label.trimmingCharacters(in: .whitespacesAndNewlines),
                 address: address,
                 latitude: place.coordinate.latitude,
                 longitude: place.coordinate.longitude

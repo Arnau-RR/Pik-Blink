@@ -73,15 +73,24 @@ struct Pik_BlinkApp: App {
             FavoritePlace.self
         ])
 
-        let sharedURL = FileManager.default
-            .containerURL(
-                forSecurityApplicationGroupIdentifier: Pik_BlinkApp.sharedGroupID
-            )!
-            .appendingPathComponent("Pik.sqlite")
+//        let sharedURL = FileManager.default
+//            .containerURL(
+//                forSecurityApplicationGroupIdentifier: Pik_BlinkApp.sharedGroupID
+//            )!
+//            .appendingPathComponent("Pik.sqlite")
 
+//        let configuration = ModelConfiguration(
+//            schema: schema,
+//            url: sharedURL
+//        )
+        
         let configuration = ModelConfiguration(
+            "PikBlink",
             schema: schema,
-            url: sharedURL
+            isStoredInMemoryOnly: false,
+            allowsSave: true,
+            groupContainer: .identifier(Pik_BlinkApp.sharedGroupID),
+            cloudKitDatabase: .private("iCloud.com.arnaurivas.PikBlink")
         )
 
         do {
